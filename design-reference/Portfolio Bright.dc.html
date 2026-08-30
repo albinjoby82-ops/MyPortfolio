@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#E6E2D8; }
+  a { color:#D4451F; text-decoration:none; }
+  a:hover { color:#A8330F; text-decoration:underline; }
+</style>
+</helmet>
+
+<div style="display:flex; flex-direction:column; gap:56px; padding:56px; font-family:'Public Sans',sans-serif;">
+
+  <div style="display:flex; align-items:baseline; gap:14px;">
+    <span style="font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#D4451F;">Direction 3b — Workbench</span>
+    <span style="font-size:13px; color:#6D6A60;">warm cream, chunky type, project rows instead of card decks</span>
+  </div>
+
+  <div style="width:1440px; background:#FBF8F1; border-radius:20px; overflow:hidden; box-shadow:0 20px 56px rgba(30,26,18,0.12);">
+
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:20px 44px; border-bottom:2px solid #16181D;">
+      <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:21px; color:#16181D; letter-spacing:-0.02em;">MAYA O.</div>
+      <div style="display:flex; align-items:center; gap:30px; font-size:15px; font-weight:600; color:#3B3931;">
+        <span style="border-bottom:2px solid #D4451F; padding-bottom:2px;">Projects</span><span>Timeline</span><span>About</span>
+        <span style="padding:10px 20px; border:2px solid #16181D; border-radius:10px; background:#F5C63C; font-weight:700; color:#16181D;">Résumé ↓</span>
+      </div>
+    </div>
+
+    <div style="padding:70px 44px 52px; display:grid; grid-template-columns:1fr 400px; gap:56px; align-items:start;">
+      <div>
+        <div style="display:inline-block; background:#F5C63C; padding:6px 12px; border-radius:6px; font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#16181D; margin-bottom:24px; transform:rotate(-1.2deg);">Grade 11 · builds stuff that moves</div>
+        <h1 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:86px; line-height:0.94; letter-spacing:-0.04em; color:#16181D; margin:0; max-width:12ch;">Robots, circuit boards, and a lot of failed prints.</h1>
+        <div style="display:flex; gap:12px; margin-top:36px;">
+          <span style="padding:14px 26px; border-radius:10px; background:#D4451F; color:#fff; font-weight:700; font-size:16px;">See what I've built</span>
+          <span style="padding:14px 26px; border-radius:10px; border:2px solid #16181D; color:#16181D; font-weight:700; font-size:16px;">Email me</span>
+        </div>
+      </div>
+      <div style="border:2px solid #16181D; border-radius:14px; overflow:hidden;">
+        <div style="background:#16181D; color:#FBF8F1; padding:10px 16px; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;">On the bench</div>
+        <div style="padding:18px; display:flex; flex-direction:column; gap:14px; font-size:14.5px; color:#3B3931;">
+          <div style="display:flex; justify-content:space-between;"><span style="color:#87837A;">Right now</span><span style="font-weight:700;">Gripper v3</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="color:#87837A;">Learning</span><span style="font-weight:700;">Inverse kinematics</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="color:#87837A;">Broke last</span><span style="font-weight:700;">A stepper driver</span></div>
+          <div style="display:flex; justify-content:space-between;"><span style="color:#87837A;">Where</span><span style="font-weight:700;">Toronto, ON</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:20px 44px 24px; display:flex; align-items:baseline; justify-content:space-between; border-top:2px solid #16181D;">
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:15px; letter-spacing:0.14em; text-transform:uppercase; color:#16181D; margin:0;">Five things I made</h2>
+      <div style="display:flex; gap:8px; font-size:13px; font-weight:600;">
+        <span style="padding:6px 14px; border-radius:999px; background:#16181D; color:#FBF8F1;">All</span>
+        <span style="padding:6px 14px; border-radius:999px; border:1px solid #D8D3C6; color:#3B3931;">Robots</span>
+        <span style="padding:6px 14px; border-radius:999px; border:1px solid #D8D3C6; color:#3B3931;">Electronics</span>
+        <span style="padding:6px 14px; border-radius:999px; border:1px solid #D8D3C6; color:#3B3931;">Just for fun</span>
+      </div>
+    </div>
+
+    <div style="padding:0 44px 56px; display:flex; flex-direction:column; gap:18px;">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="5">
+        <div style="display:grid; grid-template-columns:300px 1fr 130px; gap:28px; align-items:center; background:#fff; border:2px solid #16181D; border-radius:16px; padding:18px; box-shadow:4px 4px 0 #16181D;">
+          <div style="aspect-ratio:4/3; border-radius:10px; background:{{ p.tint }}; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:rgba(22,24,29,0.45);">{{ p.media }}</div>
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:13px; color:#D4451F;">{{ p.no }}</span>
+              <span style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#87837A;">{{ p.kind }}</span>
+            </div>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:34px; letter-spacing:-0.025em; color:#16181D; margin:0 0 8px;">{{ p.title }}</h3>
+            <p style="font-size:15.5px; line-height:1.55; color:#4A473E; margin:0 0 14px; max-width:60ch; text-wrap:pretty;">{{ p.blurb }}</p>
+            <div style="display:flex; gap:8px;">
+              <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="3">
+                <span style="padding:5px 12px; border-radius:6px; background:#F1EDE2; font-size:13px; font-weight:600; color:#3B3931;">{{ t }}</span>
+              </sc-for>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:15px; color:#16181D;">{{ p.year }}</div>
+            <div style="margin-top:10px; font-size:24px; color:#16181D;">↗</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="background:#16181D; padding:56px 44px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;">
+      <div>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:46px; line-height:1.02; letter-spacing:-0.03em; color:#FBF8F1; margin:0;">Want to see something in person?</h2>
+        <p style="font-size:17px; line-height:1.6; color:#A9A498; margin:18px 0 0; max-width:44ch; text-wrap:pretty;">I'm always up for talking about a build, joining a team, or helping someone else get started.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; background:#F5C63C; border-radius:12px; padding:18px 22px; font-weight:700; font-size:17px; color:#16181D;"><span>maya@example.com</span><span>↗</span></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; border:2px solid #3A3C43; border-radius:12px; padding:18px 22px; font-weight:700; font-size:17px; color:#FBF8F1;"><span>GitHub</span><span>↗</span></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; border:2px solid #3A3C43; border-radius:12px; padding:18px 22px; font-weight:700; font-size:17px; color:#FBF8F1;"><span>Instagram — build clips</span><span>↗</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT DETAIL -->
+  <div style="width:1440px; background:#FBF8F1; border-radius:20px; overflow:hidden; box-shadow:0 20px 56px rgba(30,26,18,0.12);">
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:20px 44px; border-bottom:2px solid #16181D;">
+      <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:21px; color:#16181D; letter-spacing:-0.02em;">MAYA O.</div>
+      <div style="display:flex; align-items:center; gap:30px; font-size:15px; font-weight:600; color:#3B3931;">
+        <span>Projects</span><span>Timeline</span><span>About</span>
+        <span style="padding:10px 20px; border:2px solid #16181D; border-radius:10px; background:#F5C63C; font-weight:700; color:#16181D;">Résumé ↓</span>
+      </div>
+    </div>
+
+    <div style="padding:52px 44px 36px;">
+      <div style="font-size:13px; font-weight:700; color:#87837A; margin-bottom:20px;">← Back to projects</div>
+      <div style="display:grid; grid-template-columns:1fr 380px; gap:56px; align-items:end;">
+        <div>
+          <div style="display:inline-block; background:#C6E4F5; padding:5px 12px; border-radius:6px; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#16181D; margin-bottom:18px;">01 · Robots</div>
+          <h1 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:68px; line-height:0.96; letter-spacing:-0.035em; color:#16181D; margin:0;">The robot arm</h1>
+          <p style="font-size:19px; line-height:1.6; color:#4A473E; margin:22px 0 0; max-width:56ch; text-wrap:pretty;">Six joints, 3D printed, driven by a board I designed myself. It took three tries before it could pick something up and put it down in the same place twice.</p>
+        </div>
+        <div style="border:2px solid #16181D; border-radius:14px; overflow:hidden;">
+          <div style="background:#16181D; color:#FBF8F1; padding:10px 16px; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;">The numbers</div>
+          <div style="padding:18px; display:flex; flex-direction:column; gap:13px; font-size:14.5px; color:#3B3931;">
+            <div style="display:flex; justify-content:space-between;"><span style="color:#87837A;">Reach</span><span style="font-weight:700;">62 cm</span></div>
+            <div style="display:flex; justify-content:space-between;"><span style="color:#87837A;">Lifts</span><span style="font-weight:700;">400 g</span></div>
+            <div style="display:flex; justify-content:space-between;"><span style="color:#87837A;">Motors</span><span style="font-weight:700;">6 steppers</span></div>
+            <div style="display:flex; justify-content:space-between;"><span style="color:#87837A;">Brain</span><span style="font-weight:700;">Teensy 4.1</span></div>
+            <div style="display:flex; justify-content:space-between;"><span style="color:#87837A;">Took me</span><span style="font-weight:700;">8 months</span></div>
+            <div style="display:flex; justify-content:space-between;"><span style="color:#87837A;">Cost</span><span style="font-weight:700;">~$310</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:0 44px 44px;">
+      <div style="aspect-ratio:16/8; border:2px solid #16181D; border-radius:16px; background:#C6E4F5; display:flex; align-items:center; justify-content:center;">
+        <div style="width:74px; height:74px; border-radius:50%; background:#16181D; color:#FBF8F1; display:flex; align-items:center; justify-content:center; font-size:22px;">▶</div>
+      </div>
+      <div style="margin-top:10px; font-size:13.5px; font-weight:600; color:#87837A;">Picking up a marker and actually not dropping it · 1:04</div>
+    </div>
+
+    <div style="padding:0 44px 44px; display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+      <div style="background:#fff; border:2px solid #16181D; border-radius:16px; padding:28px; box-shadow:4px 4px 0 #16181D;">
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:26px; letter-spacing:-0.02em; color:#16181D; margin:0 0 12px;">What went wrong</h3>
+        <p style="font-size:16px; line-height:1.65; color:#4A473E; margin:0; text-wrap:pretty;">Version 1 used cheap plastic gears and the whole arm wobbled about 4 mm at the tip. I replaced them with belt drives I could tighten, which fixed the wobble but made the arm heavier — so I had to reprint the top two links thinner.</p>
+      </div>
+      <div style="background:#fff; border:2px solid #16181D; border-radius:16px; padding:28px; box-shadow:4px 4px 0 #16181D;">
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:26px; letter-spacing:-0.02em; color:#16181D; margin:0 0 12px;">What I learned</h3>
+        <p style="font-size:16px; line-height:1.65; color:#4A473E; margin:0; text-wrap:pretty;">Measure before you print. I wasted about 40 hours of print time on parts that were 2 mm off. Now I print a small test piece of every joint first — takes 15 minutes and has saved me more times than I can count.</p>
+      </div>
+    </div>
+
+    <div style="padding:0 44px 56px;">
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:15px; letter-spacing:0.14em; text-transform:uppercase; color:#16181D; margin:0 0 18px;">Build photos</h3>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px;">
+        <div style="aspect-ratio:1; border:2px solid #16181D; border-radius:12px; background:#F1EDE2;"></div>
+        <div style="aspect-ratio:1; border:2px solid #16181D; border-radius:12px; background:#F1EDE2;"></div>
+        <div style="aspect-ratio:1; border:2px solid #16181D; border-radius:12px; background:#F1EDE2;"></div>
+        <div style="aspect-ratio:1; border:2px solid #16181D; border-radius:12px; background:#F1EDE2;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1552,&quot;height&quot;:1200}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { projects: [
+      { no:"01", kind:"Robots", title:"The robot arm", blurb:"Six joints, 3D printed, running on a driver board I designed. Three versions before it could pick something up twice in a row.", tags:["Fusion 360","KiCad","C++"], year:"2026", tint:"#C6E4F5", media:"video ▶" },
+      { no:"02", kind:"Electronics", title:"Bench power supply", blurb:"0–30V adjustable. My first PCB that worked on the first power-up instead of releasing smoke.", tags:["KiCad","Soldering"], year:"2025", tint:"#F5C63C", media:"photo" },
+      { no:"03", kind:"Robots", title:"Line-following car", blurb:"Won regionals with a PID loop I tuned at 1am the night before. Still don't fully trust it.", tags:["Arduino","PID"], year:"2025", tint:"#EE8570", media:"video ▶" },
+      { no:"04", kind:"Just for fun", title:"Automatic plant waterer", blurb:"Built because I kept killing my mom's basil. It has now kept the basil alive for 14 months.", tags:["ESP32","3D print"], year:"2024", tint:"#C8E6A0", media:"photo" },
+      { no:"05", kind:"Just for fun", title:"Coffee grinder mod", blurb:"Added a timer and a scale to a $30 grinder. Mostly an excuse to learn load cells.", tags:["Arduino","Load cell"], year:"2023", tint:"#E4DDCC", media:"photo" }
+    ]};
+  }
+}
+</script>
+</body>
+</html>

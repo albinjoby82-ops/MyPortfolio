@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Design tokens — transcribed exactly from the design handoff
+   README (design-reference/README.md). These values are final;
+   do not soften or approximate them.
+   --------------------------------------------------------------- */
+@theme {
+  /* Colours */
+  --color-ink: #16181d;
+  --color-paper: #fbf8f1;
+  --color-card: #ffffff;
+  --color-desk: #e6e2d8;
+  --color-rust: #d4451f;
+  --color-rust-hover: #a8330f;
+  --color-sun: #f5c63c;
+  --color-body-text: #4a473e;
+  --color-sub-text: #3b3931;
+  --color-muted: #87837a;
+  --color-footer-muted: #a9a498;
+  --color-chip-bg: #f1ede2;
+  --color-hairline: #d8d3c6;
+  --color-footer-border: #3a3c43;
+
+  /* Fonts — bound to next/font in app/layout.tsx */
+  --font-display: var(--font-bricolage), sans-serif;
+  --font-body: var(--font-public-sans), sans-serif;
+
+  /* The signature move: hard offset, no blur. */
+  --shadow-hard: 4px 4px 0 #16181d;
+  --shadow-hard-lifted: 6px 6px 0 #16181d;
+  --shadow-shell: 0 20px 56px rgba(30, 26, 18, 0.12);
+}
+
+@layer base {
+  body {
+    background: var(--color-desk);
+    font-family: var(--font-body);
+    color: var(--color-body-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* High-contrast design — never remove focus outlines. */
+  :focus-visible {
+    outline: 2px solid var(--color-rust);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  /* Page gutter: 44px desktop, 20px below 760px (README §Responsive). */
+  .gutter {
+    padding-inline: 44px;
+  }
+  @media (max-width: 760px) {
+    .gutter {
+      padding-inline: 20px;
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+
+  .panel-header {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Respect reduced motion: drop the hover translate, keep the colour change. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

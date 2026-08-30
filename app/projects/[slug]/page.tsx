@@ -1,0 +1,141 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import Panel from "@/components/Panel";
+import { getProject, getProjects } from "@/lib/projects";
+
+export function generateStaticParams() {
+  return getProjects().map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = getProject(slug);
+  return {
+    title: project ? `${project.title} — Albin Andrews Joby` : "Not found",
+    description: project?.blurb,
+  };
+}
+
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = getProject(slug);
+  if (!project) notFound();
+
+  const hasSpecs = project.specs.length > 0;
+
+  return (
+    <>
+      <section className="pb-9 pt-13 gutter">
+        <Link
+          href="/#projects"
+          className="mb-5 inline-block text-[13px] font-bold text-muted transition-colors duration-[120ms] hover:text-ink"
+        >
+          ← Back to projects
+        </Link>
+
+        <div
+          className={
+            "grid grid-cols-1 items-end gap-14 " +
+            (hasSpecs ? "lg:grid-cols-[1fr_380px]" : "")
+          }
+        >
+          <div>
+            <span
+              className="mb-[18px] inline-block rounded-[6px] px-3 py-[5px] text-[12px] font-bold uppercase tracking-[0.1em] text-ink"
+              style={{ backgroundColor: project.tint }}
+            >
+              {project.no} · {project.kind}
+            </span>
+
+            <h1 className="text-[clamp(34px,6.5vw,68px)] font-extrabold leading-[0.96] tracking-[-0.035em]">
+              {project.title}
+            </h1>
+
+            <p className="pretty mt-[22px] max-w-[56ch] text-[19px] leading-[1.6]">
+              {project.lede}
+            </p>
+          </div>
+
+          {hasSpecs && (
+            <Panel header="The numbers" rows={project.specs} rowGap={13} />
+          )}
+        </div>
+      </section>
+
+      {/* Hero media — real video/image when supplied, tinted block until then. */}
+      <section className="pb-11 gutter">
+        {project.media.src && project.media.type === "video" ? (
+          <video
+            controls
+            playsInline
+            poster={project.media.poster}
+            className="aspect-[16/8] w-full rounded-[16px] border-2 border-ink object-cover"
+          >
+            <source src={project.media.src} />
+          </video>
+        ) : (
+          <div
+            className="flex aspect-[16/8] items-center justify-center rounded-[16px] border-2 border-ink bg-cover bg-center"
+            style={{
+              backgroundColor: project.tint,
+              backgroundImage: project.media.src
+                ? `url(${project.media.src})`
+                : undefined,
+            }}
+          >
+            {!project.media.src && project.media.type === "video" && (
+              <div className="flex h-[74px] w-[74px] items-center justify-center rounded-full bg-ink text-[22px] text-paper">
+                ▶
+              </div>
+            )}
+          </div>
+        )}
+
+        {project.media.caption && (
+          <p className="mt-[10px] text-[13.5px] font-semibold text-muted">
+            {project.media.caption}
+          </p>
+        )}
+      </section>
+
+      {project.notes.length > 0 && (
+        <section className="grid grid-cols-1 gap-[18px] pb-11 gutter md:grid-cols-2">
+          {project.notes.map((n) => (
+            <div
+              key={n.heading}
+              className="rounded-[16px] border-2 border-ink bg-card p-7 shadow-[var(--shadow-hard)]"
+            >
+              <h3 className="mb-3 text-[26px] font-bold tracking-[-0.02em]">
+                {n.heading}
+              </h3>
+              <p className="pretty text-[16px] leading-[1.65]">{n.body}</p>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {project.photos.length > 0 && (
+        <section className="pb-14 gutter">
+          <h3 className="eyebrow mb-[18px] block">Build photos</h3>
+          <div className="grid grid-cols-2 gap-[14px] md:grid-cols-4">
+            {project.photos.map((src) => (
+              <div
+                key={src}
+                className="aspect-square rounded-[12px] border-2 border-ink bg-chip-bg bg-cover bg-center"
+                style={{ backgroundImage: `url(${src})` }}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+    </>
+  );
+}
