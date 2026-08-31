@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Panel from "@/components/Panel";
+import Prose from "@/components/Prose";
 import { getProject, getProjects } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -62,6 +63,27 @@ export default async function ProjectPage({
             <p className="pretty mt-[22px] max-w-[56ch] text-[19px] leading-[1.6]">
               {project.lede}
             </p>
+
+            {project.links.length > 0 && (
+              <div className="mt-7 flex flex-wrap gap-3">
+                {project.links.map((l, i) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={
+                      "rounded-[10px] px-[22px] py-3 text-[15px] font-bold transition-colors duration-[120ms] " +
+                      (i === 0
+                        ? "bg-rust text-white hover:bg-rust-hover"
+                        : "border-2 border-ink text-ink hover:bg-ink hover:text-paper")
+                    }
+                  >
+                    {l.label} ↗
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
           {hasSpecs && (
@@ -113,18 +135,25 @@ export default async function ProjectPage({
               key={n.heading}
               className="rounded-[16px] border-2 border-ink bg-card p-7 shadow-[var(--shadow-hard)]"
             >
-              <h3 className="mb-3 text-[26px] font-bold tracking-[-0.02em]">
+              <h2 className="mb-3 text-[26px] font-bold tracking-[-0.02em]">
                 {n.heading}
-              </h3>
+              </h2>
               <p className="pretty text-[16px] leading-[1.65]">{n.body}</p>
             </div>
           ))}
         </section>
       )}
 
+      {project.body && (
+        <section className="pb-14 gutter">
+          <h2 className="eyebrow mb-6 block">The build</h2>
+          <Prose>{project.body}</Prose>
+        </section>
+      )}
+
       {project.photos.length > 0 && (
         <section className="pb-14 gutter">
-          <h3 className="eyebrow mb-[18px] block">Build photos</h3>
+          <h2 className="eyebrow mb-[18px] block">Build photos</h2>
           <div className="grid grid-cols-2 gap-[14px] md:grid-cols-4">
             {project.photos.map((src) => (
               <div

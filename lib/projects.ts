@@ -5,6 +5,8 @@ import type { Kind } from "@/content/site";
 
 export type Spec = { key: string; value: string };
 export type Note = { heading: string; body: string };
+export type ProjectLink = { label: string; href: string };
+
 export type Media = {
   type: "video" | "photo";
   src?: string;
@@ -31,6 +33,8 @@ export type Project = {
   specs: Spec[];
   notes: Note[];
   photos: string[];
+  /** Optional outbound links — live site, repo, write-up. */
+  links: ProjectLink[];
   /** Optional long-form MDX body. */
   body: string;
 };
@@ -63,6 +67,7 @@ export function getProjects(): Project[] {
       specs: data.specs ?? [],
       notes: data.notes ?? [],
       photos: data.photos ?? [],
+      links: data.links ?? [],
       body: content.trim(),
     };
   });
