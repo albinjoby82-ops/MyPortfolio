@@ -3,184 +3,92 @@ slug: cubi
 order: 2
 kind: Hardware
 title: Cubi
-year: "2025 —"
+year: "2025 to Present"
 sortYear: 2025
 tint: "#F5C63C"
-blurb: "A 3D-printed NFC product people design themselves in the browser. Upload a logo, customise it in a live 3D preview, and the order comes out the other end as a printable file — I built the whole chain."
-lede: "Cubi turns an organisation's digital identity into a physical thing people can tap. Customers design their own product in a live 3D customiser, upload any screenshot of their logo, and the system converts it into printable geometry. I built the customiser, the image-processing pipeline, the backend, the admin and manufacturing panel, and the outreach system behind it."
-tags: ["React", "TypeScript", "Three.js", "Firebase", "WebAssembly", "Fusion", "3MF"]
+blurb: "A live custom-product business I built from first sketch to checkout and manufacture. Customers upload a logo, design an NFC product in 3D, pay online, and the finished order reaches my admin panel ready for Bambu Studio."
+lede: "Cubi began as a 3D-printed NFC idea and became a live, working product system. I designed the hardware in Fusion, built the storefront and real-time customiser, wrote the logo converter, connected secure checkout and created the private production tools that turn a customer's choices into something I can print."
+tags: ["Claude", "Codex", "Stripe", "Bambu Studio", "Cloudflare", "GitHub", "VS Code", "React", "TypeScript", "Firebase", "WebAssembly", "Fusion", "Obsidian"]
 links:
   - { label: "cubi-3d.com", href: "https://cubi-3d.com/" }
 media:
   type: photo
-  caption: "TODO: add a photo of a printed Cubi, or a screen recording of the customiser"
+  src: /projects/cubi/cubi-main.jpeg
+  caption: "A finished Cubi Base beside the Bambu Lab printer used to manufacture it."
 specs:
   - { key: "Live at", value: "cubi-3d.com" }
   - { key: "Products", value: "Base · Boards · Lite" }
   - { key: "Frontend", value: "React · Three.js" }
   - { key: "Backend", value: "Firebase · Cloudflare" }
-  - { key: "Logo pipeline", value: "Runs in-browser" }
+  - { key: "Checkout", value: "Stripe · Turnstile" }
   - { key: "Output", value: "3MF → Bambu Studio" }
 notes:
   - heading: "What went wrong"
-    body: "The 3MF export looked correct in the browser and fell apart in the actual slicer. Logo inlays came through as loose parts instead of flush insets, stroke-only icons exported as empty geometry, tile sub-parts merged into each other, and per-triangle colour overrides didn't display at all. None of it was visible until I opened the files in Bambu Studio — so I stopped trusting the preview and made real slicer testing part of the loop."
+    body: "Early versions looked finished on screen but failed further down the chain. Logos that worked in the browser became loose parts in Bambu Studio, thin icons disappeared, colours were lost and some snap-fit pieces merged together. I kept taking the files into the real slicer, printing them, finding the next weak point and rebuilding that part of the pipeline."
   - heading: "What I learned"
-    body: "A customer's choice has to survive the entire chain: browser interface to SVG, SVG to 3D geometry, geometry to 3MF, 3MF to slicer, slicer to printer. Every stage is a chance to silently lose something, and the failure almost never shows up where it was introduced. Building the whole path myself was the only way to find out where it actually broke."
+    body: "A polished interface is only the first few metres of a product. The customer's design has to survive upload, conversion, 3D geometry, payment, storage, export, slicing and printing. Cubi taught me to test the complete journey and to treat every mistake as information about the system, not as an isolated bug."
 photos: []
 ---
 
-## The customer experience
+## From checkout to Bambu Studio
 
-Customers pick a product format — **Cubi Base**, a compact counter-top NFC
-stand; **Cubi Boards** with two, three or four tile positions; or **Cubi Lite**
-as a cheaper entry point — then design it in a live 3D customiser rather than
-filling in a form and imagining the result.
+Cloudflare Workers sit behind the storefront. They validate order payloads,
+verify identity and Turnstile, read pricing on the server, calculate shipping,
+create an idempotent Stripe Checkout session and write the order to Firestore.
+A signed Stripe webhook updates its payment status, while Stripe sends the
+customer a receipt. The public site is deployed automatically from GitHub to
+Cloudflare at `cubi-3d.com`.
 
-They control the board colour, tile colour, uploaded logo, custom text, font,
-individual tile icons, NFC destinations, and the product's size and layout,
-watching the model update in real time.
+I deliberately store the cleaned SVG and design instructions, not a heavy
+generated model. When I open an order, the admin panel reconstructs the exact
+3D preview and generates the 3MF only when I need to manufacture it. That keeps
+checkout fast and moves the expensive geometry work onto the machine doing the
+production.
 
-Two decisions kept it manufacturable:
+The 3MF exporter builds the board, snap-fit pieces, logo inlay and tile icons as
+properly separated colour components, embeds the customer's configuration as
+metadata and produces a file I can take straight into Bambu Studio. Reaching
+that point took repeated slicer tests: the browser preview could not tell me
+when an icon had become empty geometry or when Bambu would interpret two parts
+incorrectly.
 
-- **A two-colour design system.** Customers choose the board colour and the
-  tile colour; everything else is derived. This keeps products visually
-  consistent and stops people building combinations that can't be printed.
-- **An admin-managed filament system.** Customers only ever see colours that
-  physically exist. Each filament carries a calibrated colour value matched to
-  the real spool, and disabling one in the admin panel removes it from the
-  storefront immediately.
+## The private production studio
 
-## The image-to-SVG converter
+The admin panel is where the web product becomes a small manufacturing system.
+It gives me a live order queue, payment badges, an order-detail viewer, 3MF and
+design-package exports, and a kanban flow from new order through printing,
+shipping and delivery.
 
-The hardest part of the project. A customer should be able to upload almost any
-image of their logo and get back a clean, printable shape — but real uploads are
-low-resolution, blurry, screenshotted, dark-on-light, light-on-dark,
-transparent, surrounded by empty space, multi-coloured, stroke-based, or unsafe
-SVG files.
+The same workspace manages product availability, the live filament palette and
+society crest approvals. Firebase Authentication protects the interface, while
+Firestore rules and server-issued admin claims protect the data independently
+of what the browser displays.
 
-Rather than paying an external service, I built my own conversion workflow. It
-measures contrast and sharpness, identifies the likely background, picks a
-thresholding strategy, removes noise, trims empty borders, traces the contours
-and emits a clean compound path.
+## Building the route to market
 
-For raster images the pipeline runs: validation and size limits, decode and
-resize, contrast and sharpness analysis, transparency detection, background and
-foreground analysis, Otsu thresholding where appropriate, dark-on-light and
-light-on-dark candidate generation, noise cleanup, border removal, boundary
-tracing, contour simplification, then normalisation and centring.
+I also built the first customer-acquisition workflow around the product. My
+scrapers collected society names, contact addresses and crests across Irish
+universities. Inside the admin panel I can review or replace a crest, run it
+through the same converter and publish a personalised page at `/for/<slug>`.
 
-Uploaded SVGs go through a separate sanitisation pass that strips scripts, event
-handlers, external references, embedded images, text, animations, filters,
-gradients and styles, leaving only geometry to convert into a one-colour
-silhouette.
+That means an outreach email can link to a real preview already carrying the
+recipient's identity. Approved contacts sync to a Google Sheet with deduplication,
+signed unsubscribe links and a server-side do-not-contact list, so re-scraping
+cannot quietly add an opted-out society again.
 
-The converter generates several candidates — readable, full-shape, dark, light,
-cut-out — scores each against the original, and shows the customer the options
-before continuing.
+## What Cubi became
 
-The final manufacturing SVG is deliberately boring and reliable: one compound
-path, black fill, even-odd hole handling, a consistent `0 0 1000 1000` viewBox,
-centred with controlled padding, and no external dependencies, scripts,
-gradients or filters.
+Cubi brought together industrial design in Fusion, browser-based image
+processing, real-time 3D graphics, secure payments, backend rules, deployment,
+outreach and additive manufacturing. I used GitHub for the development history
+and deployment flow, and Obsidian as the project's source of truth while Claude
+and Codex helped me reason through design and engineering problems.
 
-All of this runs locally in a Web Worker with WebAssembly-based tracing.
-**Customer logo files are never sent to an external image-processing API.**
+**Tools used:** Claude, Codex, Stripe, Bambu Studio, Cloudflare, GitHub and VS
+Code, alongside React, TypeScript, Firebase, WebAssembly, Fusion and Obsidian.
 
-## From a logo to a physical object
-
-The processed SVG feeds straight into the 3D viewer, built with React,
-Three.js, React Three Fiber and Drei. It handles real-time previews,
-product-specific mesh mapping, logo placement, tile and icon previews, dynamic
-material colours and multiple board sizes across desktop and mobile.
-
-The logo isn't treated as a flat image — it becomes part of the model, inset
-into the board or assigned to a tile. I also added logo paint regions, so
-selected parts of a logo can be assigned different physical colours.
-
-The admin panel generates a 3MF package from a saved configuration that opens
-directly in Bambu Studio. It has to handle the board, separate snap-fit tiles,
-recessed logos, tile icons, multiple colours, product metadata, varying sizes,
-malformed logo elements and stroke-based icons.
-
-The approach I landed on uses separate single-colour mesh objects grouped
-through the 3MF component system, so a board, logo or icon assembly appears as
-one build item while keeping its colour separation intact. The customer's
-design information — colours, text, font, icon and product configuration — is
-embedded in the 3MF metadata.
-
-## Backend and data
-
-Firebase, deliberately kept on the Spark plan and designed around that limit.
-Instead of putting raw images in Firebase Storage, the processed manufacturing
-SVG is stored as text inside the Firestore order document, which keeps the
-architecture light and the cost at zero.
-
-Orders carry everything needed to recreate a design: customer and shipping
-details, product selection, board and tile colours, text and font settings,
-tile icons, the logo SVG, paint regions, design metadata and status. Uploaded
-SVGs are validated and sanitised before acceptance, and order payloads have
-limits on file size, item count and nesting.
-
-Ordering currently works as an order request with payment handled offline —
-that let me build and test the entire product and manufacturing workflow before
-committing to a payment provider.
-
-Cloudflare Workers handle hosting and deployment; pushes to `main` on GitHub
-trigger the build, serving the live site at `cubi-3d.com`.
-
-## The admin panel
-
-The operational centre of the whole thing. Orders move through a kanban board:
-new, waiting to print, printing, printed and waiting to ship, shipped,
-delivered, cancelled.
-
-Opening an order shows a **live 3D reconstruction of what the customer
-designed**, so I can check colours, logo, text and icons before generating the
-manufacturing file — then export the 3MF and open it in Bambu Studio without
-rebuilding anything by hand.
-
-The same panel controls what can be ordered at all: enabling or disabling
-products and individual filaments, managing the customer-facing colour palette,
-reviewing inventory, updating order statuses and reviewing logos before they go
-live. Access is restricted to the owner account through Firebase auth and admin
-security rules.
-
-## Finding the first customers
-
-To launch, I built an outreach system aimed at university societies. A scraper
-collects society names, pages, email addresses, logos and useful links — around
-**94 UCD societies** so far — and an internal review dashboard lets me inspect
-and approve the scraped logos.
-
-Each approved society gets its own page at `/for/society-name` showing a
-personalised Cubi preview with their own logo already loaded. Instead of a
-generic product link, outreach shows an organisation what its own branded
-product would look like.
-
-A campaign sync workflow pushes approved societies into a Google Sheet with
-deduplication, opt-out handling and eligibility checks. The email side has
-unsubscribe links, server-side opt-out recording, signed unsubscribe URLs,
-duplicate prevention and contact validation built in from the start.
-
-## Physical design
-
-The models were built in Fusion: board and tile geometry, magnetic parts, NFC
-components, recessed logo areas, snap-fit parts and printable mesh layouts —
-designed around society stalls, committee rooms, reception desks, counters and
-small businesses.
-
-Cubi Base is compact and counter-top with two focused NFC destinations, easy to
-carry and set up at a stall. The larger boards trade portability for more
-branding space, more tap destinations, text and tile icons.
-
-## Performance
-
-A page with 3D models and in-browser image processing needs care. I code-split
-the 3D functionality, lazy-load both the logo converter and the manufacturing
-export engine, keep WebAssembly out of the initial bundle, mount canvases only
-when needed, limit device pixel ratio, cache mesh-role detection, memoise
-resolved product configurations and avoid unnecessary SVG texture rebuilds.
-
-Tested on desktop and down to 390px mobile, specifically checking for
-horizontal overflow, broken sticky controls, console errors, WebGL errors and
-whether the customiser is actually usable on a phone.
+More importantly, it changed how I build. I stopped judging progress by whether
+a feature looked finished and started judging it by whether a real customer
+could use it, pay for it, and receive the physical result. Cubi is now live and
+working. The mistakes are not an awkward preface to that result; they are how I
+got there.

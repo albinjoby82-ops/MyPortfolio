@@ -30,6 +30,7 @@ one file in a folder" over short-term convenience. Do not undo that.
 | Styling | Tailwind CSS v4 (CSS-first `@theme`, no `tailwind.config`) |
 | Content | Markdown + YAML frontmatter in `content/projects/*.mdx` |
 | Markdown rendering | `react-markdown` + `remark-gfm`, in a server component |
+| Interactive 3D | Three.js, React Three Fiber, Drei |
 | Fonts | `next/font/google` — Bricolage Grotesque, Public Sans |
 | Build | `output: 'export'` → static HTML in `out/` |
 | Node | v24, npm v11 |
@@ -108,13 +109,31 @@ components/
   ProjectList.tsx         client — filter chips + rows
   ContactBand.tsx         dark footer band
   Prose.tsx               long-form markdown renderer
+  CubiPortal.tsx          original NFC tap interaction
+  CubiLogoLab.tsx         live Claude/Bambu logo presets on real Cubi Base
+  CubiColourLab.tsx       original Cubi board-colour selector + real model
+  CubiBaseViewer.tsx      portfolio adapter around copied Cubi runtime
+  cubi-runtime/           source copied from the working Cubi app
 lib/projects.ts           reads/sorts/types the MDX frontmatter
 content/
   site.ts                 name, hero copy, bench rows, contact links
   timeline.ts             timeline entries
   projects/*.mdx          one file per project
 public/albin-joby-cv.pdf  the Résumé ↓ button target
+public/models/cubi-base/  original Cubi Base GLB
+public/projects/cubi/     Cubi photography
 ```
+
+### Cubi interactive case study
+
+The Cubi detail route is intentionally more bespoke than ordinary project
+pages. It now combines the editorial hero with three interactive sections from
+the working product: the NFC portal, the real Cubi Base logo viewer and the
+board-colour customiser. Read `docs/CUBI_HANDOFF.md` before touching these.
+
+Do not replace the real WebGL model with CSS mockups. This was tried and Albin
+explicitly rejected it. Reuse `components/cubi-runtime/` and the existing
+adapter instead.
 
 ### Design tokens
 
@@ -219,15 +238,17 @@ Verify with `read_page`, `get_page_text` or a JS query rather than chasing it.
 keyboard focus rings, reduced motion, clean `npm audit`, clean static export
 (11 pages).
 
-**Written up:** Cubi only — full multi-section build write-up plus a live-site
-link to `cubi-3d.com`.
+**Written up:** Cubi only. It now has a full multi-section build write-up, real
+product photography, the live-site link and three interactive demonstrations
+using code from Cubi itself.
 
 **Still scaffolds** (real CV facts in the frontmatter, `TODO` in the notes):
 GaelForce UCD, Dublin Micromouse Open, PCB & embedded builds, MakerLabs,
 Robo Expo.
 
-**No photos at all.** Every media slot renders a tinted placeholder that looks
-deliberate. Real assets go in `public/projects/<slug>/`.
+**Photos:** Cubi now has a real hero photo. The remaining project media slots
+still use deliberate tinted placeholders. Real assets go in
+`public/projects/<slug>/`.
 
 ---
 
@@ -238,11 +259,7 @@ Ask; don't decide these unilaterally.
 1. **Wordmark** — currently `ALBIN J.`; full name instead?
 2. **Third contact row** — stubbed to `#` in `content/site.ts`, needs his
    LinkedIn or Instagram.
-3. **Crediting Claude/Codex** — his Cubi brief credited them as development
-   collaborators. It was deliberately left off the page (it invites a reader to
-   discount the work, and his CV already lists AI-assisted development as a
-   skill). He hasn't ruled on it.
-4. **About page** — nav has no link to one; not designed. Timeline covers the
+3. **About page** — nav has no link to one; not designed. Timeline covers the
    chronology for now.
 
 ---
@@ -251,8 +268,8 @@ Ask; don't decide these unilaterally.
 
 1. **GaelForce write-up** — it leads the page and is the weakest-to-strongest
    gap. Needs: specs, two real notes, a lede.
-2. **A photo for Cubi** — that page is a wall of text with a yellow placeholder
-   where the hero should be.
+2. Continue the Cubi case study only when Albin requests the next section. See
+   `docs/CUBI_HANDOFF.md` for the current state and likely directions.
 3. Remaining four write-ups.
 4. **Connect Cloudflare Pages:** dashboard → Workers & Pages → Create → Pages →
    Connect to Git → `MyPortfolio`. Build command `npm run build`, output

@@ -1,0 +1,922 @@
+.cubiLogoConverter {
+  display: grid;
+  gap: 18px;
+  border-top: 1px solid var(--cubi-line, #d2d2d7);
+  padding-top: 22px;
+}
+
+.cubiLogoConverterHead {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.cubiLogoConverterHead > div {
+  display: grid;
+  max-width: 38rem;
+  gap: 6px;
+}
+
+.cubiLogoConverterHead p {
+  color: var(--cubi-accent, #0071e3);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cubiLogoConverterHead h4 {
+  font-size: 1.25rem;
+}
+
+.cubiLogoConverterHead span,
+.cubiLogoConverterHead small {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.cubiLogoConverterHead small {
+  max-width: 13rem;
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.cubiLogoDrop {
+  display: grid;
+  min-height: 128px;
+  place-items: center;
+  align-content: center;
+  gap: 5px;
+  border: 2px dashed rgba(0, 113, 227, 0.28);
+  border-radius: 18px;
+  background: var(--cubi-accent-soft, #e8f2ff);
+  color: var(--cubi-accent-ink, #0066cc);
+  cursor: pointer;
+  text-align: center;
+  transition:
+    border-color 240ms ease,
+    transform 240ms ease;
+}
+
+.cubiLogoDrop:hover {
+  border-color: var(--cubi-accent, #0071e3);
+  transform: translateY(-2px);
+}
+
+.cubiLogoDrop span {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.74rem;
+}
+
+.cubiLogoDrop input,
+.cubiLogoSource input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.cubiLogoSource {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid var(--cubi-line, #d2d2d7);
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: var(--cubi-fog, #f5f5f7);
+}
+
+.cubiLogoSource > div:first-child {
+  display: grid;
+  min-width: 0;
+}
+
+.cubiLogoSource strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cubiLogoSource span {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.75rem;
+}
+
+.cubiLogoSource > div:last-child {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.cubiLogoStudioButton {
+  border: 1px solid rgba(0, 113, 227, 0.22);
+  border-radius: 999px;
+  padding: 8px 13px;
+  background: var(--cubi-accent-soft, #e8f2ff);
+  color: var(--cubi-accent-ink, #0066cc);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Prominent, unmissable call-out to the Logo Studio once a candidate is chosen. */
+.cubiLogoStudioPromo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  border: 1px solid rgba(0, 113, 227, 0.3);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: linear-gradient(120deg, #eef5ff, #f7fbff);
+  color: var(--cubi-ink, #1d1d1f);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.cubiLogoStudioPromo:hover {
+  transform: translateY(-1px);
+  border-color: var(--cubi-accent, #0071e3);
+  box-shadow: 0 12px 30px rgba(0, 113, 227, 0.14);
+}
+
+.cubiLogoStudioPromoIcon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--cubi-accent, #0071e3);
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.cubiLogoStudioPromoText {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.cubiLogoStudioPromoText strong {
+  font-size: 0.9rem;
+}
+
+.cubiLogoStudioPromoText small {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.cubiLogoStudioPromoCta {
+  flex: 0 0 auto;
+  align-self: center;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: var(--cubi-accent, #0071e3);
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Nudge toward the advanced controls from the candidate list. */
+.cubiLogoCandidatesHint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 10px;
+  border: 1px dashed var(--cubi-line, #d2d2d7);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: var(--cubi-fog, #f5f5f7);
+}
+
+.cubiLogoCandidatesHint span {
+  color: var(--cubi-body, #424245);
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+.cubiLogoCandidatesHint button {
+  flex: 0 0 auto;
+  border: 1px solid var(--cubi-accent, #0071e3);
+  border-radius: 999px;
+  padding: 7px 13px;
+  background: #fff;
+  color: var(--cubi-accent-ink, #0066cc);
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .cubiLogoStudioPromo {
+    flex-wrap: wrap;
+  }
+
+  .cubiLogoStudioPromoCta {
+    order: 3;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.cubiLogoStudio {
+  display: grid;
+  gap: 16px;
+  border: 1px solid rgba(0, 113, 227, 0.2);
+  border-radius: 18px;
+  padding: 18px;
+  background: linear-gradient(145deg, #f8fbff, #fff);
+}
+
+.cubiLogoStudioHead,
+.cubiLogoStudioActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.cubiLogoStudioHead > div {
+  display: grid;
+  gap: 4px;
+}
+
+.cubiLogoStudioHead p {
+  color: var(--cubi-accent, #0071e3);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cubiLogoStudioHead h4 {
+  font-size: 1.05rem;
+}
+
+.cubiLogoStudioHead span,
+.cubiLogoStudioNote {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.cubiLogoStudioHead button,
+.cubiLogoStudioActions button {
+  border: 1px solid var(--cubi-line, #d2d2d7);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: #fff;
+  color: var(--cubi-body, #424245);
+  font-size: 0.74rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.cubiLogoStudioActions button.primary {
+  border-color: var(--cubi-accent, #0071e3);
+  background: var(--cubi-accent, #0071e3);
+  color: #fff;
+}
+
+.cubiLogoStudioPreviewGrid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cubiLogoStudioPreviewGrid > div {
+  display: grid;
+  gap: 6px;
+}
+
+.cubiLogoStudioLabel {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cubiLogoStudioPreview {
+  display: grid;
+  min-height: 130px;
+  place-items: center;
+  border: 1px solid var(--cubi-line, #d2d2d7);
+  border-radius: 12px;
+  padding: 12px;
+  background:
+    linear-gradient(45deg, #f1f1f3 25%, transparent 25%),
+    linear-gradient(-45deg, #f1f1f3 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #f1f1f3 75%),
+    linear-gradient(-45deg, transparent 75%, #f1f1f3 75%), #fff;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  background-size: 16px 16px;
+}
+
+.cubiLogoStudioPreview svg {
+  width: 100%;
+  height: 100%;
+  max-height: 130px;
+}
+
+.cubiLogoStudioControls {
+  display: grid;
+  gap: 12px;
+}
+
+.cubiLogoStudioControls label:not(.cubiLogoStudioCheck) {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  grid-template-columns: 170px minmax(0, 1fr) 55px;
+  color: var(--cubi-body, #424245);
+  font-size: 0.76rem;
+}
+
+.cubiLogoStudioControls input[type='range'] {
+  width: 100%;
+  accent-color: var(--cubi-accent, #0071e3);
+}
+
+.cubiLogoStudioControls output {
+  color: var(--cubi-muted, #6e6e73);
+  text-align: right;
+}
+
+.cubiLogoStudioCheck {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cubi-body, #424245);
+  font-size: 0.76rem;
+}
+
+.cubiLogoStudioCheck input {
+  accent-color: var(--cubi-accent, #0071e3);
+}
+
+.cubiLogoStudio {
+  margin-inline: -2px;
+  border-color: rgba(0, 113, 227, 0.22);
+  padding: 0;
+  background: #fff;
+  box-shadow: 0 16px 42px rgba(24, 39, 75, 0.08);
+  /* Lay out against the panel's own width, not the viewport, so the studio
+     never overflows the (often narrow) customizer column. */
+  container-type: inline-size;
+}
+
+.cubiLogoStudioHead {
+  border-bottom: 1px solid var(--cubi-line, #d2d2d7);
+  padding: 18px 20px;
+  background: linear-gradient(115deg, #f4f9ff, #fff 70%);
+}
+
+/* Single column by default so a narrow panel never clips the controls; the
+   container query below widens it to two columns only when there is room. */
+.cubiLogoStudioWorkspace {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 1fr;
+}
+
+.cubiLogoStudioCanvasPanel {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  border-bottom: 1px solid var(--cubi-line, #d2d2d7);
+  padding: 18px;
+  background: var(--cubi-fog, #f5f5f7);
+}
+
+@container (min-width: 640px) {
+  .cubiLogoStudioWorkspace {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+
+  .cubiLogoStudioCanvasPanel {
+    border-right: 1px solid var(--cubi-line, #d2d2d7);
+    border-bottom: 0;
+  }
+}
+
+.cubiLogoStudioCanvasHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.68rem;
+}
+
+.cubiLogoStudioZoom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cubiLogoStudioZoom button {
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 7px;
+  border: 1px solid var(--cubi-line, #d2d2d7);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--cubi-body, #424245);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cubiLogoStudioZoom button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.cubiLogoStudioZoom span {
+  min-width: 38px;
+  text-align: center;
+}
+
+/* The frame is the fixed window that clips the board area; the stage inside it
+   carries the view zoom/pan transform (magnifier only — never the decal). */
+.cubiLogoStudioPreview {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: #fff;
+}
+
+.cubiLogoStudioPreview[data-zoomed='true'] {
+  touch-action: none;
+}
+
+.cubiLogoStudioStage {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+}
+
+.cubiLogoStudioStage svg {
+  width: 100%;
+  height: 100%;
+  max-height: 236px;
+  /* Clip to the viewBox so the studio preview matches the cropped decal that
+     renderSvgTexture rasterises for the 3D board (WYSIWYG). */
+  overflow: hidden;
+}
+
+.cubiLogoStudioStage.isEditable [data-logo-shape] {
+  transition: opacity 120ms ease;
+}
+
+/* Tolerant hover: the shape picked by the nearby-pointer sampler gets a thin
+   blue outline so even a hairline mark is visible before you commit to it. */
+.cubiLogoStudioStage.isEditable [data-hover='true'] {
+  stroke: #0071e3;
+  stroke-width: 1.5;
+  paint-order: stroke;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.82;
+}
+
+/* Scroll-safe selection outline: a constant-width vector stroke instead of
+   stacked drop-shadow filters, which re-rasterised on every scroll and caused
+   the jitter. paint-order keeps it as a halo around the mark. */
+.cubiLogoStudioStage.isEditable [data-selected='true'] {
+  stroke: #ff3b30;
+  stroke-width: 2.5;
+  paint-order: stroke;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.95;
+}
+
+.cubiLogoStudioHint {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+.cubiLogoStudioCleanupBar,
+.cubiLogoStudioActions > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cubiLogoStudioCleanupBar button {
+  border: 1px solid var(--cubi-line, #d2d2d7);
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: #fff;
+  color: var(--cubi-accent-ink, #0066cc);
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cubiLogoStudio button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.cubiLogoStudioTools {
+  display: grid;
+  align-content: start;
+  min-width: 0;
+}
+
+.cubiLogoStudioTools > section {
+  display: grid;
+  gap: 13px;
+  border-bottom: 1px solid var(--cubi-line, #d2d2d7);
+  padding: 17px 18px;
+}
+
+.cubiLogoStudioToolHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 12px;
+}
+
+.cubiLogoStudioToolHead span {
+  flex: 1 1 auto;
+  text-align: right;
+}
+
+.cubiLogoStudioToolHead strong {
+  font-size: 0.83rem;
+}
+
+.cubiLogoStudioToolHead span {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.66rem;
+}
+
+.cubiLogoStudioControls label:not(.cubiLogoStudioCheck) {
+  grid-template-columns: 118px minmax(80px, 1fr) 48px;
+}
+
+.cubiLogoStudioCheck span {
+  display: grid;
+  gap: 2px;
+}
+
+.cubiLogoStudioCheck small {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.66rem;
+}
+
+.cubiLogoStudioOriginal {
+  grid-template-columns: 1fr 74px;
+  align-items: center;
+}
+
+.cubiLogoStudioMiniPreview {
+  display: grid;
+  height: 62px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--cubi-line, #d2d2d7);
+  border-radius: 10px;
+  padding: 6px;
+  background: #fff;
+}
+
+.cubiLogoStudioMiniPreview svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cubiLogoStudioActions {
+  border-top: 1px solid var(--cubi-line, #d2d2d7);
+  padding: 14px 18px;
+}
+
+.cubiLogoStudioNote {
+  padding: 0 18px 15px;
+}
+
+.cubiLogoSource label,
+.cubiLogoSource button {
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: #fff;
+  color: var(--cubi-accent-ink, #0066cc);
+  font-size: 0.75rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.cubiLogoAdvanced {
+  border: 1px solid var(--cubi-line, #d2d2d7);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.cubiLogoAdvanced summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  color: var(--cubi-body, #424245);
+  font-size: 0.8rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.cubiLogoAdvanced summary small {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.cubiLogoControlHint {
+  margin-top: -4px;
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+.cubiLogoAdvanced > div {
+  display: grid;
+  gap: 12px;
+  padding-top: 16px;
+}
+
+.cubiLogoAdvanced label:not(.cubiLogoInvert) {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  grid-template-columns: 132px minmax(0, 1fr) 34px;
+  color: var(--cubi-body, #424245);
+  font-size: 0.75rem;
+}
+
+.cubiLogoAdvanced output {
+  color: var(--cubi-muted, #6e6e73);
+  text-align: right;
+}
+
+.cubiLogoAdvanced input[type='range'] {
+  width: 100%;
+  accent-color: var(--cubi-accent, #0071e3);
+}
+
+.cubiLogoInvert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cubi-body, #424245);
+  font-size: 0.78rem;
+}
+
+.cubiLogoInvert input {
+  accent-color: var(--cubi-accent, #0071e3);
+}
+
+.cubiLogoProgress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: var(--cubi-fog, #f5f5f7);
+  color: var(--cubi-body, #424245);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.cubiLogoProgress > span {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 113, 227, 0.2);
+  border-top-color: var(--cubi-accent, #0071e3);
+  border-radius: 50%;
+  animation: cubiLogoSpin 700ms linear infinite;
+}
+
+@keyframes cubiLogoSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cubiLogoCandidates {
+  display: grid;
+  gap: 14px;
+}
+
+.cubiLogoCandidates > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.cubiLogoCandidates > div:first-child p {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.78rem;
+}
+
+.cubiLogoCandidateGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cubiLogoCandidateGrid > button {
+  display: grid;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid var(--cubi-line, #d2d2d7);
+  border-radius: 18px;
+  padding: 0;
+  background: #fff;
+  color: var(--cubi-ink, #1d1d1f);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 240ms ease,
+    box-shadow 240ms ease,
+    transform 240ms ease;
+}
+
+.cubiLogoCandidateGrid > button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+.cubiLogoCandidateGrid > button.isSelected {
+  border-color: var(--cubi-accent, #0071e3);
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.13);
+}
+
+.cubiLogoCandidatePreview {
+  display: grid;
+  height: 150px;
+  place-items: center;
+  border-bottom: 1px solid var(--cubi-line, #d2d2d7);
+  padding: 14px;
+  background:
+    linear-gradient(45deg, #f1f1f3 25%, transparent 25%),
+    linear-gradient(-45deg, #f1f1f3 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #f1f1f3 75%),
+    linear-gradient(-45deg, transparent 75%, #f1f1f3 75%),
+    #fff;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  background-size: 16px 16px;
+}
+
+.cubiLogoCandidatePreview svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cubiLogoCandidateCopy {
+  display: grid;
+  gap: 4px;
+  padding: 13px 14px 8px;
+}
+
+.cubiLogoCandidateCopy strong {
+  font-size: 0.88rem;
+}
+
+.cubiLogoCandidateCopy em {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 2px 7px;
+  background: var(--cubi-accent-soft, #e8f2ff);
+  color: var(--cubi-accent-ink, #0066cc);
+  font-size: 0.62rem;
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cubiLogoCandidateCopy small {
+  color: var(--cubi-muted, #6e6e73);
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+.cubiLogoCandidateCopy small.warning {
+  color: #93620b;
+}
+
+.cubiLogoChoose {
+  padding: 8px 14px 13px;
+  color: var(--cubi-accent-ink, #0066cc);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .cubiLogoConverterHead {
+    display: grid;
+  }
+
+  .cubiLogoConverterHead small {
+    max-width: none;
+    text-align: left;
+  }
+
+  .cubiLogoCandidateGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cubiLogoSource {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cubiLogoStudioPreviewGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cubiLogoStudioWorkspace {
+    grid-template-columns: 1fr;
+  }
+
+  .cubiLogoStudioCanvasPanel {
+    border-right: 0;
+    border-bottom: 1px solid var(--cubi-line, #d2d2d7);
+  }
+
+  .cubiLogoStudioPreview {
+    min-height: 220px;
+  }
+
+  .cubiLogoStudioControls label:not(.cubiLogoStudioCheck) {
+    grid-template-columns: 1fr 48px;
+  }
+
+  .cubiLogoStudioControls label:not(.cubiLogoStudioCheck) > span {
+    grid-column: 1 / -1;
+  }
+
+  .cubiLogoStudioActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cubiLogoAdvanced label:not(.cubiLogoInvert) {
+    grid-template-columns: 1fr 38px;
+  }
+
+  .cubiLogoAdvanced label:not(.cubiLogoInvert) > span {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cubiLogoProgress > span {
+    animation: none;
+  }
+}
+
+/* Portfolio shell around the converter controls copied above. */
+.cubiLogoShowcase{display:grid;grid-template-columns:minmax(260px,350px) minmax(580px,790px);justify-content:center;align-items:center;gap:clamp(34px,4vw,58px);padding-block:70px 76px;border-top:1px solid #d8d3c6;background:#fbf8f1}
+.cubiLogoStory h2{max-width:10ch;margin:0;color:#16181d;font-family:var(--font-bricolage),sans-serif;font-size:clamp(38px,4.2vw,58px);font-weight:800;letter-spacing:-.055em;line-height:.92}
+.cubiLogoStory>p{max-width:48ch;margin:22px 0 0;color:#4a473e;font-size:15.5px;font-weight:520;line-height:1.62}
+.cubiLogoPipeline{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:27px;color:#16181d;font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.cubiLogoPipeline span{padding:7px 9px;border:1px solid #cbc5b7;border-radius:6px;background:#fff}.cubiLogoPipeline i{color:#d4451f;font-style:normal}
+.cubiSite.cubiLogoLab{min-height:0;overflow:hidden;border:2px solid #16181d;border-radius:18px;background:#fff;box-shadow:6px 6px 0 #16181d;font-size:16px}
+.cubiLogoLabTabs{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:10px;border-bottom:1px solid #e2dfd7;background:#f2efe8}
+.cubiLogoLabTabs span{display:flex;min-width:0;align-items:center;justify-content:center;gap:6px;padding:8px 5px;border-radius:9px;color:#77736b;font-size:10px;font-weight:700}
+.cubiLogoLabTabs b{display:grid;width:20px;height:20px;place-items:center;border-radius:50%;background:#e4e1db;font-size:9px}
+.cubiLogoLabTabs .isActive{color:#fff;background:#16181d;box-shadow:0 5px 12px rgba(22,24,29,.18)}.cubiLogoLabTabs .isActive b{color:#16181d;background:#d43b2f}
+.cubiLogoLabBody{display:grid;grid-template-columns:minmax(290px,1.05fr) minmax(260px,.95fr);min-height:470px}
+.cubiLogoProductStage{position:relative;min-width:0;overflow:hidden;border-right:1px solid #e2dfd7;background:#eeeae2}
+.cubiLogoProductStage .tapBoard2Viewer{position:relative;width:100%;height:470px;min-height:470px;overflow:hidden;background:#eeeae2}
+.cubiLogoProductStage .tapBoard2Viewer canvas{display:block;width:100%;height:100%}
+.cubiLogoProductStage .tapBoard2Status,.cubiLogoProductStage .tapBoard2TargetWarning{position:absolute;z-index:3;top:13px;left:13px;max-width:calc(100% - 26px);padding:7px 10px;border:1px solid rgba(22,24,29,.13);border-radius:999px;background:rgba(255,255,255,.82);color:#5f5b53;font-size:9px;font-weight:750;box-shadow:0 8px 24px rgba(0,0,0,.08);backdrop-filter:blur(8px);pointer-events:none}
+.cubiLogoProductStage .tapBoard2Status.ready{color:#267345}.cubiLogoProductStage .tapBoard2Status.error{color:#9e2d23}.cubiLogoProductStage .tapBoard2TargetWarning{top:48px;border-radius:8px;color:#8b6517}
+.cubiLogoViewerLoading{display:grid;height:470px;place-items:center;color:#6d6860;font-size:11px;font-weight:700}
+.cubiLogoStageLegend{position:absolute;right:13px;bottom:13px;z-index:3;display:flex;gap:6px}.cubiLogoStageLegend span{padding:6px 8px;border:1px solid rgba(22,24,29,.13);border-radius:999px;background:rgba(255,255,255,.82);color:#5f5b53;font-size:8px;font-weight:750;box-shadow:0 6px 18px rgba(0,0,0,.07);backdrop-filter:blur(8px);text-transform:uppercase}
+.cubiLogoControls{display:grid;align-content:center;gap:22px;padding:32px 24px}.cubiLogoControls .cubiLogoConverterHead h4{color:#16181d;font-size:1.25rem;letter-spacing:-.035em;line-height:1.05}
+.cubiLogoPresets{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.cubiLogoPresets button{display:grid;min-width:0;place-items:center;gap:7px;padding:12px 7px 9px;border:1px solid #ddd9d0;border-radius:11px;background:#f8f6f1;color:#555149;cursor:pointer;transition:transform 150ms ease,border-color 150ms ease,box-shadow 150ms ease}.cubiLogoPresets button:hover{transform:translateY(-2px);border-color:#aaa49a}.cubiLogoPresets button.isSelected{border-color:#d43b2f;box-shadow:0 0 0 2px rgba(212,59,47,.16)}
+.cubiLogoPresets img{width:34px;height:28px;object-fit:contain}.cubiLogoPresets span{overflow:hidden;max-width:100%;font-size:9px;font-weight:750;text-overflow:ellipsis;white-space:nowrap}
+.cubiLogoDrop.cubiLogoLabUpload{position:relative;min-height:86px;border-color:rgba(212,59,47,.35);background:rgba(212,59,47,.065);color:#b62b21}.cubiLogoDrop.cubiLogoLabUpload:hover{border-color:#d43b2f}
+.cubiLogoLabStatus{display:flex;align-items:center;gap:8px;padding-top:3px;color:#68645c;font-size:10px;font-weight:650;line-height:1.4}.cubiLogoStatusDot{width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:#24a35a;box-shadow:0 0 0 3px rgba(36,163,90,.13)}
+@media(max-width:1120px){.cubiLogoShowcase{grid-template-columns:1fr;justify-items:center}.cubiLogoStory,.cubiLogoLab{width:min(790px,100%)}.cubiLogoStory h2{max-width:14ch}}
+@media(max-width:760px){.cubiLogoShowcase{padding-block:54px 60px}.cubiLogoLabBody{grid-template-columns:1fr}.cubiLogoProductStage{border-right:0;border-bottom:1px solid #e2dfd7}.cubiLogoProductStage .tapBoard2Viewer,.cubiLogoViewerLoading{height:420px;min-height:420px}.cubiLogoLabTabs span{font-size:0}.cubiLogoLabTabs b{font-size:9px}}

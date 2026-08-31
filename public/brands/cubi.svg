@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 80" width="260" height="80" role="img" aria-label="cubi">
+  <!-- Cubi wordmark: lowercase "cubi" followed by the dot.
+       The dot is a distinct brand element and is rendered as its own mark —
+       give it room, and keep it in the accent (#5b52ff).
+       Set in system display type; substitute Helvetica Neue or Segoe UI if
+       SF Pro Display is unavailable. Do not add a Google webfont. -->
+  <text x="6" y="58"
+        font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', 'Segoe UI', sans-serif"
+        font-size="62" font-weight="600" letter-spacing="-2.8" fill="#111322">cubi</text>
+  <circle cx="160" cy="52" r="8" fill="#5b52ff"/>
+</svg>

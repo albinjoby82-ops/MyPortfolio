@@ -1,0 +1,275 @@
+.cubiColourShowcase {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(650px, 900px);
+  justify-content: center;
+  align-items: center;
+  gap: clamp(34px, 4vw, 58px);
+  padding-block: 72px 80px;
+  border-top: 1px solid #d8d3c6;
+  background: #fbf8f1;
+}
+
+.cubiColourStory h2 {
+  max-width: 11ch;
+  margin: 0;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(38px, 4.1vw, 58px);
+  font-weight: 800;
+  letter-spacing: -.055em;
+  line-height: .93;
+}
+
+.cubiColourStory > p {
+  max-width: 47ch;
+  margin: 21px 0 0;
+  color: #4a473e;
+  font-size: 15px;
+  font-weight: 520;
+  line-height: 1.62;
+}
+
+.cubiColourFacts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 27px;
+  border-block: 1px solid #cbc5b7;
+}
+
+.cubiColourFacts span {
+  display: grid;
+  gap: 3px;
+  padding: 11px 8px;
+  border-left: 1px solid #cbc5b7;
+  color: #726d63;
+  font-size: 8px;
+  font-weight: 750;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.cubiColourFacts span:first-child { border-left: 0; }
+.cubiColourFacts b { color: #16181d; font-size: 15px; }
+
+.cubiColourDemo {
+  min-width: 0;
+  overflow: hidden;
+  border: 2px solid #16181d;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 7px 7px 0 #16181d;
+}
+
+.cubiColourTabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  padding: 10px;
+  border-bottom: 1px solid #e2dfd7;
+  background: #f2f0f7;
+}
+
+.cubiColourTabs span {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 46px;
+  padding: 6px;
+  border-radius: 11px;
+  color: #777780;
+}
+
+.cubiColourTabs span.isActive {
+  background: #fff;
+  color: #16181d;
+  box-shadow: 0 5px 16px rgba(22, 24, 29, .12);
+}
+
+.cubiColourTabs b {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #e2e1e8;
+  font-size: 10px;
+}
+
+.cubiColourTabs .isActive b { background: #d43b2f; color: #fff; }
+.cubiColourTabs em { font-size: 9px; font-style: normal; font-weight: 750; line-height: 1.1; }
+
+.cubiColourWorkspace {
+  display: grid;
+  grid-template-columns: minmax(330px, 1.08fr) minmax(330px, .92fr);
+  min-height: 535px;
+}
+
+.cubiColourStage {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border-right: 1px solid #e2dfd7;
+  background: #eeeae2;
+}
+
+.cubiColourStage .tapBoard2Viewer {
+  position: relative;
+  width: 100%;
+  height: 535px;
+  min-height: 535px;
+  overflow: hidden;
+}
+
+.cubiColourStage .tapBoard2Viewer canvas { display: block; width: 100%; height: 100%; }
+.cubiColourStage .tapBoard2Status,
+.cubiColourStage .tapBoard2TargetWarning { display: none; }
+.cubiColourViewerLoading { display: grid; height: 535px; place-items: center; color: #6d6860; font-size: 11px; font-weight: 700; }
+
+.cubiColourStageNotes {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.cubiColourStageNotes span {
+  padding: 6px 8px;
+  border: 1px solid rgba(22, 24, 29, .13);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .84);
+  color: #69645c;
+  font-size: 7px;
+  font-weight: 800;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.cubiColourControls {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-width: 0;
+  background: #fff;
+}
+
+.cubiColourControls .tapBoard2StepContent {
+  display: grid;
+  align-content: start;
+  gap: 25px;
+  padding: 32px 28px 24px;
+}
+
+.cubiColourControls .tapBoard2StepHeading p {
+  margin: 0 0 6px;
+  color: #5d50ec;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.cubiColourControls .tapBoard2StepHeading h3 {
+  margin: 0;
+  color: #16181d;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+
+.cubiColourControls .tapBoard2StepHeading > span {
+  display: block;
+  margin-top: 7px;
+  color: #74767d;
+  font-size: 12px;
+}
+
+.cubiColourControls .tapBoard2LargeSwatches {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 17px 8px;
+}
+
+.cubiColourControls .cubiSwatch {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #68686e;
+  cursor: pointer;
+}
+
+.cubiColourControls .cubiSwatchChip {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 900;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+  box-shadow: 0 0 0 1px rgba(49, 42, 38, .2);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.cubiColourControls .cubiSwatch:hover .cubiSwatchChip { transform: translateY(-2px); }
+.cubiColourControls .cubiSwatch.active .cubiSwatchChip { box-shadow: 0 0 0 3px #fff, 0 0 0 6px #16181d; }
+.cubiColourControls .cubiSwatchName { max-width: 64px; font-size: 9px; font-weight: 750; line-height: 1.05; text-align: center; }
+.cubiColourControls .cubiSwatch.active .cubiSwatchName { color: #16181d; }
+
+.cubiColourFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+  border-top: 1px solid #e2dfd7;
+  padding: 12px 20px;
+  color: #818188;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.cubiColourFooter button {
+  min-width: 105px;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 20px;
+  background: #5d50ec;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@media (max-width: 1180px) {
+  .cubiColourShowcase { grid-template-columns: 1fr; justify-items: center; }
+  .cubiColourStory, .cubiColourDemo { width: min(900px, 100%); }
+  .cubiColourStory h2 { max-width: 14ch; }
+}
+
+@media (max-width: 780px) {
+  .cubiColourShowcase { padding-block: 54px 62px; }
+  .cubiColourWorkspace { grid-template-columns: 1fr; }
+  .cubiColourStage { border-right: 0; border-bottom: 1px solid #e2dfd7; }
+  .cubiColourStage .tapBoard2Viewer, .cubiColourViewerLoading { height: 430px; min-height: 430px; }
+  .cubiColourTabs em { display: none; }
+}
+
+@media (max-width: 480px) {
+  .cubiColourControls .tapBoard2LargeSwatches { grid-template-columns: repeat(4, 1fr); }
+  .cubiColourFacts { grid-template-columns: 1fr; }
+  .cubiColourFacts span { border-top: 1px solid #cbc5b7; border-left: 0; }
+  .cubiColourFacts span:first-child { border-top: 0; }
+  .cubiColourStageNotes span:last-child { display: none; }
+}

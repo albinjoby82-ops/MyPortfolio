@@ -1,0 +1,2453 @@
+/* Cubi customer-facing site: tokens, layout, nav/footer, landing sections. */
+
+.cubiSite {
+  /* Quiet hardware-store palette: warm white, graphite and one clear blue. */
+  --cubi-ink: #111322;
+  --cubi-body: #4c5067;
+  --cubi-muted: #6e6e73;
+  --cubi-faint: #86868b;
+  --cubi-bg: #ffffff;
+  --cubi-paper: #ffffff;
+  --cubi-fog: #f4f4fa;
+  --cubi-card: #f4f4fa;
+  --cubi-line: #ddddea;
+  --cubi-accent: #5b52ff;
+  --cubi-accent-ink: #463bea;
+  --cubi-accent-soft: #eeecff;
+  /* Deep indigo used for dark sections instead of near-black. */
+  --cubi-night: #1b1936;
+  --cubi-night-panel: #28254f;
+
+  --cubi-font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+    'Helvetica Neue', 'Segoe UI', sans-serif;
+  --cubi-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+    'Helvetica Neue', 'Segoe UI', sans-serif;
+
+  --cubi-radius-card: 28px;
+  --cubi-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --cubi-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  min-height: 100vh;
+  background: var(--cubi-bg);
+  color: var(--cubi-ink);
+  font-family: var(--cubi-font-body);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.cubiSite h1,
+.cubiSite h2,
+.cubiSite h3,
+.cubiSite h4 {
+  margin: 0;
+  font-family: var(--cubi-font-display);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.03;
+  color: var(--cubi-ink);
+  text-wrap: balance;
+}
+
+.cubiSite p {
+  margin: 0;
+}
+
+.cubiContainer {
+  width: min(1140px, 100% - 40px);
+  margin: 0 auto;
+}
+
+.cubiEyebrow {
+  margin: 0 0 14px;
+  color: var(--cubi-accent);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Buttons & pills ---------- */
+
+.cubiButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 999px;
+  font-family: var(--cubi-font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 180ms var(--cubi-ease), box-shadow 180ms var(--cubi-ease),
+    background-color 180ms var(--cubi-ease), color 180ms var(--cubi-ease);
+}
+
+.cubiButton:hover {
+  transform: translateY(-1px);
+}
+
+.cubiButton:active {
+  transform: translateY(0);
+}
+
+.cubiButtonPrimary {
+  background: var(--cubi-ink);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(19, 20, 23, 0.16);
+}
+
+.cubiButtonPrimary:hover {
+  background: #26282e;
+  box-shadow: 0 14px 30px rgba(19, 20, 23, 0.22);
+}
+
+.cubiButtonAccent {
+  background: var(--cubi-accent);
+  color: #fff;
+  box-shadow: 0 10px 26px rgba(44, 75, 255, 0.28);
+}
+
+.cubiButtonAccent:hover {
+  background: var(--cubi-accent-ink);
+  box-shadow: 0 14px 32px rgba(44, 75, 255, 0.34);
+}
+
+.cubiButtonGhost {
+  border: 1px solid var(--cubi-line);
+  background: var(--cubi-paper);
+  color: var(--cubi-ink);
+}
+
+.cubiButtonGhost:hover {
+  border-color: #d4d4cf;
+  background: var(--cubi-fog);
+}
+
+.cubiBasketLink { display:inline-flex;align-items:center;gap:7px;color:var(--cubi-ink);font-size:.82rem;font-weight:650;text-decoration:none;white-space:nowrap }
+.cubiBasketLink span { display:grid;min-width:22px;height:22px;padding:0 5px;place-items:center;border-radius:999px;color:#fff;background:var(--cubi-accent);font-size:.68rem }
+.cubiBasketTestBadge { display:inline-flex;margin-bottom:10px;padding:5px 9px;border-radius:999px;color:#151827;background:#c9ff5c;font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase }
+
+.cubiPillRow {
+  --tab-count: 4;
+  --active-index: 0;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--tab-count), minmax(0, 1fr));
+  width: min(100%, 620px);
+  gap: 0;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(118, 118, 128, 0.12);
+  isolation: isolate;
+}
+
+.cubiPillRow::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc((100% - 8px) / var(--tab-count));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 4px 14px rgba(0, 0, 0, 0.07);
+  transform: translateX(calc(var(--active-index) * 100%));
+  transition: transform 620ms var(--cubi-ease);
+  will-change: transform;
+}
+
+.cubiPill {
+  position: relative;
+  display: inline-flex;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cubi-body);
+  font-family: var(--cubi-font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 360ms var(--cubi-ease), transform 360ms var(--cubi-ease);
+}
+
+.cubiPill:hover {
+  color: var(--cubi-ink);
+}
+
+.cubiPill.isActive {
+  color: var(--cubi-ink);
+  transform: scale(1.015);
+}
+
+.cubiPill:focus-visible,
+.cubiFeaturePill:focus-visible,
+.cubiFeatureClose:focus-visible,
+.cubiButton:focus-visible {
+  outline: 3px solid rgba(0, 113, 227, 0.42);
+  outline-offset: 3px;
+}
+
+.cubiChip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: var(--cubi-fog);
+  color: var(--cubi-muted);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cubiChipAccent {
+  background: var(--cubi-accent-soft);
+  color: var(--cubi-accent-ink);
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.cubiReveal {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(48px) scale(0.985);
+  transition:
+    opacity 900ms var(--cubi-ease),
+    filter 900ms var(--cubi-ease),
+    transform 900ms var(--cubi-ease);
+  will-change: opacity, filter, transform;
+}
+
+.cubiReveal.isIn {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  /* Release the compositor layer once revealed; keeping will-change on every
+     revealed section makes the whole page expensive to scroll. */
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cubiReveal {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- 2026 expressive landing-page refresh ---------- */
+
+.cubiHero {
+  background:
+    radial-gradient(circle at 82% 20%, rgba(91, 82, 255, 0.13), transparent 34%),
+    radial-gradient(circle at 10% 84%, rgba(201, 255, 92, 0.17), transparent 28%),
+    #fbfbff;
+}
+
+.cubiHero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.26;
+  background-image: radial-gradient(#7773a5 0.65px, transparent 0.65px);
+  background-size: 14px 14px;
+  mask-image: linear-gradient(to bottom, #000, transparent 85%);
+  pointer-events: none;
+}
+
+.cubiHeroInner { position: relative; }
+
+.cubiHeroCopy h1 {
+  max-width: 680px;
+  font-size: clamp(3.4rem, 6.8vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.065em;
+}
+
+.cubiHeroLead { max-width: 31rem; }
+
+.cubiHeroStage {
+  border-color: rgba(91, 82, 255, 0.18);
+  background:
+    radial-gradient(circle at 70% 16%, #fff 0%, rgba(239, 237, 255, 0.92) 48%, #dedbf7 100%);
+  box-shadow: 0 34px 90px rgba(48, 42, 120, 0.18);
+  transform: rotate(1.2deg);
+}
+
+.cubiProof {
+  padding: 26px 0;
+  background: var(--cubi-night);
+  color: white;
+}
+
+.cubiProofGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.cubiProofItem {
+  display: grid;
+  gap: 2px;
+  padding: 9px 24px;
+  border-left: 1px solid rgba(255,255,255,0.13);
+}
+
+.cubiProofItem:first-child { border-left: 0; padding-left: 0; }
+.cubiProofItem strong { font-size: 1.08rem; letter-spacing: -0.025em; }
+.cubiProofItem span { color: rgba(255,255,255,0.56); font-size: 0.74rem; }
+
+.cubiUseCases { padding: clamp(84px, 12vw, 150px) 0; overflow: hidden; }
+
+.cubiSplitHead {
+  display: grid;
+  align-items: end;
+  gap: 60px;
+  grid-template-columns: 1.45fr 0.55fr;
+  margin-bottom: 48px;
+}
+
+.cubiSplitHead h2 { max-width: 760px; font-size: clamp(2.6rem, 5.4vw, 4.8rem); }
+.cubiSplitHead > p { color: var(--cubi-body); font-size: 1.02rem; }
+
+.cubiUseCaseGrid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cubiUseCaseCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 360px;
+  padding: 26px;
+  border-radius: 28px;
+  overflow: hidden;
+  transition: transform 500ms var(--cubi-ease), box-shadow 500ms var(--cubi-ease);
+}
+
+.cubiUseCaseCard:hover { transform: translateY(-8px) rotate(-0.5deg); box-shadow: 0 30px 70px rgba(17,19,34,.15); }
+.cubiUseCaseCard.is-violet { background: #5b52ff; color: white; }
+.cubiUseCaseCard.is-lime { background: #c9ff5c; color: #18200b; }
+.cubiUseCaseCard.is-coral { background: #ff826b; color: #2b0e09; }
+.cubiUseCaseCard > span:first-child { font-size: .78rem; font-weight: 800; letter-spacing: .12em; }
+.cubiUseCaseCard h3 { color: inherit; font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 14px; }
+.cubiUseCaseCard p { max-width: 18rem; opacity: .76; font-size: .95rem; }
+.cubiUseCaseArrow { position: absolute; top: 22px; right: 24px; font-size: 1.5rem; transition: transform 400ms var(--cubi-ease); }
+
+/* Icon tile at the top; margin-bottom auto sinks the title/body/tags block to
+   the bottom so the tall card reads top-to-bottom instead of sitting empty. */
+.cubiUseCaseIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: auto;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .16);
+  color: inherit;
+}
+.cubiUseCaseIcon svg { width: 28px; height: 28px; display: block; }
+.cubiUseCaseTags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+.cubiUseCaseTags li { padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, .18); font-size: .74rem; font-weight: 700; letter-spacing: .01em; }
+/* Light lime/coral cards use dark text, so tint their tiles dark for contrast. */
+.cubiUseCaseCard.is-lime .cubiUseCaseIcon,
+.cubiUseCaseCard.is-lime .cubiUseCaseTags li,
+.cubiUseCaseCard.is-coral .cubiUseCaseIcon,
+.cubiUseCaseCard.is-coral .cubiUseCaseTags li { background: rgba(0, 0, 0, .12); }
+.cubiUseCaseCard:hover .cubiUseCaseArrow { transform: translate(4px,-4px); }
+
+.cubiHow { padding: clamp(84px, 11vw, 140px) 0; background: var(--cubi-night); color: white; }
+.cubiHow .cubiEyebrow { color: #c9ff5c; }
+.cubiHow h2, .cubiHow h3 { color: white; }
+.cubiHowInner { display: grid; gap: 80px; grid-template-columns: .9fr 1.1fr; }
+.cubiHowInner h2 { font-size: clamp(2.7rem, 4.8vw, 4.4rem); }
+.cubiHowSteps { display: grid; }
+.cubiHowSteps article {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: 48px 1fr;
+  padding: 27px 0;
+  border-top: 1px solid rgba(255,255,255,.15);
+}
+.cubiHowSteps article > span {
+  display: grid; place-items: center; width: 38px; height: 38px;
+  border-radius: 50%; background: #c9ff5c; color: #111322; font-weight: 800;
+}
+.cubiHowSteps h3 { font-size: 1.35rem; margin-bottom: 7px; }
+.cubiHowSteps p { color: rgba(255,255,255,.58); max-width: 29rem; font-size: .92rem; }
+
+.cubiFinalCta {
+  position: relative;
+  overflow: hidden;
+  background: #5b52ff;
+  color: white;
+}
+.cubiFinalCta::before {
+  content: ''; position: absolute; width: 360px; height: 360px; border-radius: 50%;
+  right: -80px; top: -150px; background: #c9ff5c; opacity: .95;
+}
+.cubiFinalCta .cubiEyebrow { color: #c9ff5c; }
+.cubiFinalCta h2 { color: white; font-size: clamp(2.8rem, 6vw, 5.2rem); }
+.cubiFinalCta p { color: rgba(255,255,255,.75); }
+.cubiFinalCta .cubiButtonAccent { background: #c9ff5c; color: #111322; box-shadow: 0 12px 34px rgba(17,19,34,.25); }
+
+@media (max-width: 760px) {
+  .cubiProofGrid { grid-template-columns: 1fr 1fr; gap: 18px 0; }
+  .cubiProofItem:nth-child(3) { border-left: 0; padding-left: 0; }
+  .cubiSplitHead, .cubiHowInner { grid-template-columns: 1fr; gap: 28px; }
+  .cubiUseCaseGrid { grid-template-columns: 1fr; }
+  .cubiUseCaseCard { min-height: 280px; }
+}
+
+@media (max-width: 640px) {
+  .cubiHeroCopy h1 { font-size: clamp(3.2rem, 16vw, 4.6rem); }
+  .cubiHeroStage { transform: none; }
+  .cubiProofItem { padding: 6px 14px; }
+  .cubiProofItem:first-child, .cubiProofItem:nth-child(3) { padding-left: 0; }
+  .cubiFinalCta::before { width: 210px; height: 210px; top: -120px; }
+}
+
+/* ---------- Navigation ---------- */
+
+.cubiNav {
+  position: sticky;
+  z-index: 40;
+  top: 0;
+  border-bottom: 1px solid rgba(210, 210, 215, 0.55);
+  background: rgba(250, 250, 252, 0.78);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.cubiNavInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 62px;
+}
+
+.cubiNavRight {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.cubiMobileAccountLink {
+  display: none;
+}
+
+.cubiBrand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  font-family: var(--cubi-font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--cubi-ink);
+  text-decoration: none;
+}
+
+.cubiBrandDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--cubi-accent);
+  transform: translateY(-1px);
+  transition: transform 300ms var(--cubi-ease);
+}
+
+.cubiBrand:hover .cubiBrandDot {
+  transform: translateY(-5px);
+}
+
+.cubiNavLinks {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.cubiNavLinks a {
+  color: var(--cubi-body);
+  font-size: 0.9rem;
+  font-weight: 550;
+  text-decoration: none;
+  transition: color 160ms var(--cubi-ease);
+}
+
+.cubiNavLinks a:hover {
+  color: var(--cubi-ink);
+}
+
+.cubiNavCta {
+  min-height: 40px;
+  padding: 0 18px;
+  font-size: 0.86rem;
+}
+
+.cubiAccountControl {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cubiAccountName {
+  color: var(--cubi-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cubiAccountName:hover {
+  color: var(--cubi-ink);
+}
+
+.cubiAccountError {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1;
+  width: max-content;
+  max-width: 220px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--cubi-ink);
+  color: #fff;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+/* ---------- Hero ---------- */
+
+.cubiHero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(48px, 8vh, 96px) 0 clamp(56px, 9vh, 110px);
+}
+
+.cubiHeroInner {
+  display: grid;
+  align-items: center;
+  gap: clamp(36px, 5vw, 72px);
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+}
+
+.cubiHeroCopy {
+  display: grid;
+  gap: 22px;
+  justify-items: start;
+  animation: cubiHeroCopyIn 1s var(--cubi-ease) both;
+}
+
+.cubiHeroCopy h1 {
+  font-size: clamp(3.1rem, 6.5vw, 5.35rem);
+  font-weight: 700;
+}
+
+.cubiHeroLead {
+  max-width: 34rem;
+  color: var(--cubi-body);
+  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  line-height: 1.6;
+}
+
+.cubiHeroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+/* Hero demo stage — placeholder for the future interactive drag/tap demo. */
+
+.cubiHeroStage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(340px, 44vw, 480px);
+  border: 1px solid var(--cubi-line);
+  border-radius: 32px;
+  background:
+    radial-gradient(120% 90% at 70% 10%, #ffffff 0%, var(--cubi-fog) 62%, #e8e8ed 100%);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08);
+  animation: cubiHeroStageIn 1.15s var(--cubi-ease) 100ms both;
+}
+
+@keyframes cubiHeroCopyIn {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(36px);
+  }
+}
+
+@keyframes cubiHeroStageIn {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(48px) scale(0.96);
+  }
+}
+
+.cubiDemoBoard {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto auto;
+  gap: 14px;
+  width: clamp(232px, 24vw, 290px);
+  aspect-ratio: 4 / 5;
+  padding: 16px 18px 12px;
+  border-radius: 22px;
+  background: linear-gradient(160deg, #fbfbf9 0%, #ececea 100%);
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  box-shadow:
+    0 30px 60px rgba(20, 20, 20, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: rotate(-4deg) translateX(-8%);
+}
+
+/* Raised logo plate on the upper half, like the printed product. */
+.cubiDemoBoardPlate {
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  border: 1px solid rgba(20, 20, 20, 0.09);
+  background: linear-gradient(170deg, #ffffff 0%, #f2f2ef 100%);
+  box-shadow:
+    0 2px 6px rgba(20, 20, 20, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.cubiDemoBoardLogo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--cubi-ink);
+  font-family: var(--cubi-font-display);
+  font-size: clamp(2.5rem, 4.6vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.cubiDemoBoardLogo .cubiBrandDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+}
+
+.cubiDemoBoardText {
+  justify-self: center;
+  color: rgba(26, 27, 32, 0.75);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.cubiDemoTiles {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cubiDemoTile {
+  position: relative;
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  border-radius: 16px;
+  background: #1c1d22;
+  box-shadow:
+    0 10px 18px rgba(10, 10, 14, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: #f5f5f2;
+  transition:
+    transform 220ms var(--cubi-ease),
+    box-shadow 220ms var(--cubi-ease);
+}
+
+.cubiDemoTile svg {
+  width: 52px;
+  height: 52px;
+}
+
+.cubiDemoTileMark {
+  font-family: var(--cubi-font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.cubiDemoTileMark .cubiBrandDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.cubiDemoTile.isTarget::after {
+  content: '';
+  position: absolute;
+  inset: -9px;
+  border: 2px solid rgba(44, 75, 255, 0.55);
+  border-radius: 20px;
+  animation: cubiPulse 2.4s var(--cubi-ease) infinite;
+  transition: opacity 180ms var(--cubi-ease);
+}
+
+.cubiDemoTile.isTarget.isArmed::after {
+  animation: none;
+  opacity: 0;
+}
+
+.cubiDemoTile.isArmed {
+  transform: scale(1.07);
+  box-shadow:
+    0 0 0 3px rgba(44, 75, 255, 0.45),
+    0 12px 24px rgba(10, 10, 14, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+@keyframes cubiPulse {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.92);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.14);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.14);
+  }
+}
+
+/* NFC contact ripple: rings expanding from the tapped tile. */
+.cubiDemoRings {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cubiDemoRings i {
+  position: absolute;
+  inset: -4px;
+  border: 2px solid rgba(44, 75, 255, 0.6);
+  border-radius: 18px;
+  opacity: 0;
+  animation: cubiRing 1.3s ease-out infinite;
+}
+
+.cubiDemoRings i:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.cubiDemoRings i:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+@keyframes cubiRing {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+
+.cubiDemoPhone {
+  position: absolute;
+  right: clamp(18px, 4vw, 44px);
+  bottom: clamp(22px, 4vw, 48px);
+  display: grid;
+  width: clamp(140px, 14vw, 172px);
+  aspect-ratio: 9 / 18.5;
+  padding: 10px;
+  border-radius: 26px;
+  background: #17181c;
+  box-shadow: 0 26px 54px rgba(15, 16, 20, 0.4);
+  animation: cubiFloat 5.2s ease-in-out infinite;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cubiDemoPhone:focus-visible {
+  outline: 2px solid var(--cubi-accent);
+  outline-offset: 4px;
+}
+
+@keyframes cubiFloat {
+  0%,
+  100% {
+    transform: rotate(6deg) translateY(0);
+  }
+  50% {
+    transform: rotate(6deg) translateY(-10px);
+  }
+}
+
+.cubiDemoScreen {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #3b3e4a 0%, #23242b 70%);
+}
+
+.cubiDemoScreen::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 34%;
+  height: 10px;
+  border-radius: 999px;
+  background: #101116;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+/* The "haptic buzz" when the NFC contact lands. */
+.cubiDemoScreen.isBumped {
+  animation: cubiBump 300ms linear;
+}
+
+@keyframes cubiBump {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-1.5px, 0.5px);
+  }
+  40% {
+    transform: translate(1.5px, -0.5px);
+  }
+  60% {
+    transform: translate(-1px, 0);
+  }
+  80% {
+    transform: translate(1px, 0);
+  }
+}
+
+.cubiDemoLock {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 4px;
+  padding-top: 28%;
+}
+
+.cubiDemoLockTime {
+  color: rgba(245, 245, 242, 0.92);
+  font-family: var(--cubi-font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.cubiDemoLockHint {
+  color: rgba(245, 245, 242, 0.45);
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cubiDemoNotification {
+  position: absolute;
+  top: 22px;
+  right: 6px;
+  left: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 9px;
+  border-radius: 12px;
+  background: rgba(250, 250, 250, 0.96);
+  box-shadow: 0 8px 18px rgba(10, 10, 14, 0.35);
+  animation: cubiNotifIn 460ms cubic-bezier(0.2, 0.9, 0.3, 1.18) both;
+  z-index: 1;
+}
+
+@keyframes cubiNotifIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.94);
+  }
+}
+
+/* Safari-style sheet that slides up over the lock screen. */
+.cubiDemoBrowser {
+  position: absolute;
+  inset: 6px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 8px;
+  padding: 18px 6px 6px;
+  border-radius: 14px;
+  background: #ffffff;
+  animation: cubiSheetIn 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  z-index: 2;
+}
+
+@keyframes cubiSheetIn {
+  from {
+    transform: translateY(104%);
+  }
+}
+
+.cubiDemoBrowserBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #eef0f4;
+  color: #3a3c44;
+  font-size: 0.55rem;
+  font-weight: 600;
+}
+
+.cubiDemoBrowserLock {
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  border: 1.2px solid #8a8d98;
+  border-top-width: 3px;
+}
+
+.cubiDemoBrowserSkeleton {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  padding: 8px 4px;
+}
+
+.cubiDemoBrowserSkeleton span {
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ececf1 25%, #f7f7fa 50%, #ececf1 75%);
+  background-size: 200% 100%;
+  animation: cubiShimmer 1.1s linear infinite;
+}
+
+.cubiDemoBrowserSkeleton .cubiDemoSkeletonBlock {
+  width: 100%;
+  height: 54px;
+  margin-top: 4px;
+  border-radius: 8px;
+}
+
+@keyframes cubiShimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.cubiDemoBrowserPage {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 6px;
+  padding: 6px 2px;
+  animation: cubiPageIn 320ms var(--cubi-ease) both;
+}
+
+@keyframes cubiPageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.cubiDemoWebsiteBrand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  color: var(--cubi-ink);
+  font-family: var(--cubi-font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 2px;
+}
+
+.cubiDemoWebsiteEyebrow {
+  margin: 0;
+  color: var(--cubi-accent);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cubiDemoWebsiteHeading {
+  margin: 0;
+  color: #1a1b20;
+  font-family: var(--cubi-font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.cubiDemoWebsiteButton {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--cubi-accent);
+  color: #fff;
+  font-size: 0.5rem;
+  font-weight: 700;
+}
+
+.cubiDemoInstagramHeader {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.cubiDemoInstagramAvatar {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f5c04a 0%, #e0455f 50%, #6d4fd6 100%);
+  box-shadow: 0 0 0 1.5px #fff, 0 0 0 2.5px #e0455f33;
+}
+
+.cubiDemoInstagramHandle {
+  overflow: hidden;
+  min-width: 0;
+  margin-right: auto;
+  color: #1a1b20;
+  font-size: 0.56rem;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.cubiDemoInstagramFollow {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: #2c4bff;
+  color: #fff;
+  font-size: 0.48rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cubiDemoInstagramGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.cubiDemoInstagramGrid span {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: #e4e4ea;
+}
+
+.cubiDemoInstagramGrid span:nth-child(2) {
+  background: #d7dcff;
+}
+
+.cubiDemoInstagramGrid span:nth-child(4) {
+  background: #ecedf2;
+}
+
+.cubiDemoInstagramGrid span:nth-child(6) {
+  background: #dfe2ea;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cubiDemoPhone,
+  .cubiDemoTile.isTarget::after,
+  .cubiDemoRings i,
+  .cubiDemoBrowserSkeleton span {
+    animation: none;
+  }
+}
+
+.cubiDemoNotifIcon {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--cubi-accent);
+  color: #fff;
+  font-family: var(--cubi-font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.cubiDemoNotifText {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.cubiDemoNotifText strong {
+  color: #1a1b20;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.cubiDemoNotifText small {
+  overflow: hidden;
+  color: #5b5d66;
+  font-size: 0.56rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cubiDemoTag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  transition: background-color 300ms var(--cubi-ease), color 300ms var(--cubi-ease);
+}
+
+/* "Your turn" invitation after the demo plays itself once. */
+.cubiDemoTag.isInvite {
+  background: var(--cubi-accent);
+  color: #fff;
+  animation: cubiInvitePulse 2.2s var(--cubi-ease) infinite;
+}
+
+@keyframes cubiInvitePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(0, 113, 227, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 113, 227, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cubiDemoTag.isInvite {
+    animation: none;
+  }
+}
+
+.cubiHeroFootnote {
+  margin-top: 14px;
+  color: var(--cubi-faint);
+  font-size: 0.8rem;
+}
+
+/* ---------- Section shell ---------- */
+
+.cubiSection {
+  padding: clamp(64px, 10vh, 120px) 0;
+}
+
+.cubiSectionAlt {
+  background: var(--cubi-fog);
+}
+
+.cubiSectionHead {
+  max-width: 44rem;
+  margin-bottom: clamp(32px, 5vh, 56px);
+}
+
+.cubiSectionHead h2 {
+  font-size: clamp(2.35rem, 4.8vw, 4rem);
+}
+
+.cubiSectionHead .cubiSectionSub {
+  margin-top: 14px;
+  color: var(--cubi-body);
+  font-size: 1.05rem;
+  max-width: 38rem;
+}
+
+/* ---------- Feature deep-dive ----------
+   Pattern borrowed from Apple's product-page "Take a closer look" panel:
+   pills float directly on the media instead of sitting in a separate card,
+   nothing is expanded at rest, and picking one goes full-bleed with a close
+   affordance instead of swapping a boxed thumbnail next door. */
+
+.cubiFeaturePanel {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(360px, 46vw, 560px);
+  border: 1px solid rgba(91, 82, 255, 0.18);
+  border-radius: var(--cubi-radius-card);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    radial-gradient(circle at 50% 42%, #3d3a72 0%, #24243e 48%, #171824 100%);
+  background-size: 34px 34px, 34px 34px, auto;
+  box-shadow: 0 34px 80px rgba(31, 29, 75, 0.22);
+}
+
+.cubiFeaturePanel::before {
+  content: 'CUBI / PRODUCT LAB';
+  position: absolute;
+  z-index: 4;
+  top: 20px;
+  left: 22px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.62rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  pointer-events: none;
+}
+
+.cubiFeaturePanel::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  width: 280px;
+  height: 280px;
+  left: 50%;
+  bottom: -32%;
+  border-radius: 50%;
+  background: #c9ff5c;
+  filter: blur(70px);
+  opacity: 0.2;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.cubiFeaturePanelMedia {
+  position: absolute;
+  inset: 0;
+}
+
+.cubiFeatureClose {
+  position: absolute;
+  z-index: 5;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background: rgba(18, 19, 30, 0.7);
+  backdrop-filter: blur(12px);
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.85);
+  animation: cubiFeatureCloseIn 400ms var(--cubi-ease) 150ms forwards;
+  transition: background-color 300ms var(--cubi-ease), border-color 300ms var(--cubi-ease);
+}
+
+.cubiFeatureClose:hover {
+  background: rgba(18, 19, 30, 0.9);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes cubiFeatureCloseIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Apple-style: no containing card. The column is a transparent, click-through
+   rail; each pill is its own floating frosted capsule sitting on the media,
+   so the 3D viewer stays draggable between them. */
+.cubiFeaturePills {
+  position: absolute;
+  z-index: 3;
+  top: 52px;
+  left: 22px;
+  bottom: 18px;
+  width: min(330px, calc(100% - 44px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  overflow: hidden auto;
+  pointer-events: none;
+  scrollbar-width: none;
+}
+
+.cubiFeaturePill {
+  pointer-events: auto;
+  flex: 0 0 auto;
+  max-width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  background: rgba(248, 248, 250, 0.9);
+  backdrop-filter: blur(14px);
+  color: #17181f;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  transition:
+    background-color 400ms var(--cubi-ease),
+    border-radius 500ms var(--cubi-ease),
+    transform 400ms var(--cubi-ease);
+}
+
+.cubiFeaturePill:hover {
+  background: rgba(255, 255, 255, 0.97);
+  transform: scale(1.02);
+}
+
+/* The active pill stops being a pill: it widens into a frosted description
+   bubble and its label row collapses away (the bold title re-appears inline
+   at the start of the paragraph, like Apple's). */
+.cubiFeaturePill.isActive {
+  align-self: stretch;
+  border-radius: 18px;
+  background: rgba(248, 248, 250, 0.82);
+  transform: none;
+}
+
+.cubiFeaturePillHead {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, auto);
+  align-items: center;
+  gap: 9px;
+  max-height: 46px;
+  padding: 11px 18px 11px 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  opacity: 1;
+  transition:
+    max-height 450ms var(--cubi-ease),
+    padding 450ms var(--cubi-ease),
+    opacity 300ms var(--cubi-ease);
+}
+
+.cubiFeaturePill.isActive .cubiFeaturePillHead {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+}
+
+.cubiFeaturePillIcon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid rgba(23, 24, 31, 0.72);
+  border-radius: 50%;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.cubiFeatureLayer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(14px) scale(0.975);
+  /* Inactive layers stop painting entirely once the crossfade finishes —
+     stacked blurred layers are too expensive to keep composited. */
+  visibility: hidden;
+  transition:
+    opacity 600ms var(--cubi-ease),
+    filter 700ms var(--cubi-ease),
+    transform 700ms var(--cubi-ease),
+    visibility 0s 700ms;
+  pointer-events: none;
+}
+
+.cubiFeatureLayer.isActive {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  visibility: visible;
+  transition-delay: 0s;
+  pointer-events: auto;
+}
+
+.cubiFeatureLayer svg {
+  width: min(100%, 460px);
+  height: auto;
+  max-height: 100%;
+}
+
+.cubiFeatureViewerWrap {
+  position: absolute;
+  inset: 0;
+}
+
+.cubiFeatureViewerWrap .tapBoard2Viewer {
+  height: 100%;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* The engine's load-status and mapping-warning chips are dev aids; keep the
+   marketing panel clean. */
+.cubiFeatureViewerWrap .tapBoard2Status,
+.cubiFeatureViewerWrap .tapBoard2TargetWarning {
+  display: none;
+}
+
+.cubiFeatureMediaCaption {
+  position: absolute;
+  z-index: 3;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.cubiFeatureLoading {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  color: var(--cubi-faint);
+  font-size: 0.85rem;
+}
+
+.cubiFeatureTabBody {
+  display: grid;
+  overflow: hidden;
+  /* Zero intrinsic width: the collapsed description must not widen the pill
+     (shrink-to-fit buttons measure hidden content too). */
+  width: 0;
+  min-width: 100%;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    grid-template-rows 560ms var(--cubi-ease),
+    opacity 400ms var(--cubi-ease),
+    transform 500ms var(--cubi-ease);
+}
+
+.cubiFeaturePill.isActive .cubiFeatureTabBody {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: none;
+}
+
+.cubiFeatureTabBody p {
+  overflow: hidden;
+  min-height: 0;
+  color: rgba(23, 24, 31, 0.78);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.cubiFeatureTabBody strong {
+  color: #17181f;
+  font-weight: 700;
+}
+.cubiFeatureControlZone { position: absolute; z-index: 4; top: 64px; right: 22px; display: grid; gap: 8px; width: 300px; padding: 14px 16px; border-radius: 14px; background: rgba(248, 248, 250, .9); box-shadow: 0 4px 18px rgba(0, 0, 0, .16); backdrop-filter: blur(14px); }
+.cubiFeatureControlZone > div { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+.cubiFeatureControlZone small { width: 76px; color: var(--cubi-muted); font-size: .68rem; font-weight: 700; }
+.cubiFeatureSwatch, .cubiFeatureIcon { width: 22px; height: 22px; padding: 0; border: 2px solid rgba(19,20,39,.15); border-radius: 50%; cursor: pointer; }
+.cubiFeatureIcon { display: grid; place-items: center; border-radius: 7px; background: #fff; color: var(--cubi-ink); }
+.cubiFeatureIcon svg { width: 16px; height: 16px; }
+
+.cubiFeaturePill.isActive .cubiFeatureTabBody p {
+  padding: 12px 20px 16px;
+}
+
+/* ---------- Lineup ---------- */
+
+.cubiLineupPanel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--cubi-line);
+  border-radius: var(--cubi-radius-card);
+  background: var(--cubi-paper);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.06);
+  min-height: 380px;
+  margin-top: 26px;
+  transition: min-height 650ms var(--cubi-ease);
+}
+
+.cubiLineupPanel.isBoardFamily {
+  min-height: 640px;
+}
+
+/* The Cubi Base shot is intentionally square, so give that active card enough
+   vertical room for the image plus the card padding. Without this, the square
+   is centred inside the old 380px panel and both ends are clipped. */
+.cubiLineupPanel:has(.cubiLineupCard.isActive .cubiLineupProductImage) {
+  min-height: clamp(560px, 50vw, 640px);
+}
+
+.cubiLineupCard {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-items: center;
+  gap: clamp(20px, 4vw, 48px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: clamp(24px, 4vw, 48px);
+  opacity: 0;
+  filter: blur(9px);
+  transform: translateY(18px) scale(0.985);
+  /* See .cubiFeatureLayer: hidden layers must not stay painted/composited. */
+  visibility: hidden;
+  transition:
+    opacity 540ms var(--cubi-ease),
+    filter 620ms var(--cubi-ease),
+    transform 620ms var(--cubi-ease),
+    visibility 0s 620ms;
+  pointer-events: none;
+}
+
+.cubiLineupCard.isActive {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  visibility: visible;
+  transition-delay: 0s;
+  pointer-events: auto;
+}
+
+.cubiLineupVisual {
+  display: grid;
+  place-items: center;
+  min-height: 240px;
+  border-radius: 18px;
+  background: var(--cubi-fog);
+  transition: transform 760ms var(--cubi-ease);
+}
+
+.cubiLineupCard.isActive .cubiLineupVisual {
+  transform: scale(1.018);
+}
+
+.cubiLineupVisual svg {
+  width: min(78%, 300px);
+  height: auto;
+}
+
+.cubiLineupProductImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  background: #eee9e1;
+  border-radius: inherit;
+  transition: transform 760ms var(--cubi-ease);
+}
+
+/* The square ratio lives on the image, not on this rule: `:has()` needs
+   Chrome 105+ / Safari 15.4+ / Firefox 121+, and where it isn't supported the
+   whole block is dropped, leaving the image to stretch to the grid row and
+   crop. Keep the sizing above so it degrades safely.
+
+   Why square: the product shots are 3:4 portrait with a lot of empty backdrop
+   — the product itself only spans y 18%-85%. A 1:1 crop removes just that
+   dead margin, so the whole product still shows with no letterboxing. Don't
+   widen past ~1.08:1; beyond that the crop starts eating the product, and
+   going back to `contain` reintroduces side bars that can't be hidden with a
+   flat background (the backdrop is a gradient, #e6dcd3 to #b9aa9b). */
+.cubiLineupVisual:has(.cubiLineupProductImage) {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cubiLineupInfo {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+
+.cubiLineupInfo h3 {
+  font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+}
+
+.cubiLineupInfo p {
+  color: var(--cubi-body);
+  max-width: 26rem;
+}
+
+/* Cubi Board family selector: the family tab reveals all real sizes before
+   the customer enters a specific product/customizer. */
+
+.cubiLineupCardFamily {
+  align-content: start;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.cubiBoardFamilyHead {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.cubiBoardFamilyHead > div {
+  display: grid;
+  max-width: 42rem;
+  gap: 8px;
+  order: -1;
+}
+
+.cubiBoardFamilyHead h3 {
+  font-size: clamp(1.75rem, 3vw, 2.6rem);
+}
+
+.cubiBoardFamilyHead p {
+  color: var(--cubi-body);
+}
+
+.cubiBoardFamilyHead > .cubiChip {
+  flex: 0 0 auto;
+}
+
+.cubiBoardSizeGrid {
+  display: grid;
+  min-width: 0;
+  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cubiBoardSizeCard {
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+  grid-template-rows: auto 1fr;
+  border: 1px solid var(--cubi-line);
+  border-radius: 22px;
+  background: var(--cubi-paper);
+  color: var(--cubi-ink);
+  text-decoration: none;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.045);
+  transition:
+    border-color 500ms var(--cubi-ease),
+    box-shadow 500ms var(--cubi-ease),
+    transform 500ms var(--cubi-ease);
+}
+
+.cubiBoardSizeCard:hover {
+  border-color: #b8b8bd;
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+}
+
+.cubiBoardSizeCard:focus-visible {
+  outline: 3px solid rgba(0, 113, 227, 0.42);
+  outline-offset: 3px;
+}
+
+.cubiBoardSizeVisual {
+  display: grid;
+  min-height: 180px;
+  place-items: center;
+  border-bottom: 1px solid var(--cubi-line);
+  background:
+    radial-gradient(circle at 50% 20%, #ffffff 0%, var(--cubi-fog) 72%);
+}
+
+.cubiBoardSizeVisual svg {
+  width: min(88%, 240px);
+  height: auto;
+  transition: transform 650ms var(--cubi-ease);
+}
+
+.cubiBoardSizeCard:hover .cubiBoardSizeVisual svg {
+  transform: translateY(-3px) scale(1.035);
+}
+
+.cubiBoardSizeVisual {
+  overflow: hidden;
+}
+
+.cubiBoardSizeVisual:has(.cubiBoardSizeImage) {
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+  position: relative;
+}
+
+.cubiBoardSizeImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 650ms var(--cubi-ease);
+}
+
+.cubiBoardSizeCard:hover .cubiBoardSizeImage {
+  transform: scale(1.04);
+}
+
+.cubiBoardSizeInfo {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 20px;
+}
+
+.cubiBoardSizeInfo > span {
+  color: var(--cubi-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cubiBoardSizeInfo h4 {
+  font-size: 1.2rem;
+  letter-spacing: -0.035em;
+}
+
+.cubiBoardSizeInfo p {
+  color: var(--cubi-body);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.cubiBoardSizeInfo strong {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  color: var(--cubi-accent);
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+.cubiBoardSizeInfo strong span {
+  font-size: 1.15rem;
+  transition: transform 400ms var(--cubi-ease);
+}
+
+.cubiBoardSizeCard:hover .cubiBoardSizeInfo strong span {
+  transform: translateX(4px);
+}
+
+/* ---------- Final CTA ---------- */
+
+.cubiFinalCta {
+  padding: clamp(72px, 12vh, 140px) 0;
+  text-align: center;
+}
+
+.cubiFinalCta h2 {
+  font-size: clamp(2.4rem, 5.4vw, 4rem);
+}
+
+.cubiFinalCta p {
+  max-width: 34rem;
+  margin: 18px auto 30px;
+  color: var(--cubi-body);
+  font-size: 1.05rem;
+}
+
+/* ---------- Footer ---------- */
+
+.cubiFooter {
+  border-top: 1px solid var(--cubi-line);
+  background: var(--cubi-fog);
+  padding: clamp(40px, 6vh, 64px) 0 28px;
+  color: var(--cubi-muted);
+  font-size: 0.86rem;
+}
+
+.cubiFooterGrid {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  margin-bottom: 36px;
+}
+
+.cubiFooterBrand {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.cubiFooterBrand p {
+  max-width: 22rem;
+}
+
+.cubiFooterCol {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.cubiFooterCol strong {
+  margin-bottom: 4px;
+  color: var(--cubi-ink);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cubiFooterCol a {
+  width: fit-content;
+  color: var(--cubi-muted);
+  text-decoration: none;
+  transition: color 160ms var(--cubi-ease);
+}
+
+.cubiFooterCol a:hover {
+  color: var(--cubi-ink);
+}
+
+.cubiFooterCol span {
+  color: var(--cubi-faint);
+}
+
+.cubiFooterBottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid var(--cubi-line);
+  padding-top: 20px;
+  color: var(--cubi-faint);
+  font-size: 0.78rem;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 960px) {
+  .cubiHeroInner {
+    grid-template-columns: 1fr;
+  }
+
+  .cubiHeroCopy {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .cubiHeroCopy .cubiHeroActions {
+    justify-content: center;
+  }
+
+  .cubiFeaturePanel {
+    min-height: clamp(460px, 110vw, 600px);
+  }
+
+  .cubiFeaturePills {
+    width: calc(100% - 40px);
+  }
+
+  .cubiLineupCard {
+    position: absolute;
+    grid-template-columns: 1fr;
+    align-content: start;
+    overflow-y: auto;
+  }
+
+  .cubiLineupPanel {
+    min-height: 520px;
+  }
+
+  .cubiLineupPanel:has(.cubiLineupCard.isActive .cubiLineupProductImage) {
+    min-height: clamp(560px, 92vw, 700px);
+  }
+
+  .cubiLineupVisual:has(.cubiLineupProductImage) {
+    width: min(100%, 430px);
+    justify-self: center;
+  }
+
+  .cubiLineupPanel.isBoardFamily {
+    min-height: 590px;
+  }
+
+  .cubiLineupVisual {
+    min-height: 200px;
+  }
+
+  .cubiFooterGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cubiFooterBrand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .cubiLineupPanel.isBoardFamily {
+    min-height: 750px;
+  }
+
+  .cubiLineupCardFamily {
+    gap: 20px;
+  }
+
+  .cubiBoardFamilyHead {
+    display: grid;
+    gap: 12px;
+  }
+
+  .cubiBoardFamilyHead > div {
+    order: 0;
+  }
+
+  .cubiBoardFamilyHead > .cubiChip {
+    width: fit-content;
+    order: -1;
+  }
+
+  .cubiBoardSizeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .cubiBoardSizeCard {
+    grid-template-columns: 104px minmax(0, 1fr);
+    grid-template-rows: 1fr;
+    align-items: center;
+  }
+
+  .cubiBoardSizeVisual {
+    min-height: 100%;
+    border-right: 1px solid var(--cubi-line);
+    border-bottom: 0;
+  }
+
+  .cubiBoardSizeVisual:has(.cubiBoardSizeImage) {
+    aspect-ratio: auto;
+    align-self: stretch;
+  }
+
+  .cubiBoardSizeInfo {
+    gap: 4px;
+    padding: 16px;
+  }
+
+  .cubiBoardSizeInfo > span {
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+  }
+
+  .cubiBoardSizeInfo p {
+    font-size: 0.78rem;
+  }
+
+  /* Let the label + arrow flow as one inline phrase so the arrow stays glued
+     to the text instead of floating to the far edge when the row is narrow. */
+  .cubiBoardSizeInfo strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.82rem;
+  }
+
+  .cubiBoardSizeInfo strong span {
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: -1px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .cubiSite {
+    font-size: 16px;
+  }
+
+  .cubiNavInner {
+    gap: 10px;
+    min-height: 56px;
+  }
+
+  .cubiNavLinks {
+    display: none;
+  }
+
+  /* Keep the header to one deliberate, tappable row rather than squeezing
+     the desktop account controls into the available width. The account page
+     provides the full sign-in and order controls on smaller screens. */
+  .cubiNavRight {
+    margin-left: auto;
+    gap: 10px;
+  }
+
+  .cubiAccountControl {
+    display: none;
+  }
+
+  .cubiMobileAccountLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    color: var(--cubi-body);
+    font-size: 0.78rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .cubiBasketLink {
+    gap: 0;
+    font-size: 0;
+  }
+
+  .cubiBasketLink span {
+    font-size: 0.68rem;
+  }
+
+  .cubiNavCta {
+    min-height: 36px;
+    padding: 0 13px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+
+  .cubiHeroActions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .cubiHeroActions .cubiButton {
+    width: 100%;
+  }
+
+  /* Feature controls are useful on wide screens, but their desktop overlay
+     hides the product on a phone. Keep the feature selector compact and let
+     the live preview remain the focus. */
+  .cubiFeaturePanel {
+    min-height: 430px;
+  }
+
+  .cubiFeatureControlZone {
+    display: none;
+  }
+
+  .cubiFeaturePills {
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    pointer-events: auto;
+  }
+
+  .cubiFeaturePill,
+  .cubiFeaturePill.isActive {
+    align-self: auto;
+    max-width: none;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .cubiFeaturePillHead,
+  .cubiFeaturePill.isActive .cubiFeaturePillHead {
+    max-height: 46px;
+    padding: 10px 14px 10px 10px;
+    opacity: 1;
+  }
+
+  .cubiFeaturePill.isActive .cubiFeatureTabBody {
+    display: none;
+  }
+
+  .cubiFeatureMediaCaption {
+    bottom: 68px;
+    font-size: 0.72rem;
+  }
+
+  .cubiPillRow {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .cubiPill {
+    min-width: 0;
+    padding: 0 8px;
+    font-size: 0.76rem;
+  }
+
+  .cubiDemoPhone {
+    right: 10px;
+    bottom: 12px;
+  }
+
+  /* Keep the demo instructions clear of the board and phone: the chip spans
+     the top of the stage and the board is pushed below it. */
+  .cubiHeroStage {
+    min-height: 440px;
+    padding-top: 56px;
+  }
+
+  .cubiDemoTag {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    z-index: 3;
+    justify-content: center;
+    height: auto;
+    min-height: 30px;
+    padding: 6px 12px;
+    line-height: 1.35;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .cubiFooterGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 430px) {
+  .cubiLineupPanel.isBoardFamily {
+    min-height: 620px;
+  }
+
+  .cubiBoardSizeCard {
+    grid-template-columns: 84px minmax(0, 1fr);
+  }
+
+  .cubiBoardSizeInfo {
+    padding: 13px 14px;
+  }
+
+  .cubiBoardSizeInfo h4 {
+    font-size: 1.06rem;
+  }
+
+  .cubiBoardSizeInfo p {
+    display: none;
+  }
+
+  .cubiBoardSizeInfo strong {
+    font-size: 0.8rem;
+  }
+}
+
+/* Very small phones: the label and product name wrap, so reserve extra height
+   for the (absolutely-positioned, overflow-hidden) panel to avoid clipping the
+   third card. */
+@media (max-width: 359px) {
+  .cubiLineupPanel.isBoardFamily {
+    min-height: 790px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cubiHeroCopy,
+  .cubiHeroStage {
+    animation: none;
+  }
+
+  .cubiPillRow::before,
+  .cubiFeatureLayer,
+  .cubiFeaturePanel,
+  .cubiFeaturePill,
+  .cubiFeatureTabBody,
+  .cubiLineupCard {
+    transition: none;
+  }
+}
+
+/* Portfolio host shell. The interaction and product styling above are copied
+   from the live Cubi site; these rules only fit that working demo into the
+   portfolio's case-study grid. */
+.cubiPortfolioPortal {
+  display: grid;
+  grid-template-columns: minmax(260px, 350px) minmax(500px, 710px);
+  justify-content: center;
+  gap: clamp(34px, 4vw, 58px);
+  align-items: center;
+  padding-block: 62px 70px;
+  border-top: 2px solid #16181d;
+  background: #fbf8f1;
+}
+
+.cubiPortfolioIntro {
+  max-width: 540px;
+}
+
+.cubiPortfolioKicker {
+  display: inline-flex;
+  margin-bottom: 22px;
+  padding: 7px 11px;
+  border: 2px solid #16181d;
+  border-radius: 7px;
+  background: #f5c63c;
+  color: #16181d;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 0 #16181d;
+}
+
+.cubiPortfolioIntro h2 {
+  max-width: 10ch;
+  margin: 0;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(38px, 4.2vw, 58px);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+}
+
+.cubiPortfolioIntro > p {
+  max-width: 48ch;
+  margin: 22px 0 26px;
+  color: #333127;
+  font-size: 16px;
+  font-weight: 550;
+  line-height: 1.65;
+}
+
+.cubiPortfolioSteps {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid rgba(22, 24, 29, 0.28);
+  list-style: none;
+}
+
+.cubiPortfolioSteps li {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 2px solid rgba(22, 24, 29, 0.28);
+  color: #16181d;
+}
+
+.cubiPortfolioSteps span {
+  font-size: 11px;
+  font-weight: 800;
+  opacity: 0.55;
+}
+
+.cubiPortfolioSteps strong {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.cubiSite.cubiPortfolioDemoShell {
+  position: relative;
+  width: 100%;
+  max-width: 710px;
+  min-height: 0;
+  padding: 11px;
+  border: 2px solid #16181d;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+  font-size: 16px;
+}
+
+.cubiSite.cubiPortfolioDemoShell::before {
+  content: 'LIVE DEMO';
+  position: absolute;
+  top: -14px;
+  right: 22px;
+  z-index: 4;
+  padding: 5px 10px;
+  border: 2px solid #16181d;
+  border-radius: 6px;
+  background: #f5c63c;
+  color: #16181d;
+  font-family: var(--font-public-sans), sans-serif;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+}
+
+.cubiPortfolioDemoShell .cubiHeroStage {
+  min-height: 430px;
+  overflow: hidden;
+  border-radius: 12px;
+  animation: none;
+}
+
+.cubiPortfolioDemoShell .cubiDemoBoard {
+  width: clamp(210px, 22vw, 258px);
+}
+
+.cubiPortfolioDemoShell .cubiDemoPhone {
+  right: clamp(14px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 30px);
+  width: clamp(126px, 12vw, 150px);
+}
+
+.cubiPortfolioDemoShell .cubiDemoTag {
+  top: 20px;
+  left: 20px;
+}
+
+.cubiPortfolioDemoHint {
+  margin: 11px 7px 1px !important;
+  color: #666158;
+  font-family: var(--font-public-sans), sans-serif;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+@media (max-width: 1040px) {
+  .cubiPortfolioPortal {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .cubiPortfolioIntro {
+    width: min(710px, 100%);
+    max-width: 710px;
+  }
+
+  .cubiPortfolioIntro h2 {
+    max-width: 14ch;
+  }
+}
+
+@media (max-width: 620px) {
+  .cubiPortfolioPortal {
+    padding-block: 48px 56px;
+  }
+
+  .cubiSite.cubiPortfolioDemoShell {
+    padding: 9px;
+    border-radius: 17px;
+    box-shadow: 5px 5px 0 #16181d;
+  }
+
+  .cubiPortfolioDemoShell .cubiHeroStage {
+    min-height: 410px;
+    border-radius: 11px;
+  }
+}
+
+/* Refresh overrides intentionally live last so the original component styles
+   remain the safe base while this visual direction wins the cascade. */
+.cubiSite .cubiHero {
+  background:
+    radial-gradient(circle at 82% 20%, rgba(91, 82, 255, 0.13), transparent 34%),
+    radial-gradient(circle at 10% 84%, rgba(201, 255, 92, 0.17), transparent 28%),
+    #fbfbff;
+}
+.cubiSite .cubiHeroInner { position: relative; }
+.cubiSite .cubiHeroCopy h1 { max-width: 680px; font-size: clamp(3.4rem, 6.8vw, 6rem); line-height: .92; letter-spacing: -.065em; }
+.cubiSite .cubiHeroLead { max-width: 31rem; }
+.cubiSite .cubiHeroStage {
+  border-color: rgba(91,82,255,.18);
+  background: radial-gradient(circle at 70% 16%, #fff 0%, rgba(239,237,255,.92) 48%, #dedbf7 100%);
+  box-shadow: 0 34px 90px rgba(48,42,120,.18);
+  transform: rotate(1.2deg);
+}
+.cubiSite .cubiFinalCta { position: relative; overflow: hidden; background: #5b52ff; color: white; }
+.cubiSite .cubiFinalCta .cubiEyebrow { color: #c9ff5c; }
+.cubiSite .cubiFinalCta h2 { color: white; font-size: clamp(2.8rem, 6vw, 5.2rem); }
+.cubiSite .cubiFinalCta p { color: rgba(255,255,255,.75); }
+.cubiSite .cubiFinalCta .cubiButtonAccent { background: #c9ff5c; color: #111322; box-shadow: 0 12px 34px rgba(17,19,34,.25); }
+
+@media (max-width: 640px) {
+  .cubiSite .cubiHeroCopy h1 { font-size: clamp(3.2rem, 16vw, 4.6rem); }
+  .cubiSite .cubiHeroStage { transform: none; }
+}
+
+/* Feature deep-dive: numbered editorial selector + product theatre. */
+.cubiSite #features {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(91,82,255,.1), transparent 26%),
+    linear-gradient(180deg, #f7f6ff 0%, #f0f0f8 100%);
+}
+
+.cubiFeatureNumber {
+  color: rgba(23, 24, 31, 0.4);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.cubiFeatureTitle {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+  .cubiFeaturePillHead { font-size: 0.88rem; padding: 10px 15px 10px 10px; }
+}
+
+/* "Continue as guest" — deliberately a quiet text button, not a second
+   primary. Signing in is the better outcome for the customer (their orders
+   survive a cleared browser), so guest is the escape hatch, not the headline.
+   Lives here rather than in AccountPage.css because the header uses it too,
+   and the header renders on every page. */
+.cubiAccountGuestLink {
+  padding: 0;
+  border: 0;
+  color: var(--cubi-accent, #5b52ff);
+  background: none;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.cubiAccountGuestLink:hover {
+  opacity: 0.7;
+}

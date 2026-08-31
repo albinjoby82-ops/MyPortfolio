@@ -2,6 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Panel from "@/components/Panel";
 import Prose from "@/components/Prose";
+import CubiPortal from "@/components/CubiPortal";
+import CubiLogoLab from "@/components/CubiLogoLab";
+import CubiColourLab from "@/components/CubiColourLab";
 import { getProject, getProjects } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -94,7 +97,51 @@ export default async function ProjectPage({
 
       {/* Hero media — real video/image when supplied, tinted block until then. */}
       <section className="pb-11 gutter">
-        {project.media.src && project.media.type === "video" ? (
+        {project.slug === "cubi" && project.media.src ? (
+          <div className="grid overflow-hidden rounded-[16px] border-2 border-ink bg-[#111525] shadow-[var(--shadow-hard)] md:grid-cols-[44%_56%]">
+            <div className="relative min-h-[520px] overflow-hidden md:min-h-[650px]">
+              <img
+                src={project.media.src}
+                alt="Finished Cubi Base beside the Bambu Lab printer used to manufacture it"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+              />
+              <span className="absolute bottom-5 left-5 rounded-full border border-white/25 bg-black/55 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm">
+                Built in Dublin
+              </span>
+            </div>
+
+            <div className="flex flex-col justify-between bg-sun p-8 text-ink md:p-12">
+              <div className="flex items-center justify-between border-b-2 border-ink/20 pb-5 text-[11px] font-extrabold uppercase tracking-[0.14em]">
+                <span>From pixels to plastic</span>
+                <span>2025 to Present</span>
+              </div>
+
+              <div className="py-12 md:py-16">
+                <p className="mb-5 text-[12px] font-extrabold uppercase tracking-[0.16em] text-ink/65">
+                  One connected workflow
+                </p>
+                <p className="font-display text-[clamp(42px,6vw,86px)] font-extrabold leading-[0.88] tracking-[-0.065em] text-ink">
+                  DESIGN IT.<br />PAY FOR IT.<br />PRINT IT.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-3 border-t-2 border-ink/20 pt-6">
+                {[
+                  ["01", "Upload"],
+                  ["02", "Customise"],
+                  ["03", "Manufacture"],
+                ].map(([no, label]) => (
+                  <div key={no} className="border-l-2 border-ink/20 pl-4 first:border-l-0 first:pl-0">
+                    <span className="block text-[11px] font-extrabold text-ink/55">{no}</span>
+                    <span className="mt-1 block text-[12px] font-bold uppercase tracking-[0.06em] md:text-[14px]">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : project.media.src && project.media.type === "video" ? (
           <video
             controls
             playsInline
@@ -128,6 +175,10 @@ export default async function ProjectPage({
         )}
       </section>
 
+      {project.slug === "cubi" && <CubiPortal />}
+
+      {project.slug === "cubi" && <CubiLogoLab />}
+
       {project.notes.length > 0 && (
         <section className="grid grid-cols-1 gap-[18px] pb-11 gutter md:grid-cols-2">
           {project.notes.map((n) => (
@@ -143,6 +194,8 @@ export default async function ProjectPage({
           ))}
         </section>
       )}
+
+      {project.slug === "cubi" && <CubiColourLab />}
 
       {project.body && (
         <section className="pb-14 gutter">
