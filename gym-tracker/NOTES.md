@@ -179,19 +179,31 @@ Evidence it's the layout and not any one component: stubbing `not-found.tsx`
 down to a bare `<div>` didn't fix it, it just moved the failure from
 `/_global-error` to `/_not-found`.
 
-**Probably inherited, not caused by the strip.** Next is pinned at exactly
-16.2.1 in upstream's own `package.json`, the failing frame is inside Next's own
-dist, and none of the removed code is in that path. I did not verify against a
-pristine checkout — worth doing before spending long on it.
+**Confirmed inherited, not caused by the strip.** I built pristine upstream
+v1.3.2 (the vendored snapshot at commit `c19402e`, its own `node_modules`, its
+own env) and it fails with the byte-identical error on the same page. So this
+ships broken from upstream against the Next version upstream itself pins
+(16.2.1) — it is not fallout from anything removed here.
 
-**Suggested fix** (didn't attempt — too large to start unsupervised at the end
-of the session, and it touches the layout every page depends on): split the
-layout. Add a real `app/layout.tsx` that owns `<html>`/`<body>` and nothing
+Worth knowing: pristine upstream also refuses to build at all without
+`REVENUECAT_SECRET_KEY`, `STRIPE_SECRET_KEY` and friends set. It hard-fails
+collecting `/api/billing/status` before it ever reaches prerendering. That is a
+decent retrospective argument for having stripped the monetisation code rather
+than leaving it configured with dummy values.
+
+**Suggested fix** (attempted the cheap version, didn't work; the real one is
+too large to start unsupervised at the end of the session, and it touches the
+layout every page depends on): split the layout. Add a real `app/layout.tsx` that owns `<html>`/`<body>` and nothing
 else, and reduce `app/[locale]/layout.tsx` to a fragment that mounts the
 providers. Then the synthetic pages get a valid root layout with no context
-dependency. I added a self-contained `app/global-error.tsx`, which is the right
-thing to have regardless, but on its own it isn't picked up for the synthetic
-route.
+dependency.
+
+Two cheaper things I tried that did *not* fix it, so nobody repeats them:
+a self-contained `app/global-error.tsx` (kept — it's the right thing to have
+regardless, but Next doesn't pick it up for the synthetic route), and a
+pass-through `app/layout.tsx` returning `children` (reverted, no effect).
+Stubbing `not-found.tsx` to a bare `<div>` only moved the failure to
+`/_not-found`, which is what pointed at the layout in the first place.
 
 `next dev` is unaffected, so local development and Step 2 work can continue
 while this is open.
