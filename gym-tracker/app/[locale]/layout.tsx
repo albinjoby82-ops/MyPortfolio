@@ -246,14 +246,14 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
         <head>
           <meta charSet="UTF-8" />
           <meta content="width=device-width, initial-scale=1, maximum-scale=1 viewport-fit=cover" name="viewport" />
-          {/* {env.NEXT_PUBLIC_AD_PROVIDER !== "custom" && ( */}
+          {/* {undefined !== "custom" && ( */}
           <>
-            <meta content={env.NEXT_PUBLIC_AD_CLIENT} name="google-adsense-account" />
+            <meta content={undefined} name="google-adsense-account" />
 
             <script
               async
               crossOrigin="anonymous"
-              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${env.NEXT_PUBLIC_AD_CLIENT}`}
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${undefined}`}
             />
 
             {/* Ezoic Privacy Scripts */}

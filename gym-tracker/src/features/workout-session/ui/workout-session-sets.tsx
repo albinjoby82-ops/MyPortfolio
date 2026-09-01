@@ -283,10 +283,10 @@ export function WorkoutSessionSets({
         </div>
       )}
 
-      {(env.NEXT_PUBLIC_BOTTOM_WORKOUT_SESSION_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_BOTTOM_WORKOUT_SESSION_PLACEMENT_ID) && (
+      {(undefined || undefined) && (
         <HorizontalBottomBanner
-          adSlot={env.NEXT_PUBLIC_BOTTOM_WORKOUT_SESSION_BANNER_AD_SLOT}
-          ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_BOTTOM_WORKOUT_SESSION_PLACEMENT_ID}
+          adSlot={undefined}
+          ezoicPlacementId={undefined}
         />
       )}
     </div>

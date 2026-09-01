@@ -44,10 +44,10 @@ export async function ProgramsPage({ locale }: ProgramsPageProps) {
   return (
     <main className="flex flex-col bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       {/* Hero Section - Style Apple moderne */}
-      {(env.NEXT_PUBLIC_TOP_PROGRAMS_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_PROGRAMS_PLACEMENT_ID) && (
+      {(undefined || undefined) && (
         <HorizontalTopBanner
-          adSlot={env.NEXT_PUBLIC_TOP_PROGRAMS_BANNER_AD_SLOT}
-          ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_PROGRAMS_PLACEMENT_ID}
+          adSlot={undefined}
+          ezoicPlacementId={undefined}
         />
       )}
       <header className="relative overflow-hidden">
@@ -130,10 +130,10 @@ export async function ProgramsPage({ locale }: ProgramsPageProps) {
                   />
                 </div>
 
-                {(env.NEXT_PUBLIC_BOTTOM_PROGRAMS_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_BOTTOM_PROGRAMS_PLACEMENT_ID) && (
+                {(undefined || undefined) && (
                   <HorizontalBottomBanner
-                    adSlot={env.NEXT_PUBLIC_BOTTOM_PROGRAMS_BANNER_AD_SLOT}
-                    ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_BOTTOM_PROGRAMS_PLACEMENT_ID}
+                    adSlot={undefined}
+                    ezoicPlacementId={undefined}
                   />
                 )}
 

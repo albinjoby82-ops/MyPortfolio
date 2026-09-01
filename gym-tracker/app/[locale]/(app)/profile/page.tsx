@@ -30,7 +30,7 @@ export default function ProfilePage() {
 
   return (
     <div className="px-2 sm:px-6">
-      {env.NEXT_PUBLIC_TOP_PROFILE_BANNER_AD_SLOT && <HorizontalTopBanner adSlot={env.NEXT_PUBLIC_TOP_PROFILE_BANNER_AD_SLOT} />}
+      {undefined && <HorizontalTopBanner adSlot={undefined} />}
       {!session && <LocalAlert className="my-4" />}
       {session && (
         <div className="mt-4">

@@ -199,10 +199,10 @@ export function WorkoutStepper() {
   if (isWorkoutActive && session) {
     return (
       <div className="w-full max-w-6xl mx-auto">
-        {(env.NEXT_PUBLIC_TOP_WORKOUT_SESSION_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_WORKOUT_SESSION_PLACEMENT_ID) && (
+        {(undefined || undefined) && (
           <HorizontalTopBanner
-            adSlot={env.NEXT_PUBLIC_TOP_WORKOUT_SESSION_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_WORKOUT_SESSION_PLACEMENT_ID}
+            adSlot={undefined}
+            ezoicPlacementId={undefined}
           />
         )}
         {!showCongrats && <WorkoutSessionHeader onQuitWorkout={quitWorkout} />}
@@ -274,27 +274,27 @@ export function WorkoutStepper() {
   };
 
   const renderBottomBanner = () => {
-    if (currentStep === 1 && (env.NEXT_PUBLIC_EQUIPMENT_SELECTION_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_EQUIPMENT_SELECTION_PLACEMENT_ID)) {
+    if (currentStep === 1 && (undefined || undefined)) {
       return (
         <HorizontalBottomBanner
-          adSlot={env.NEXT_PUBLIC_EQUIPMENT_SELECTION_BANNER_AD_SLOT}
-          ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_EQUIPMENT_SELECTION_PLACEMENT_ID}
+          adSlot={undefined}
+          ezoicPlacementId={undefined}
         />
       );
     }
-    if (currentStep === 2 && (env.NEXT_PUBLIC_MUSCLE_SELECTION_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_MUSCLE_SELECTION_PLACEMENT_ID)) {
+    if (currentStep === 2 && (undefined || undefined)) {
       return (
         <HorizontalBottomBanner
-          adSlot={env.NEXT_PUBLIC_MUSCLE_SELECTION_BANNER_AD_SLOT}
-          ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_MUSCLE_SELECTION_PLACEMENT_ID}
+          adSlot={undefined}
+          ezoicPlacementId={undefined}
         />
       );
     }
-    if (currentStep === 3 && (env.NEXT_PUBLIC_EXERCISE_SELECTION_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_EXERCISES_SELECTION_PLACEMENT_ID)) {
+    if (currentStep === 3 && (undefined || undefined)) {
       return (
         <HorizontalBottomBanner
-          adSlot={env.NEXT_PUBLIC_EXERCISE_SELECTION_BANNER_AD_SLOT}
-          ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_EXERCISES_SELECTION_PLACEMENT_ID}
+          adSlot={undefined}
+          ezoicPlacementId={undefined}
         />
       );
     }
@@ -306,11 +306,11 @@ export function WorkoutStepper() {
       //   return <NutripureAffiliateBanner />;
       // }
 
-      if (env.NEXT_PUBLIC_TOP_STEPPER_STEP_1_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_1_PLACEMENT_ID) {
+      if (undefined || undefined) {
         return (
           <HorizontalTopBanner
-            adSlot={env.NEXT_PUBLIC_TOP_STEPPER_STEP_1_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_1_PLACEMENT_ID}
+            adSlot={undefined}
+            ezoicPlacementId={undefined}
           />
         );
       }
@@ -321,11 +321,11 @@ export function WorkoutStepper() {
       //   return <NutripureAffiliateBanner />;
       // }
 
-      if (env.NEXT_PUBLIC_TOP_STEPPER_STEP_2_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_2_PLACEMENT_ID) {
+      if (undefined || undefined) {
         return (
           <HorizontalTopBanner
-            adSlot={env.NEXT_PUBLIC_TOP_STEPPER_STEP_2_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_2_PLACEMENT_ID}
+            adSlot={undefined}
+            ezoicPlacementId={undefined}
           />
         );
       }
@@ -336,11 +336,11 @@ export function WorkoutStepper() {
       //   return <NutripureAffiliateBanner />;
       // }
 
-      if (env.NEXT_PUBLIC_TOP_STEPPER_STEP_3_BANNER_AD_SLOT || env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_3_PLACEMENT_ID) {
+      if (undefined || undefined) {
         return (
           <HorizontalTopBanner
-            adSlot={env.NEXT_PUBLIC_TOP_STEPPER_STEP_3_BANNER_AD_SLOT}
-            ezoicPlacementId={env.NEXT_PUBLIC_EZOIC_TOP_STEPPER_STEP_3_PLACEMENT_ID}
+            adSlot={undefined}
+            ezoicPlacementId={undefined}
           />
         );
       }
