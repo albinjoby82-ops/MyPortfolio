@@ -30,14 +30,14 @@ model User {
   accounts      Account[]
   feedbacks     Feedbacks[]
 
-  role           UserRole?        @default(user)
-  banned         Boolean?         @default(false)
-  banReason      String?
-  banExpires     DateTime?
-  WorkoutSession WorkoutSession[]
+  role              UserRole?              @default(user)
+  banned            Boolean?               @default(false)
+  banReason         String?
+  banExpires        DateTime?
+  WorkoutSession    WorkoutSession[]
   FavoriteExercises UserFavoriteExercise[]
 
-  isPremium     Boolean?       @default(false)
+  isPremium Boolean? @default(false)
 
   // Onboarding preferences
   onboardingPreferences Json?
@@ -320,6 +320,16 @@ model WorkoutSessionExercise {
   @@map("workout_session_exercises")
 }
 
+// TODO(step-2): WorkoutSet stores a set's values as parallel arrays
+// (valuesInt / valuesSec / units, indexed against `types`). That is flexible
+// for logging but painful to aggregate — computing weekly tonnage means
+// re-parsing every array on every read.
+//
+// Before building the comparison page and graphs, add a derived DailyStat
+// table (one row per user per day: tonnage, sets, sessions, steps) populated
+// by a nightly job, and read the graphs from that instead. It is derived
+// data, so it can always be dropped and rebuilt from the rows below.
+// See PLAN.md "What to strip from the base app".
 model WorkoutSet {
   id                       String                 @id @default(cuid())
   workoutSessionExerciseId String
