@@ -179,7 +179,7 @@ export function ProgramDetailPage({ program, isAuthenticated }: ProgramDetailPag
     <div className="flex-1 flex flex-col overflow-hidden relative">
       <div className="flex-1 overflow-y-auto overflow-x-hidden pb-20">
         <Breadcrumbs items={breadcrumbItems} />
-        {(undefined || undefined) && (
+        {(false as boolean) && (
           <HorizontalTopBanner
             adSlot={undefined}
             ezoicPlacementId={undefined}
@@ -535,7 +535,7 @@ export function ProgramDetailPage({ program, isAuthenticated }: ProgramDetailPag
                     });
                   })()}
                 </div>
-                {(undefined || undefined) && (
+                {(false as boolean) && (
                   <HorizontalBottomBanner
                     adSlot={undefined}
                     ezoicPlacementId={undefined}

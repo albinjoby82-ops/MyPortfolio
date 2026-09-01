@@ -26,8 +26,8 @@ export const Header = () => {
   const userAvatar = session.data?.user?.email?.substring(0, 2).toUpperCase() || "";
 
   const isPremium = premiumStatus?.isPremium ?? false;
-  const showAds = undefined === true;
-  const hasAdProvider = undefined || undefined === "ezoic";
+  const showAds = false as boolean;
+  const hasAdProvider = false as boolean;
 
   const handleSignOut = () => {
     logout.mutate();

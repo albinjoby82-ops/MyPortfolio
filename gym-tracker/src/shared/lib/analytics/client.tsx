@@ -6,8 +6,8 @@
  */
 import type { ReactNode } from "react";
 
-const AnalyticsProvider = ({ children }: { children: ReactNode }) => <>{children}</>;
+const AnalyticsProvider = ({ children }: { children?: ReactNode }) => <>{children}</>;
 
-const track = (_name: string, _payload?: Record<string, unknown>) => {};
+const track = (_event: unknown, _payload?: unknown) => {};
 
 export { AnalyticsProvider, track };

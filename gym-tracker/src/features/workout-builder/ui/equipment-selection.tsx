@@ -148,7 +148,7 @@ export function EquipmentSelection({ onToggleEquipment, selectedEquipment }: Equ
       {/* {locale === "fr" ? (
         <NutripureAffiliateBanner />
       ) : (
-        (undefined || undefined) && (
+        (false as boolean) && (
           <HorizontalBottomBanner
             adSlot={undefined}
             ezoicPlacementId={undefined}

@@ -315,16 +315,16 @@ export default async function RootLayout({ params, children }: RootLayoutProps) 
           <meta name="impact-site-verification" value="e6afc3fc-0dcd-4625-a8cd-282991d40164" />
 
           {/* Google Analytics 4 */}
-          {env.NEXT_PUBLIC_GA4_MEASUREMENT_ID && (
+          {(false as boolean) && (
             <>
-              <script async src={`https://www.googletagmanager.com/gtag/js?id=${env.NEXT_PUBLIC_GA4_MEASUREMENT_ID}`} />
+              <script async src={`https://www.googletagmanager.com/gtag/js?id=${undefined}`} />
               <script
                 dangerouslySetInnerHTML={{
                   __html: `
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
-                    gtag('config', '${env.NEXT_PUBLIC_GA4_MEASUREMENT_ID}');
+                    gtag('config', '${undefined}');
                   `,
                 }}
               />

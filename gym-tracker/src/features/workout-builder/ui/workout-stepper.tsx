@@ -22,7 +22,6 @@ import type { ExerciseWithAttributes, WorkoutBuilderStep } from "../types";
 import useBoolean from "@/shared/hooks/useBoolean";
 import { WorkoutSessionSets } from "@/features/workout-session/ui/workout-session-sets";
 import { WorkoutSessionHeader } from "@/features/workout-session/ui/workout-session-header";
-import { DonationModal } from "@/features/workout-session/ui/donation-modal";
 import { useDonationModal } from "@/features/workout-session/hooks/use-donation-modal";
 import { WorkoutBuilderFooter } from "@/features/workout-builder/ui/workout-stepper-footer";
 import { env } from "@/env";
@@ -191,7 +190,6 @@ export function WorkoutStepper() {
           <Button onClick={goToProfile}>{t("commons.go_to_profile")}</Button>
         </div>
         {/* Donation Modal */}
-        <DonationModal isOpen={showModal} onClose={closeModal} />
       </>
     );
   }
@@ -199,7 +197,7 @@ export function WorkoutStepper() {
   if (isWorkoutActive && session) {
     return (
       <div className="w-full max-w-6xl mx-auto">
-        {(undefined || undefined) && (
+        {(false as boolean) && (
           <HorizontalTopBanner
             adSlot={undefined}
             ezoicPlacementId={undefined}
@@ -274,7 +272,7 @@ export function WorkoutStepper() {
   };
 
   const renderBottomBanner = () => {
-    if (currentStep === 1 && (undefined || undefined)) {
+    if (currentStep === 1 && (false as boolean)) {
       return (
         <HorizontalBottomBanner
           adSlot={undefined}
@@ -282,7 +280,7 @@ export function WorkoutStepper() {
         />
       );
     }
-    if (currentStep === 2 && (undefined || undefined)) {
+    if (currentStep === 2 && (false as boolean)) {
       return (
         <HorizontalBottomBanner
           adSlot={undefined}
@@ -290,7 +288,7 @@ export function WorkoutStepper() {
         />
       );
     }
-    if (currentStep === 3 && (undefined || undefined)) {
+    if (currentStep === 3 && (false as boolean)) {
       return (
         <HorizontalBottomBanner
           adSlot={undefined}
@@ -306,7 +304,7 @@ export function WorkoutStepper() {
       //   return <NutripureAffiliateBanner />;
       // }
 
-      if (undefined || undefined) {
+      if (false as boolean) {
         return (
           <HorizontalTopBanner
             adSlot={undefined}
@@ -321,7 +319,7 @@ export function WorkoutStepper() {
       //   return <NutripureAffiliateBanner />;
       // }
 
-      if (undefined || undefined) {
+      if (false as boolean) {
         return (
           <HorizontalTopBanner
             adSlot={undefined}
@@ -336,7 +334,7 @@ export function WorkoutStepper() {
       //   return <NutripureAffiliateBanner />;
       // }
 
-      if (undefined || undefined) {
+      if (false as boolean) {
         return (
           <HorizontalTopBanner
             adSlot={undefined}

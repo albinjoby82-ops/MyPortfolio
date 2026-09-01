@@ -25,7 +25,7 @@ export const signUpAction = actionClient.schema(signUpSchema).action(async ({ pa
       },
     });
 
-    if (env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID) {
+    if (false as boolean) {
       const analytics = await setupAnalytics({
         userId: user.user.id,
         fullName: `${parsedInput.firstName} ${parsedInput.lastName}`,

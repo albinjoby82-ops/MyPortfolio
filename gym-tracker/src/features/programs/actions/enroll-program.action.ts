@@ -61,7 +61,7 @@ export async function enrollInProgram(programId: string) {
 
   revalidatePath(`/programs/${enrollment.program.slug}`);
 
-  if (env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID) {
+  if (false as boolean) {
     const analytics = await setupAnalytics({
       userId,
       fullName: `${session.user?.firstName} ${session.user?.lastName}`,

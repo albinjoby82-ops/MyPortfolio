@@ -44,7 +44,7 @@ export async function ProgramsPage({ locale }: ProgramsPageProps) {
   return (
     <main className="flex flex-col bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       {/* Hero Section - Style Apple moderne */}
-      {(undefined || undefined) && (
+      {(false as boolean) && (
         <HorizontalTopBanner
           adSlot={undefined}
           ezoicPlacementId={undefined}
@@ -130,7 +130,7 @@ export async function ProgramsPage({ locale }: ProgramsPageProps) {
                   />
                 </div>
 
-                {(undefined || undefined) && (
+                {(false as boolean) && (
                   <HorizontalBottomBanner
                     adSlot={undefined}
                     ezoicPlacementId={undefined}

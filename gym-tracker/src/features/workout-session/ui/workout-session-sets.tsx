@@ -283,7 +283,7 @@ export function WorkoutSessionSets({
         </div>
       )}
 
-      {(undefined || undefined) && (
+      {(false as boolean) && (
         <HorizontalBottomBanner
           adSlot={undefined}
           ezoicPlacementId={undefined}

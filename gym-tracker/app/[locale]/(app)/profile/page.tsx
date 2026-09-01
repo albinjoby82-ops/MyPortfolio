@@ -30,7 +30,7 @@ export default function ProfilePage() {
 
   return (
     <div className="px-2 sm:px-6">
-      {undefined && <HorizontalTopBanner adSlot={undefined} />}
+      {(false as boolean) && <HorizontalTopBanner adSlot={undefined} />}
       {!session && <LocalAlert className="my-4" />}
       {session && (
         <div className="mt-4">
