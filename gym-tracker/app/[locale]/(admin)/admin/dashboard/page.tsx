@@ -17,12 +17,9 @@ async function getDashboardStats() {
       // Total exercises
       prisma.exercise.count(),
 
-      // Active subscriptions
-      prisma.subscription.count({
-        where: {
-          status: "ACTIVE",
-        },
-      }),
+      // No subscriptions in this build — kept as a constant so the
+      // destructuring below and the dashboard tiles still line up.
+      Promise.resolve(0),
 
       // Users created in last 7 days
       prisma.user.count({

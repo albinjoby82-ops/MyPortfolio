@@ -17,15 +17,6 @@ CREATE TYPE "WorkoutSetType" AS ENUM ('TIME', 'WEIGHT', 'REPS', 'BODYWEIGHT', 'N
 CREATE TYPE "WorkoutSetUnit" AS ENUM ('kg', 'lbs');
 
 -- CreateEnum
-CREATE TYPE "SubscriptionStatus" AS ENUM ('ACTIVE', 'TRIAL', 'CANCELLED', 'EXPIRED', 'PAUSED');
-
--- CreateEnum
-CREATE TYPE "Platform" AS ENUM ('WEB', 'IOS', 'ANDROID');
-
--- CreateEnum
-CREATE TYPE "PaymentProcessor" AS ENUM ('STRIPE', 'PAYPAL', 'LEMONSQUEEZY', 'PADDLE', 'APPLE_PAY', 'GOOGLE_PAY', 'REVENUECAT', 'NONE', 'OTHER');
-
--- CreateEnum
 CREATE TYPE "ProgramLevel" AS ENUM ('BEGINNER', 'INTERMEDIATE', 'ADVANCED', 'EXPERT');
 
 -- CreateEnum
@@ -48,6 +39,7 @@ CREATE TABLE "user" (
     "banReason" TEXT,
     "banExpires" TIMESTAMP(3),
     "isPremium" BOOLEAN DEFAULT false,
+    "onboardingPreferences" JSONB,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -210,90 +202,6 @@ CREATE TABLE "workout_sets" (
     "completed" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "workout_sets_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "subscription_plans" (
-    "id" TEXT NOT NULL,
-    "priceMonthly" DECIMAL(10,2),
-    "priceYearly" DECIMAL(10,2),
-    "currency" TEXT NOT NULL DEFAULT 'EUR',
-    "interval" TEXT NOT NULL DEFAULT 'month',
-    "isActive" BOOLEAN NOT NULL DEFAULT true,
-    "availableRegions" TEXT[] DEFAULT ARRAY[]::TEXT[],
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "subscription_plans_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "plan_provider_mappings" (
-    "id" TEXT NOT NULL,
-    "planId" TEXT NOT NULL,
-    "provider" "PaymentProcessor" NOT NULL,
-    "externalId" TEXT NOT NULL,
-    "region" TEXT,
-    "metadata" JSONB,
-    "isActive" BOOLEAN NOT NULL DEFAULT true,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "plan_provider_mappings_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "subscriptions" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "planId" TEXT NOT NULL,
-    "revenueCatUserId" TEXT,
-    "status" "SubscriptionStatus" NOT NULL,
-    "startedAt" TIMESTAMP(3) NOT NULL,
-    "currentPeriodEnd" TIMESTAMP(3),
-    "cancelledAt" TIMESTAMP(3),
-    "platform" "Platform",
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "subscriptions_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "licenses" (
-    "id" TEXT NOT NULL,
-    "key" TEXT NOT NULL,
-    "userId" TEXT,
-    "validFrom" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "validUntil" TIMESTAMP(3),
-    "maxUsers" INTEGER DEFAULT 1,
-    "features" JSONB,
-    "activatedAt" TIMESTAMP(3),
-    "lastCheckedAt" TIMESTAMP(3),
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "licenses_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "revenuecat_webhook_events" (
-    "id" TEXT NOT NULL,
-    "eventType" TEXT NOT NULL,
-    "eventTimestamp" TIMESTAMP(3) NOT NULL,
-    "appUserId" TEXT NOT NULL,
-    "environment" TEXT NOT NULL,
-    "productId" TEXT,
-    "transactionId" TEXT,
-    "originalTransactionId" TEXT,
-    "entitlementIds" TEXT,
-    "processed" BOOLEAN NOT NULL DEFAULT false,
-    "processingError" TEXT,
-    "retryCount" INTEGER NOT NULL DEFAULT 0,
-    "rawEventData" JSONB NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "revenuecat_webhook_events_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -478,30 +386,6 @@ CREATE UNIQUE INDEX "exercise_attribute_values_attributeNameId_value_key" ON "ex
 CREATE UNIQUE INDEX "exercise_attributes_exerciseId_attributeNameId_attributeVal_key" ON "exercise_attributes"("exerciseId", "attributeNameId", "attributeValueId");
 
 -- CreateIndex
-CREATE INDEX "plan_provider_mappings_provider_externalId_idx" ON "plan_provider_mappings"("provider", "externalId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "plan_provider_mappings_planId_provider_region_key" ON "plan_provider_mappings"("planId", "provider", "region");
-
--- CreateIndex
-CREATE UNIQUE INDEX "subscriptions_userId_platform_key" ON "subscriptions"("userId", "platform");
-
--- CreateIndex
-CREATE UNIQUE INDEX "licenses_key_key" ON "licenses"("key");
-
--- CreateIndex
-CREATE INDEX "revenuecat_webhook_events_appUserId_idx" ON "revenuecat_webhook_events"("appUserId");
-
--- CreateIndex
-CREATE INDEX "revenuecat_webhook_events_eventType_idx" ON "revenuecat_webhook_events"("eventType");
-
--- CreateIndex
-CREATE INDEX "revenuecat_webhook_events_processed_idx" ON "revenuecat_webhook_events"("processed");
-
--- CreateIndex
-CREATE INDEX "revenuecat_webhook_events_eventTimestamp_idx" ON "revenuecat_webhook_events"("eventTimestamp");
-
--- CreateIndex
 CREATE UNIQUE INDEX "programs_slug_key" ON "programs"("slug");
 
 -- CreateIndex
@@ -598,18 +482,6 @@ ALTER TABLE "workout_session_exercises" ADD CONSTRAINT "workout_session_exercise
 ALTER TABLE "workout_sets" ADD CONSTRAINT "workout_sets_workoutSessionExerciseId_fkey" FOREIGN KEY ("workoutSessionExerciseId") REFERENCES "workout_session_exercises"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "plan_provider_mappings" ADD CONSTRAINT "plan_provider_mappings_planId_fkey" FOREIGN KEY ("planId") REFERENCES "subscription_plans"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "subscriptions" ADD CONSTRAINT "subscriptions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "subscriptions" ADD CONSTRAINT "subscriptions_planId_fkey" FOREIGN KEY ("planId") REFERENCES "subscription_plans"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "licenses" ADD CONSTRAINT "licenses_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "program_coaches" ADD CONSTRAINT "program_coaches_programId_fkey" FOREIGN KEY ("programId") REFERENCES "programs"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -641,4 +513,3 @@ ALTER TABLE "user_session_progress" ADD CONSTRAINT "user_session_progress_sessio
 
 -- AddForeignKey
 ALTER TABLE "user_session_progress" ADD CONSTRAINT "user_session_progress_workoutSessionId_fkey" FOREIGN KEY ("workoutSessionId") REFERENCES "workout_sessions"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-

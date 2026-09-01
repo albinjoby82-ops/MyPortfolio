@@ -1,7 +1,8 @@
 import { admin, customSession } from "better-auth/plugins";
 import { nextCookies } from "better-auth/next-js";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { betterAuth, APIError } from "better-auth";
+import { betterAuth } from "better-auth";
+import { APIError } from "better-auth/api";
 
 import { prisma } from "@/shared/lib/prisma";
 import { sendEmail } from "@/shared/lib/mail/sendEmail";
