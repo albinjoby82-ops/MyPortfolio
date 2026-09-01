@@ -1,10 +1,8 @@
 "use client";
 
-import { useSession } from "@/features/auth/lib/auth-client";
-
+/**
+ * Two-user private app: no paid tier, no ads. Always "subscribed".
+ */
 export function useUserSubscription() {
-  const { data: session, ...rest } = useSession();
-  const isPremium = session?.user?.isPremium || false;
-
-  return { isPremium, ...rest };
+  return { isPremium: true, isPending: false, error: null, data: null };
 }

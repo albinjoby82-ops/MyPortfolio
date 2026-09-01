@@ -1,60 +1,23 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-
 import type { PremiumStatus, UserSubscription } from "@/shared/types/premium.types";
 
-import { useSession } from "@/features/auth/lib/auth-client";
-
+/**
+ * Two-user private app: there is no paid tier, so everyone is "premium".
+ *
+ * These hooks keep the original signatures so the many call sites inherited
+ * from the upstream base still compile. The Stripe/RevenueCat plumbing behind
+ * them has been deleted.
+ */
 
 export function usePremiumStatus() {
-  const { data: session } = useSession();
-
-  return useQuery({
-    queryKey: ["premium-status", session?.user?.id],
-    queryFn: async (): Promise<PremiumStatus> => {
-      if (!session?.user?.id) {
-        return { isPremium: false };
-      }
-
-      const response = await fetch("/api/premium/status");
-      if (!response.ok) {
-        throw new Error("Failed to fetch premium status");
-      }
-
-      return response.json();
-    },
-    enabled: !!session?.user?.id,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    gcTime: 10 * 60 * 1000, // 10 minutes
-  });
+  return { data: { isPremium: true } as PremiumStatus, isLoading: false, isPending: false, error: null };
 }
 
 export function useSubscription() {
-  const { data: session } = useSession();
-
-  return useQuery({
-    queryKey: ["subscription", session?.user?.id],
-    queryFn: async (): Promise<UserSubscription> => {
-      if (!session?.user?.id) {
-        return { isActive: false };
-      }
-
-      const response = await fetch("/api/premium/subscription");
-      if (!response.ok) {
-        throw new Error("Failed to fetch subscription");
-      }
-
-      return response.json();
-    },
-    enabled: !!session?.user?.id,
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
-  });
+  return { data: { isActive: true } as UserSubscription, isLoading: false, isPending: false, error: null };
 }
 
-// Simple boolean check - most common use case
 export function useIsPremium(): boolean {
-  const { data: premiumStatus } = usePremiumStatus();
-  return premiumStatus?.isPremium ?? false;
+  return true;
 }

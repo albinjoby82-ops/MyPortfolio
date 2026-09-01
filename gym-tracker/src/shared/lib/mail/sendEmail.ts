@@ -1,39 +1,19 @@
-import nodemailer from "nodemailer";
-import { render } from "@react-email/components";
-
-import { env } from "@/env";
-
-type EmailPayload = {
+/**
+ * Transactional email removed — private two-user app with no SMTP configured.
+ *
+ * Kept as a logging no-op rather than deleted, because better-auth's password
+ * reset path still wants a sender. If we ever need a password reset we'll read
+ * the link out of the server log.
+ */
+interface EmailPayload {
   from?: string;
   to: string;
   subject: string;
-  text: string;
-  react?: React.ReactElement;
-};
+  text?: string;
+  react?: unknown;
+}
 
-const transporter = nodemailer.createTransport({
-  host: env.SMTP_HOST,
-  port: env.SMTP_PORT,
-  secure: env.SMTP_SECURE,
-  auth:
-    env.SMTP_USER && env.SMTP_PASS
-      ? {
-          user: env.SMTP_USER,
-          pass: env.SMTP_PASS,
-        }
-      : undefined,
-});
-
-export const sendEmail = async ({ from, to, subject, text, react }: EmailPayload) => {
-  try {
-    return transporter.sendMail({
-      from: from ?? env.SMTP_FROM,
-      to,
-      subject,
-      text,
-      html: react ? await render(react) : undefined,
-    });
-  } catch (error) {
-    console.error(error);
-  }
+export const sendEmail = async ({ to, subject, text }: EmailPayload) => {
+  console.info(`[email disabled] to=${to} subject=${subject}\n${text ?? ""}`);
+  return { skipped: true as const };
 };

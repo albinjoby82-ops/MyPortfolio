@@ -1,40 +1,13 @@
-import { OpenPanelComponent, type TrackProperties, useOpenPanel } from "@openpanel/nextjs";
+"use client";
 
-import { env } from "@/env";
+/**
+ * Analytics removed — private two-user app, nothing to measure.
+ * No-op stubs kept so existing call sites compile.
+ */
+import type { ReactNode } from "react";
 
-const isProd = process.env.NODE_ENV === "production";
+const AnalyticsProvider = ({ children }: { children: ReactNode }) => <>{children}</>;
 
-const AnalyticsProvider = function () {
-  if (!env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID) {
-    return null;
-  }
-
-  return (
-    <OpenPanelComponent
-      clientId={env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID}
-      trackAttributes={true}
-      trackOutgoingLinks={isProd}
-      trackScreenViews={isProd}
-    />
-  );
-};
-
-const track = (options: { event: string } & TrackProperties) => {
-  if (!env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID) {
-    return;
-  }
-
-  if (!isProd) {
-    console.log("Track", options);
-    return;
-  }
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { track: openTrack } = useOpenPanel();
-
-  const { event, ...rest } = options;
-
-  openTrack(event, rest);
-};
+const track = (_name: string, _payload?: Record<string, unknown>) => {};
 
 export { AnalyticsProvider, track };
