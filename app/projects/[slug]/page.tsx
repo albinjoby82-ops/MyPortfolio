@@ -5,6 +5,7 @@ import Prose from "@/components/Prose";
 import CubiPortal from "@/components/CubiPortal";
 import CubiLogoLab from "@/components/CubiLogoLab";
 import CubiColourLab from "@/components/CubiColourLab";
+import CubiWorkflow from "@/components/CubiWorkflow";
 import { getProject, getProjects } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -19,7 +20,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProject(slug);
   return {
-    title: project ? `${project.title} — Albin Andrews Joby` : "Not found",
+    title: project ? `${project.title} | Albin Andrews Joby` : "Not found",
     description: project?.blurb,
   };
 }
@@ -179,23 +180,9 @@ export default async function ProjectPage({
 
       {project.slug === "cubi" && <CubiLogoLab />}
 
-      {project.notes.length > 0 && (
-        <section className="grid grid-cols-1 gap-[18px] pb-11 gutter md:grid-cols-2">
-          {project.notes.map((n) => (
-            <div
-              key={n.heading}
-              className="rounded-[16px] border-2 border-ink bg-card p-7 shadow-[var(--shadow-hard)]"
-            >
-              <h2 className="mb-3 text-[26px] font-bold tracking-[-0.02em]">
-                {n.heading}
-              </h2>
-              <p className="pretty text-[16px] leading-[1.65]">{n.body}</p>
-            </div>
-          ))}
-        </section>
-      )}
-
       {project.slug === "cubi" && <CubiColourLab />}
+
+      {project.slug === "cubi" && <CubiWorkflow />}
 
       {project.body && (
         <section className="pb-14 gutter">
@@ -216,6 +203,22 @@ export default async function ProjectPage({
               />
             ))}
           </div>
+        </section>
+      )}
+
+      {project.notes.length > 0 && (
+        <section className="grid grid-cols-1 gap-[18px] pb-14 gutter md:grid-cols-2">
+          {project.notes.map((n) => (
+            <div
+              key={n.heading}
+              className="rounded-[16px] border-2 border-ink bg-card p-7 shadow-[var(--shadow-hard)]"
+            >
+              <h2 className="mb-3 text-[26px] font-bold tracking-[-0.02em]">
+                {n.heading}
+              </h2>
+              <p className="pretty text-[16px] leading-[1.65]">{n.body}</p>
+            </div>
+          ))}
         </section>
       )}
     </>

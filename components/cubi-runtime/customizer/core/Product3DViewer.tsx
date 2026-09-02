@@ -646,6 +646,7 @@ export default function Product3DViewer(props: Product3DViewerProps) {
         />
         <OrbitControls
           makeDefault
+          enableZoom={false}
           enableDamping
           dampingFactor={0.08}
           minDistance={minimumCameraDistance}

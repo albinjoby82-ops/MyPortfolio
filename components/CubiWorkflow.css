@@ -1,0 +1,149 @@
+.cubiWorkflow {
+  padding-block: 76px 82px;
+  border-top: 2px solid #16181d;
+  border-bottom: 2px solid #16181d;
+  background: #f5c63c;
+}
+
+.cubiWorkflowHead {
+  display: grid;
+  grid-template-columns: minmax(280px, .9fr) minmax(320px, 1.1fr);
+  align-items: end;
+  gap: 22px 60px;
+  max-width: 1240px;
+  margin: 0 auto 48px;
+}
+
+.cubiWorkflowHead .cubiPortfolioKicker {
+  grid-column: 1 / -1;
+  width: fit-content;
+  background: #fff;
+}
+
+.cubiWorkflowHead h2 {
+  max-width: 12ch;
+  margin: 0;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(40px, 5vw, 70px);
+  font-weight: 800;
+  letter-spacing: -.06em;
+  line-height: .9;
+}
+
+.cubiWorkflowHead > p {
+  max-width: 52ch;
+  margin: 0 0 3px;
+  color: #332f25;
+  font-size: 16px;
+  font-weight: 560;
+  line-height: 1.62;
+}
+
+.cubiWorkflowTimeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.cubiWorkflowTimeline li {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  min-height: 245px;
+  padding: 0 24px 28px;
+  border-left: 2px solid rgba(22, 24, 29, .28);
+}
+
+.cubiWorkflowTimeline li:nth-child(-n + 4) {
+  border-bottom: 2px solid rgba(22, 24, 29, .28);
+}
+
+.cubiWorkflowTimeline li:nth-child(4n + 1) { border-left: 0; }
+.cubiWorkflowTimeline li:nth-child(n + 5) { padding-top: 30px; }
+
+.cubiWorkflowNumber {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  margin-bottom: 24px;
+  border: 2px solid #16181d;
+  border-radius: 50%;
+  background: #16181d;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  box-shadow: 4px 4px 0 rgba(255, 255, 255, .75);
+}
+
+.cubiWorkflowCopy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.cubiWorkflowCopy h3 {
+  margin: 0;
+  color: #16181d;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -.03em;
+}
+
+.cubiWorkflowCopy p {
+  margin: 11px 0 20px;
+  color: #3e392d;
+  font-size: 13.5px;
+  font-weight: 540;
+  line-height: 1.55;
+}
+
+.cubiWorkflowCopy span {
+  width: fit-content;
+  margin-top: auto;
+  border: 1px solid rgba(22, 24, 29, .35);
+  border-radius: 999px;
+  padding: 5px 8px;
+  background: rgba(255, 255, 255, .34);
+  color: #16181d;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 920px) {
+  .cubiWorkflowHead { grid-template-columns: 1fr; }
+  .cubiWorkflowHead h2 { max-width: 15ch; }
+  .cubiWorkflowTimeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cubiWorkflowTimeline li,
+  .cubiWorkflowTimeline li:nth-child(n + 5) { padding: 26px 22px; border-bottom: 2px solid rgba(22, 24, 29, .28); }
+  .cubiWorkflowTimeline li:nth-child(odd) { border-left: 0; }
+  .cubiWorkflowTimeline li:nth-child(even) { border-left: 2px solid rgba(22, 24, 29, .28); }
+  .cubiWorkflowTimeline li:nth-last-child(-n + 2) { border-bottom: 0; }
+}
+
+@media (max-width: 560px) {
+  .cubiWorkflow { padding-block: 56px 62px; }
+  .cubiWorkflowHead { margin-bottom: 32px; }
+  .cubiWorkflowTimeline { grid-template-columns: 1fr; }
+  .cubiWorkflowTimeline li,
+  .cubiWorkflowTimeline li:nth-child(even),
+  .cubiWorkflowTimeline li:nth-child(n + 5) {
+    grid-template-columns: 48px 1fr;
+    grid-template-rows: 1fr;
+    gap: 17px;
+    min-height: 0;
+    border-left: 0;
+    border-bottom: 2px solid rgba(22, 24, 29, .28);
+    padding: 24px 0;
+  }
+  .cubiWorkflowTimeline li:last-child { border-bottom: 0; }
+  .cubiWorkflowNumber { margin: 0; }
+}

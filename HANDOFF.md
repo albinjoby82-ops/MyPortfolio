@@ -112,6 +112,7 @@ components/
   CubiPortal.tsx          original NFC tap interaction
   CubiLogoLab.tsx         live Claude/Bambu logo presets on real Cubi Base
   CubiColourLab.tsx       original Cubi board-colour selector + real model
+  CubiWorkflow.tsx        customer journey from browser to printed order
   CubiBaseViewer.tsx      portfolio adapter around copied Cubi runtime
   cubi-runtime/           source copied from the working Cubi app
 lib/projects.ts           reads/sorts/types the MDX frontmatter
@@ -127,9 +128,10 @@ public/projects/cubi/     Cubi photography
 ### Cubi interactive case study
 
 The Cubi detail route is intentionally more bespoke than ordinary project
-pages. It now combines the editorial hero with three interactive sections from
-the working product: the NFC portal, the real Cubi Base logo viewer and the
-board-colour customiser. Read `docs/CUBI_HANDOFF.md` before touching these.
+pages. It now combines the editorial hero with four custom sections: the NFC
+portal, the real Cubi Base logo viewer, the board-colour customiser and the
+customer workflow from browser to printed order. Read `docs/CUBI_HANDOFF.md`
+before touching these.
 
 Do not replace the real WebGL model with CSS mockups. This was tried and Albin
 explicitly rejected it. Reuse `components/cubi-runtime/` and the existing

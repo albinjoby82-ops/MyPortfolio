@@ -19,14 +19,15 @@ Read `HANDOFF.md` before changing this project. For Cubi work, also read
 
 ## Cubi continuation
 
-The Cubi page currently has three custom interactive sections:
+The Cubi page currently has four custom sections:
 
 1. `CubiPortal`: the original NFC tap demo.
 2. `CubiLogoLab`: the real Cubi Base model with Claude and Bambu logo presets.
 3. `CubiColourLab`: Cubi's original board-colour selector driving the real
    model materials.
+4. `CubiWorkflow`: the customer journey from product choice and logo conversion
+   through Stripe checkout, Cloudflare, Firestore, production and Bambu Studio.
 
 The GLB is `public/models/cubi-base/Cubi-Base-2.glb`. The portfolio adapter is
 `components/CubiBaseViewer.tsx`. Details and next steps are in
 `docs/CUBI_HANDOFF.md`.
-

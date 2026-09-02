@@ -83,7 +83,6 @@ export default function CubiLogoLab() {
             <CubiBaseViewer logoSvg={cleanSvg} logoName={selected.label} />
             <div className="cubiLogoStageLegend">
               <span>Drag to rotate</span>
-              <span>Scroll to zoom</span>
             </div>
           </div>
 

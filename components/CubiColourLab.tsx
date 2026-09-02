@@ -70,7 +70,6 @@ export default function CubiColourLab() {
             <CubiBaseViewer boardColor={boardColor} tileColor="#d43b2f" />
             <div className="cubiColourStageNotes" aria-hidden="true">
               <span>Drag to rotate</span>
-              <span>Scroll to zoom</span>
               <span>Every change updates live</span>
             </div>
           </div>
@@ -83,10 +82,6 @@ export default function CubiColourLab() {
               value={boardColor}
               onChange={setBoardColor}
             />
-            <div className="cubiColourFooter">
-              <span>Step 1 of 5</span>
-              <button type="button">Next</button>
-            </div>
           </div>
         </div>
       </div>

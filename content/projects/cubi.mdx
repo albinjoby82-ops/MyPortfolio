@@ -30,27 +30,92 @@ notes:
 photos: []
 ---
 
-## From checkout to Bambu Studio
+## Why the logo converter took the longest
 
-Cloudflare Workers sit behind the storefront. They validate order payloads,
-verify identity and Turnstile, read pricing on the server, calculate shipping,
-create an idempotent Stripe Checkout session and write the order to Firestore.
-A signed Stripe webhook updates its payment status, while Stripe sends the
-customer a receipt. The public site is deployed automatically from GitHub to
-Cloudflare at `cubi-3d.com`.
+Customers do not arrive with perfect vector artwork. They upload screenshots,
+small JPEGs, transparent PNGs, blurred edges, inverted colours and complicated
+crests. Early versions could turn a detailed badge into one solid blob, lose the
+holes inside letters or keep a border while throwing away the mark in the
+middle. I spent longer testing and tuning this part than any single screen in
+the storefront.
 
-I deliberately store the cleaned SVG and design instructions, not a heavy
-generated model. When I open an order, the admin panel reconstructs the exact
-3D preview and generates the 3MF only when I need to manufacture it. That keeps
-checkout fast and moves the expensive geometry work onto the machine doing the
-production.
+The converter runs locally in the browser. Small artwork is upscaled before
+thresholding, masks are smoothed, enclosed holes are recovered and badge-like
+logos are detected so the central mark can be separated from the surrounding
+disc or background. It tries different ways of interpreting the foreground,
+traces them with a WebAssembly vectoriser in a Web Worker and produces several
+SVG candidates rather than pretending one automatic answer will suit every
+logo.
+
+Each candidate is checked against the source mask for fidelity and penalised
+when it becomes excessively complex, slow or warning-heavy. Cubi can suggest a
+result, but it never silently decides which version represents the customer's
+identity. The customer, or me in the crest-review panel, chooses the candidate
+that still looks like the original artwork.
+
+SVG files take a separate safety path. Scripts, external references, embedded
+content, unsupported elements and unsafe styles are removed before the useful
+geometry is normalised into a predictable printable shape. The same cleaned SVG
+drives both the live 3D decal and the physical logo inset, so the preview and the
+manufacturing pipeline are working from the same source.
+
+## Designing the physical product
+
+I designed the Cubi hardware in Fusion around the parts that had to work in the
+real world: removable NFC tiles, fitted recesses, separate colour inserts and
+pieces that could be printed repeatedly and assembled without losing their
+clearance. Cubi Base became the compact two-tap counter product, Cubi Board
+supports wider two, three and four-tile layouts, and Cubi Lite keeps the same
+idea in a slimmer form.
+
+The physical tiles are not one decorative mesh. A tile can contain a body, an
+icon-bearing insert and a base as separate snap-fit pieces. One early exporter
+wrongly unioned those parts into a single solid because they looked related in
+the browser. Opening the result in Bambu Studio showed that the snap-fit
+boundaries and clearances had been destroyed.
+
+That failure changed how I tested the whole product. I stopped treating the 3D
+preview as proof that the design worked. I inspected the exported objects in the
+slicer, printed the pieces, checked the inlays and fits, then changed the model,
+mesh mapping or exporter until the digital order survived as a real assembled
+Cubi.
+
+## Cloudflare, GitHub and the route to Bambu Studio
+
+Cubi was my first time using Cloudflare to run a complete live product, rather
+than simply putting a website online. I had to learn how the public storefront,
+server-side Workers, Turnstile protection, environment settings and deployment
+fit together. It made me think properly about what the browser should be allowed
+to do, what needed to happen on the server and where customer and payment data
+should be trusted.
+
+Cloudflare Workers sit behind the storefront. They validate each order payload,
+verify identity and Turnstile, read the real pricing on the server, calculate
+shipping, create an idempotent Stripe Checkout session and write the order to
+Firestore. A signed Stripe webhook updates the payment status after checkout,
+while Stripe sends the customer a receipt. This was the first project where I
+had connected all of those separate services into one production flow.
+
+It was also my first time using GitHub as the backbone of a live project. I used
+it to keep the development history, manage the code as Cubi changed and connect
+the repository directly to Cloudflare. Updates pushed to GitHub trigger the
+public deployment at `cubi-3d.com`, so the code I test locally follows a clear
+route into the live product. Learning that workflow changed GitHub from somewhere
+I stored code into part of how I build and operate software.
+
+The same chain continues past the web platform and into manufacturing. I
+deliberately store the cleaned SVG and the customer's design instructions, not
+a heavy generated model. When I open an order, the admin panel reconstructs the
+exact 3D preview and generates the 3MF only when I need to manufacture it. That
+keeps checkout fast and moves the expensive geometry work onto the machine doing
+the production.
 
 The 3MF exporter builds the board, snap-fit pieces, logo inlay and tile icons as
 properly separated colour components, embeds the customer's configuration as
 metadata and produces a file I can take straight into Bambu Studio. Reaching
-that point took repeated slicer tests: the browser preview could not tell me
-when an icon had become empty geometry or when Bambu would interpret two parts
-incorrectly.
+that point took repeated slicer tests. The browser preview could not tell me when
+an icon had become empty geometry or when Bambu would interpret two parts
+incorrectly, so every stage had to be tested as part of one connected system.
 
 ## The private production studio
 

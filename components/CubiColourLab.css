@@ -153,8 +153,7 @@
 }
 
 .cubiColourControls {
-  display: grid;
-  grid-template-rows: 1fr auto;
+  display: block;
   min-width: 0;
   background: #fff;
 }
@@ -228,29 +227,6 @@
 .cubiColourControls .cubiSwatch.active .cubiSwatchChip { box-shadow: 0 0 0 3px #fff, 0 0 0 6px #16181d; }
 .cubiColourControls .cubiSwatchName { max-width: 64px; font-size: 9px; font-weight: 750; line-height: 1.05; text-align: center; }
 .cubiColourControls .cubiSwatch.active .cubiSwatchName { color: #16181d; }
-
-.cubiColourFooter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 70px;
-  border-top: 1px solid #e2dfd7;
-  padding: 12px 20px;
-  color: #818188;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.cubiColourFooter button {
-  min-width: 105px;
-  border: 0;
-  border-radius: 999px;
-  padding: 12px 20px;
-  background: #5d50ec;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 800;
-}
 
 @media (max-width: 1180px) {
   .cubiColourShowcase { grid-template-columns: 1fr; justify-items: center; }

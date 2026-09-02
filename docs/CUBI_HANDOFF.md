@@ -5,8 +5,8 @@ Last updated 31 August 2026.
 ## Outcome
 
 The Cubi project page is now a substantial case study with real product media,
-custom editorial layouts and three interactive demonstrations taken from the
-working Cubi codebase. Local route:
+custom editorial layouts, three interactive demonstrations taken from the
+working Cubi codebase and a customer workflow timeline. Local route:
 
 `http://localhost:3000/projects/cubi/`
 
@@ -78,6 +78,19 @@ Green, Bambu Green, Pink, Red, Blue, Black, Cyan, Orange, Yellow and Jade
 White. Only the board-colour step is interactive right now. The remaining step
 labels are intentionally present as context, not clickable fake functionality.
 
+### 4. Customer workflow
+
+Files:
+
+- `components/CubiWorkflow.tsx`
+- `components/CubiWorkflow.css`
+
+This is an eight-step timeline showing one customer order from product choice
+and live customisation through the local logo converter, basket, Cloudflare and
+Stripe checkout, Stripe webhook, Firestore, admin production tools, Bambu
+Studio and delivery. Keep it focused on the customer's journey while making the
+supporting systems visible.
+
 ## Original Cubi runtime inventory
 
 `components/cubi-runtime/` contains:
@@ -119,6 +132,10 @@ These match the versions used by the original Cubi project.
 - Avoid em dashes in visible copy.
 - The interactive windows should feel compact. Albin repeatedly asked to avoid
   large empty blocks and awkward image crops.
+- Wheel zoom is disabled in the embedded product viewers so scrolling the
+  portfolio page never gets trapped by a canvas. Drag rotation remains active.
+- The "What went wrong" and "What I learned" cards belong at the bottom of the
+  project page, after the long-form build story.
 
 ## Verification completed
 
@@ -133,7 +150,7 @@ These match the versions used by the original Cubi project.
 Albin stopped here intentionally. When work resumes, ask what section he wants
 next. Likely directions mentioned earlier include:
 
-- deeper image-led explanations of the converter pipeline;
+- supporting images for the converter and physical-product explanations;
 - screenshots or live views of the admin order panel;
 - the 3MF-to-Bambu Studio manufacturing workflow;
 - backend, Stripe, Firebase and Cloudflare architecture;
@@ -142,4 +159,3 @@ next. Likely directions mentioned earlier include:
 
 Do not expand all of these automatically. Continue one visual section at a
 time with Albin reviewing localhost screenshots.
-
