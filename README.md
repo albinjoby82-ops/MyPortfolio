@@ -1,7 +1,7 @@
 # Portfolio — Albin Andrews Joby
 
 Personal engineering portfolio. Next.js (App Router) exported to fully static
-HTML, deployed on Cloudflare Pages.
+HTML and deployed with Cloudflare Workers Static Assets.
 
 ## Running it
 
@@ -61,7 +61,14 @@ runtime and is **not** used by this site.
 
 ## Deploying
 
-Cloudflare Pages, connected to this repo:
+The repository includes `wrangler.jsonc`, which builds the static export and
+uploads `out/` as a Cloudflare Worker with static assets.
 
-- Build command: `npm run build`
-- Output directory: `out`
+```bash
+npm run deploy:dry  # build and validate without uploading
+npm run deploy      # build and deploy to Cloudflare
+```
+
+For Cloudflare Workers Builds, the deploy command can remain
+`npx wrangler deploy`. Wrangler reads the checked-in configuration, runs
+`npm run build`, then uploads the `out/` directory directly.

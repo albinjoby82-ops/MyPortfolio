@@ -32,7 +32,8 @@ one file in a folder" over short-term convenience. Do not undo that.
 | Markdown rendering | `react-markdown` + `remark-gfm`, in a server component |
 | Interactive 3D | Three.js, React Three Fiber, Drei |
 | Fonts | `next/font/google` — Bricolage Grotesque, Public Sans |
-| Build | `output: 'export'` → static HTML in `out/` |
+| Build | `output: 'export'` to static HTML in `out/` |
+| Hosting | Cloudflare Workers Static Assets via `wrangler.jsonc` |
 | Node | v24, npm v11 |
 
 `npm audit` is currently clean. `postcss` is pinned to `^8.5.23` in
@@ -276,9 +277,10 @@ Ask; don't decide these unilaterally.
 2. Continue the Cubi case study only when Albin requests the next section. See
    `docs/CUBI_HANDOFF.md` for the current state and likely directions.
 3. Remaining four write-ups.
-4. **Connect Cloudflare Pages:** dashboard → Workers & Pages → Create → Pages →
-   Connect to Git → `MyPortfolio`. Build command `npm run build`, output
-   directory `out`. Pushes to `main` then auto-deploy.
+4. **Cloudflare deployment:** `wrangler.jsonc` configures a static-assets-only
+   Worker. Cloudflare Workers Builds can use `npx wrangler deploy`; Wrangler
+   runs `npm run build` and uploads `out/`. Do not let automatic framework
+   setup migrate this static export to OpenNext.
 5. Custom domain, once one exists (`site.url` in `content/site.ts` is a
    placeholder).
 
@@ -289,6 +291,8 @@ Ask; don't decide these unilaterally.
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # static export → ./out   (stop dev first!)
+npm run build    # static export to ./out   (stop dev first!)
+npm run deploy:dry
+npm run deploy
 npx serve out    # sanity-check the exported build
 ```
