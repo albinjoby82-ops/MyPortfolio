@@ -1,7 +1,7 @@
 # Agent handoff
 
 Context for an agent picking up this project cold. Read this before touching
-anything. Last updated 31 Aug 2026.
+anything. Last updated 2 Sep 2026.
 
 ---
 
@@ -113,6 +113,8 @@ components/
   CubiLogoLab.tsx         live Claude/Bambu logo presets on real Cubi Base
   CubiColourLab.tsx       original Cubi board-colour selector + real model
   CubiWorkflow.tsx        customer journey from browser to printed order
+  GaleForceChapterOne.tsx VEX U introduction, video and pitch deck window
+  GaleForceChapterOne.css GaleForce Chapter 01 layout and media windows
   CubiBaseViewer.tsx      portfolio adapter around copied Cubi runtime
   cubi-runtime/           source copied from the working Cubi app
 lib/projects.ts           reads/sorts/types the MDX frontmatter
@@ -123,6 +125,7 @@ content/
 public/albin-joby-cv.pdf  the Résumé ↓ button target
 public/models/cubi-base/  original Cubi Base GLB
 public/projects/cubi/     Cubi photography
+public/projects/galeforce/ GaleForce pitch deck PDF
 ```
 
 ### Cubi interactive case study
