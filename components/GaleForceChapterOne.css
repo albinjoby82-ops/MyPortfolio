@@ -6,7 +6,8 @@
 
 .galeForceChapterIntro,
 .galeForceVexBlock,
-.galeForcePitchBlock {
+.galeForcePitchBlock,
+.galeForceSponsorshipBlock {
   max-width: 1240px;
   margin-inline: auto;
 }
@@ -46,7 +47,8 @@
 
 .galeForceChapterCopy,
 .galeForceVexCopy,
-.galeForcePitchHeading > p {
+.galeForcePitchHeading > p,
+.galeForceSponsorshipCopy {
   color: #263b47;
   font-size: 16px;
   font-weight: 540;
@@ -55,7 +57,8 @@
 
 .galeForceChapterCopy p,
 .galeForceVexCopy p,
-.galeForcePitchHeading > p {
+.galeForcePitchHeading > p,
+.galeForceSponsorshipCopy p {
   margin: 0 0 18px;
 }
 
@@ -68,7 +71,8 @@
 }
 
 .galeForceVexCopy h3,
-.galeForcePitchHeading h3 {
+.galeForcePitchHeading h3,
+.galeForceSponsorshipHeading h3 {
   max-width: 13ch;
   margin: 24px 0 18px;
   color: #16181d;
@@ -164,10 +168,70 @@
   background: #f5f3ed;
 }
 
+.galeForceSponsorshipBlock {
+  margin-top: 88px;
+  padding-top: 64px;
+  border-top: 2px solid rgba(22, 24, 29, .32);
+}
+
+.galeForceSponsorshipHeading {
+  display: grid;
+  grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr);
+  gap: 52px 82px;
+  align-items: start;
+  margin-bottom: 36px;
+}
+
+.galeForceSponsorshipHeading h3 {
+  max-width: 12ch;
+  margin: 24px 0 0;
+}
+
+.galeForceSponsorNames {
+  display: grid;
+  grid-template-columns: minmax(190px, 1.35fr) repeat(3, minmax(120px, 1fr));
+  overflow: hidden;
+  margin-bottom: 34px;
+  border: 2px solid #16181d;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.galeForceSponsorNames span,
+.galeForceSponsorNames strong {
+  display: flex;
+  min-height: 82px;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 20px;
+  text-align: center;
+}
+
+.galeForceSponsorNames span {
+  background: #16181d;
+  color: #c6e4f5;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .11em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.galeForceSponsorNames strong {
+  border-left: 2px solid #16181d;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(22px, 2.6vw, 34px);
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+
 @media (max-width: 900px) {
   .galeForceChapterIntro,
   .galeForceVexBlock,
-  .galeForcePitchHeading {
+  .galeForcePitchHeading,
+  .galeForceSponsorshipHeading {
     grid-template-columns: 1fr;
     gap: 32px;
   }
@@ -175,6 +239,10 @@
   .galeForceChapterIntro h2 { max-width: 13ch; }
   .galeForceVexBlock { margin-bottom: 70px; }
   .galeForcePitchHeading h3 { max-width: 14ch; }
+  .galeForceSponsorshipHeading h3 { max-width: 15ch; }
+  .galeForceSponsorNames { grid-template-columns: repeat(3, 1fr); }
+  .galeForceSponsorNames span { grid-column: 1 / -1; min-height: 54px; }
+  .galeForceSponsorNames strong:first-of-type { border-left: 0; }
 }
 
 @media (max-width: 560px) {
@@ -182,7 +250,12 @@
   .galeForceChapterIntro { margin-bottom: 56px; }
   .galeForceChapterIntro h2 { margin-top: 24px; font-size: clamp(40px, 13vw, 60px); }
   .galeForceVexCopy h3,
-  .galeForcePitchHeading h3 { font-size: 40px; }
+  .galeForcePitchHeading h3,
+  .galeForceSponsorshipHeading h3 { font-size: 40px; }
   .galeForceWindowBar { gap: 10px; font-size: 8px; }
   .galeForcePdfWindow iframe { height: 560px; }
+  .galeForceSponsorshipBlock { margin-top: 68px; }
+  .galeForceSponsorNames { grid-template-columns: 1fr; }
+  .galeForceSponsorNames span { grid-column: auto; }
+  .galeForceSponsorNames strong { min-height: 62px; border-top: 2px solid #16181d; border-left: 0; }
 }

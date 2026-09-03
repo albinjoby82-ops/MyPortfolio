@@ -26,10 +26,12 @@ export default function GaleForceChapterOne() {
             find funding and create a team that could actually operate.
           </p>
           <p>
-            I co-founded GaleForce, so my role reaches across the whole
-            project: engineering, prototyping, sponsor communication, PR,
-            school coordination and making sure the team has what it needs to
-            reach the competition.
+            I co-founded GaleForce and serve as Head of the
+            Electrical/Electronics department. I lead the team&apos;s electrical
+            work while contributing across the wider project through
+            engineering, prototyping, sponsor communication, PR, school
+            coordination and making sure the team has what it needs to reach
+            the competition.
           </p>
         </div>
       </div>
@@ -106,6 +108,65 @@ export default function GaleForceChapterOne() {
           <iframe
             src="/projects/galeforce/initial-pitch-deck.pdf#view=FitH"
             title="GaleForce initial pitch deck"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div className="galeForceSponsorshipBlock">
+        <div className="galeForceSponsorshipHeading">
+          <div>
+            <span className="galeForceKicker">02 · Sponsorships</span>
+            <h3>Official backing gave us momentum. Sponsorship made the build possible.</h3>
+          </div>
+          <div className="galeForceSponsorshipCopy">
+            <p>
+              Once GaleForce was officially backed by UCD&apos;s School of
+              Electrical and Electronic Engineering, we got straight to work
+              on the next challenge: raising the money and securing the
+              materials needed to build two competitive robots.
+            </p>
+            <p>
+              As a co-founder, it was my responsibility to help see that
+              process through. Before the semester had even started, I had
+              personally brought on three 3D-printing sponsors: SUNLU, 3DJake
+              and eSUN.
+            </p>
+            <p>
+              Each partnership came down to a combination of good timing, a
+              strong sponsorship deck and an online meeting to close the deal.
+              The timing opened the door, the deck made a clear case for the
+              team, and the conversation turned that interest into practical
+              support.
+            </p>
+            <a
+              className="galeForceSourceLink"
+              href="https://gaelforceucd.ie/#sponsors"
+              target="_blank"
+              rel="noreferrer"
+            >
+              See GaleForce&apos;s current sponsors ↗
+            </a>
+          </div>
+        </div>
+
+        <div className="galeForceSponsorNames" aria-label="3D-printing sponsors I secured">
+          <span>Personally secured before semester</span>
+          <strong>SUNLU</strong>
+          <strong>3DJake</strong>
+          <strong>eSUN</strong>
+        </div>
+
+        <div className="galeForcePdfWindow">
+          <div className="galeForceWindowBar">
+            <span>GALEFORCE · SPONSORSHIP DECK</span>
+            <a href="/projects/galeforce/sponsorship-deck.pdf" download>
+              Download PDF ↗
+            </a>
+          </div>
+          <iframe
+            src="/projects/galeforce/sponsorship-deck.pdf#view=FitH"
+            title="GaleForce sponsorship deck"
             loading="lazy"
           />
         </div>
