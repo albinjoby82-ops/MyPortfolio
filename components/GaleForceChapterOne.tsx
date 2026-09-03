@@ -9,7 +9,7 @@ export default function GaleForceChapterOne() {
         <div>
           <span className="galeForceKicker">01 · The idea</span>
           <h2 id="galeforce-chapter-one-title">
-            We started GaleForce because Ireland had no VEX U team.
+            We started GaelForce because Ireland had no VEX U team.
           </h2>
         </div>
         <div className="galeForceChapterCopy">
@@ -26,7 +26,7 @@ export default function GaleForceChapterOne() {
             find funding and create a team that could actually operate.
           </p>
           <p>
-            I co-founded GaleForce and serve as Head of the
+            I co-founded GaelForce and serve as Head of the
             Electrical/Electronics department. I lead the team&apos;s electrical
             work while contributing across the wider project through
             engineering, prototyping, sponsor communication, PR, school
@@ -78,7 +78,7 @@ export default function GaleForceChapterOne() {
             />
           </div>
           <p className="galeForceWindowCaption">
-            A short introduction to the competition we built GaleForce to enter.
+            A short introduction to the competition we built GaelForce to enter.
           </p>
         </div>
       </div>
@@ -92,7 +92,7 @@ export default function GaleForceChapterOne() {
           <p>
             This is the original deck we brought to the school. It explained
             what VEX U was, who we were, what support the team needed and why
-            GaleForce could bring something valuable to the university. It was
+            GaelForce could bring something valuable to the university. It was
             the first step in turning an idea between friends into an official
             team.
           </p>
@@ -107,7 +107,7 @@ export default function GaleForceChapterOne() {
           </div>
           <iframe
             src="/projects/galeforce/initial-pitch-deck.pdf#view=FitH"
-            title="GaleForce initial pitch deck"
+            title="GaelForce initial pitch deck"
             loading="lazy"
           />
         </div>
@@ -121,7 +121,7 @@ export default function GaleForceChapterOne() {
           </div>
           <div className="galeForceSponsorshipCopy">
             <p>
-              Once GaleForce was officially backed by UCD&apos;s School of
+              Once GaelForce was officially backed by UCD&apos;s School of
               Electrical and Electronic Engineering, we got straight to work
               on the next challenge: raising the money and securing the
               materials needed to build two competitive robots.
@@ -145,7 +145,7 @@ export default function GaleForceChapterOne() {
               target="_blank"
               rel="noreferrer"
             >
-              See GaleForce&apos;s current sponsors ↗
+              See GaelForce&apos;s current sponsors ↗
             </a>
           </div>
         </div>
@@ -166,7 +166,7 @@ export default function GaleForceChapterOne() {
           </div>
           <iframe
             src="/projects/galeforce/sponsorship-deck.pdf#view=FitH"
-            title="GaleForce sponsorship deck"
+            title="GaelForce sponsorship deck"
             loading="lazy"
           />
         </div>
