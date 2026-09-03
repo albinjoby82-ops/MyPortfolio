@@ -1,0 +1,267 @@
+/* Shared styling for the LinkedIn / Instagram widgets.
+   Follows the portfolio's signature move: 2px ink border, 4px hard offset
+   shadow, no blur. Tokens mirror app/globals.css. */
+
+.socialWindow,
+.socialFeed {
+  --social-ink: #16181d;
+  --social-muted: #263b47;
+  --social-shadow: 4px 4px 0 var(--social-ink);
+  --social-shadow-lifted: 6px 6px 0 var(--social-ink);
+}
+
+/* --- Single pinned post ------------------------------------------------- */
+
+.socialWindow {
+  margin: 0;
+  overflow: hidden;
+  border: 2px solid var(--social-ink);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--social-shadow);
+}
+
+.socialWindowBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 16px;
+  border-bottom: 2px solid var(--social-ink);
+  background: var(--social-ink);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.socialWindowBar a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.socialWindowFrame {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: #fff;
+}
+
+.socialWindowCaption {
+  margin: 0;
+  padding: 14px 16px;
+  border-top: 2px solid var(--social-ink);
+  color: var(--social-muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.socialWindowEmpty {
+  margin: 0;
+  padding: 20px 16px;
+  color: var(--social-muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.socialWindowEmpty code {
+  word-break: break-all;
+}
+
+/* --- Auto-pulled feed ---------------------------------------------------- */
+
+.socialFeedHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.socialKicker {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 2px solid var(--social-ink);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--social-ink);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  box-shadow: var(--social-shadow);
+}
+
+.socialFeedHead h3 {
+  margin: 22px 0 0;
+  color: var(--social-ink);
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1;
+}
+
+.socialFeedControls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.socialFeedFilters {
+  display: flex;
+  gap: 8px;
+}
+
+.socialFeedFilter {
+  padding: 8px 14px;
+  border: 2px solid var(--social-ink);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--social-ink);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.socialFeedFilter:hover {
+  background: var(--social-ink);
+  color: #fff;
+}
+
+.socialFeedFilter--on {
+  background: var(--social-ink);
+  color: #fff;
+}
+
+.socialFeedAccounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.socialFeedAccounts a {
+  color: var(--social-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.socialFeedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.socialCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 2px solid var(--social-ink);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--social-shadow);
+  color: var(--social-ink);
+  text-decoration: none;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.socialCard:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--social-shadow-lifted);
+}
+
+.socialCardBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--social-ink);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.socialCard--linkedin .socialCardBar {
+  background: #c6e4f5;
+}
+
+.socialCard--instagram .socialCardBar {
+  background: #f7d8c8;
+}
+
+.socialCardImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-bottom: 2px solid var(--social-ink);
+  object-fit: cover;
+}
+
+.socialCardText {
+  margin: 0;
+  padding: 16px 14px;
+  color: var(--social-muted);
+  font-size: 14.5px;
+  font-weight: 550;
+  line-height: 1.6;
+
+  /* Keep every card the same shape regardless of post length. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  overflow: hidden;
+}
+
+.socialCardLink {
+  margin-top: auto;
+  padding: 12px 14px 14px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.socialFeedNote {
+  margin: 18px 0 0;
+  max-width: 62ch;
+  color: var(--social-muted);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.socialFeedNote--quiet {
+  font-size: 12.5px;
+  opacity: .75;
+}
+
+@media (max-width: 760px) {
+  .socialFeedHead {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .socialCard,
+  .socialFeedFilter {
+    transition: none;
+  }
+
+  .socialCard:hover {
+    transform: none;
+  }
+}

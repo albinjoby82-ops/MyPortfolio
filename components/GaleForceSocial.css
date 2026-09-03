@@ -1,0 +1,75 @@
+/* Layout for the GaelForce social section. Window styling itself lives in
+   SocialWindows.css so it can be reused anywhere on the site. */
+
+.galeForceSocial {
+  padding-block: 86px 96px;
+  border-top: 2px solid #16181d;
+  background: #fdf6ec;
+}
+
+.galeForceSocialInner {
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+.galeForceSocialIntro {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: 40px 82px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+
+.galeForceSocialIntro h2 {
+  max-width: 14ch;
+  margin: 30px 0 0;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(36px, 4.6vw, 64px);
+  font-weight: 800;
+  letter-spacing: -.06em;
+  line-height: .92;
+}
+
+.galeForceSocialIntro p {
+  margin: 0;
+  max-width: 54ch;
+  color: #263b47;
+  font-size: 16px;
+  font-weight: 540;
+  line-height: 1.68;
+}
+
+.galeForcePinned {
+  margin-top: 72px;
+  padding-top: 56px;
+  border-top: 2px solid rgba(22, 24, 29, .18);
+}
+
+.galeForcePinned h3 {
+  margin: 22px 0 30px;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1;
+}
+
+.galeForcePinnedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .galeForceSocialIntro {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .galeForcePinnedGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

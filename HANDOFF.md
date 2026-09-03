@@ -116,11 +116,18 @@ components/
   CubiWorkflow.tsx        customer journey from browser to printed order
   GaleForceChapterOne.tsx VEX U introduction, video and pitch deck window
   GaleForceChapterOne.css GaleForce Chapter 01 layout and media windows
+  GaleForceSocial.tsx     GaelForce LinkedIn/Instagram feed + pinned posts
+  GaleForceSocial.css     layout for that section
+  SocialFeed.tsx          client — auto-pulled latest posts, with fallback
+  SocialPost.tsx          one chosen post, via the official embed iframe
+  SocialWindows.css       shared window/card styling for both
   CubiBaseViewer.tsx      portfolio adapter around copied Cubi runtime
   cubi-runtime/           source copied from the working Cubi app
 lib/projects.ts           reads/sorts/types the MDX frontmatter
+lib/social.ts             embed-URL parsing + feed normalising
 content/
   site.ts                 name, hero copy, bench rows, contact links
+  social.ts               social accounts, feed endpoint, pinned posts
   timeline.ts             timeline entries
   projects/*.mdx          one file per project
 public/albin-joby-cv.pdf  the Résumé ↓ button target
@@ -140,6 +147,16 @@ before touching these.
 Do not replace the real WebGL model with CSS mockups. This was tried and Albin
 explicitly rejected it. Reuse `components/cubi-runtime/` and the existing
 adapter instead.
+
+### Social widgets
+
+`/projects/gaelforce-ucd/` has a social section with two halves:
+`SocialFeed` pulls the latest LinkedIn/Instagram posts at runtime, and
+`SocialPost` embeds one specific post anywhere on the site. Because the site is
+a static export, the feed reads from a JSON endpoint you own
+(`NEXT_PUBLIC_SOCIAL_FEED_URL`) that keeps the API tokens on its side — never
+put a token in this repo. Configuration is `content/social.ts`; the account
+handles are still TODO. Read `docs/SOCIAL_FEED.md` before touching it.
 
 ### Design tokens
 
