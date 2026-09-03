@@ -8,6 +8,7 @@ import CubiColourLab from "@/components/CubiColourLab";
 import CubiWorkflow from "@/components/CubiWorkflow";
 import GaleForceChapterOne from "@/components/GaleForceChapterOne";
 import GaleForceSocial from "@/components/GaleForceSocial";
+import GaleForceCad from "@/components/GaleForceCad";
 import { getProject, getProjects } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -187,6 +188,8 @@ export default async function ProjectPage({
       {project.slug === "cubi" && <CubiWorkflow />}
 
       {project.slug === "gaelforce-ucd" && <GaleForceChapterOne />}
+
+      {project.slug === "gaelforce-ucd" && <GaleForceCad />}
 
       {project.slug === "gaelforce-ucd" && <GaleForceSocial />}
 

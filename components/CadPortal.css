@@ -1,0 +1,548 @@
+/* CAD portal — a document window with a tab rail, a viewer and an inspector.
+   Same hard-edged language as the rest of the site: 2px ink border, 4px offset
+   shadow, no blur. */
+
+.cadPortal {
+  --cad-ink: #16181d;
+  --cad-muted: #4a5560;
+  --cad-line: rgba(22, 24, 29, .16);
+  --cad-shadow: 4px 4px 0 var(--cad-ink);
+
+  padding-block: 86px 96px;
+  border-top: 2px solid var(--cad-ink);
+  background: #eeeae2;
+}
+
+.cadPortalInner {
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+.cadPortalIntro {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: 40px 82px;
+  align-items: end;
+  margin-bottom: 44px;
+}
+
+.cadKicker {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 2px solid var(--cad-ink);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--cad-ink);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  box-shadow: var(--cad-shadow);
+}
+
+.cadPortalIntro h2 {
+  max-width: 15ch;
+  margin: 30px 0 0;
+  color: var(--cad-ink);
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(36px, 4.6vw, 64px);
+  font-weight: 800;
+  letter-spacing: -.06em;
+  line-height: .92;
+}
+
+.cadPortalIntro p {
+  margin: 0;
+  max-width: 54ch;
+  color: #263b47;
+  font-size: 16px;
+  font-weight: 540;
+  line-height: 1.68;
+}
+
+/* --- Window -------------------------------------------------------------- */
+
+.cadWindow {
+  overflow: hidden;
+  border: 2px solid var(--cad-ink);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: var(--cad-shadow);
+}
+
+.cadWindowBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  background: var(--cad-ink);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.cadWindowBar a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.cadWindowName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cadWindowBody {
+  display: grid;
+  grid-template-columns: 216px minmax(0, 1fr) 268px;
+  min-height: 520px;
+}
+
+/* --- Tab rail ------------------------------------------------------------ */
+
+.cadTabRail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px;
+  border-right: 2px solid var(--cad-ink);
+  background: #f6f3ec;
+  overflow-y: auto;
+}
+
+.cadTab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 11px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--cad-ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.cadTab:hover {
+  background: #fff;
+  border-color: var(--cad-line);
+}
+
+.cadTab--on {
+  background: #fff;
+  border-color: var(--cad-ink);
+  box-shadow: 3px 3px 0 var(--cad-ink);
+}
+
+.cadTabIcon {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--cad-ink);
+}
+
+/* Part Studio = a solid square, Assembly = stacked, Drawing = a sheet. */
+.cadTabIcon--part-studio {
+  border-radius: 3px;
+  background: #d4451f;
+}
+
+.cadTabIcon--assembly {
+  border-radius: 3px;
+  background: #f5c63c;
+  box-shadow: 3px -3px 0 -1px #fff, 4px -4px 0 -1px var(--cad-ink);
+}
+
+.cadTabIcon--drawing {
+  border-radius: 2px;
+  background: #fff;
+}
+
+.cadTabText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cadTabText strong {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: -.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cadTabText em {
+  color: var(--cad-muted);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* --- Stage --------------------------------------------------------------- */
+
+.cadStage {
+  position: relative;
+  min-height: 520px;
+  background: #eeeae2;
+}
+
+.cadStage canvas {
+  display: block;
+  touch-action: none;
+}
+
+.cadEmbedFrame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  border: 0;
+}
+
+.cadViewerLoading,
+.cadEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 100%;
+  min-height: 520px;
+  padding: 28px;
+  color: var(--cad-muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.cadEmpty p {
+  margin: 0;
+  max-width: 42ch;
+  line-height: 1.6;
+}
+
+.cadEmptyTitle {
+  color: var(--cad-ink);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.cadEmpty code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(22, 24, 29, .07);
+  font-size: 12.5px;
+}
+
+.cadEmptyLink {
+  margin-top: 6px;
+  color: var(--cad-ink);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Inspector ----------------------------------------------------------- */
+
+.cadInspector {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 18px 16px 22px;
+  border-left: 2px solid var(--cad-ink);
+  background: #fff;
+  max-height: 720px;
+  overflow-y: auto;
+}
+
+.cadInspectorSummary {
+  margin: 0;
+  color: var(--cad-muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.cadInspectorBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 2px solid var(--cad-line);
+}
+
+.cadInspectorBlock:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.cadInspectorHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cadInspectorHead h3 {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.cadTextButton {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: #d4451f;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cadHint {
+  margin: 0;
+  color: var(--cad-muted);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.cadPartList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cadPartList li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cadPart {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  padding: 7px 9px;
+  border: 2px solid var(--cad-line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--cad-ink);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: border-color 120ms ease, opacity 120ms ease;
+}
+
+.cadPart:hover {
+  border-color: var(--cad-ink);
+}
+
+.cadPart--off {
+  opacity: .45;
+}
+
+.cadPartDot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--cad-ink);
+}
+
+.cadPart--off .cadPartDot {
+  background: transparent;
+  box-shadow: inset 0 0 0 2px var(--cad-muted);
+}
+
+.cadIsolate {
+  flex: none;
+  padding: 6px 8px;
+  border: 2px solid var(--cad-line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--cad-muted);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.cadIsolate[aria-pressed='true'] {
+  border-color: var(--cad-ink);
+  background: var(--cad-ink);
+  color: #fff;
+}
+
+.cadControlLabel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.cadControlLabel output {
+  color: #d4451f;
+  font-variant-numeric: tabular-nums;
+  text-transform: none;
+}
+
+.cadSlider {
+  width: 100%;
+  height: 24px;
+  accent-color: #d4451f;
+  cursor: pointer;
+}
+
+.cadMate {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 11px 12px;
+  border: 2px solid var(--cad-ink);
+  border-radius: 10px;
+  background: #f6f3ec;
+}
+
+.cadMateHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cadMateHead strong {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+
+.cadMateType {
+  padding: 3px 7px;
+  border: 1px solid var(--cad-ink);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.cadMateControl {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cadInspectorLink {
+  margin-top: auto;
+  color: var(--cad-ink);
+  font-size: 12.5px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Foot ---------------------------------------------------------------- */
+
+.cadWindowFoot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 18px;
+  padding: 11px 16px;
+  border-top: 2px solid var(--cad-ink);
+  background: #f6f3ec;
+  color: var(--cad-muted);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.cadFootNote {
+  font-weight: 600;
+  opacity: .85;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+  .cadWindowBody {
+    grid-template-columns: 190px minmax(0, 1fr);
+  }
+
+  .cadInspector {
+    grid-column: 1 / -1;
+    border-left: 0;
+    border-top: 2px solid var(--cad-ink);
+    max-height: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .cadPortalIntro {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .cadWindowBody {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cadTabRail {
+    flex-direction: row;
+    border-right: 0;
+    border-bottom: 2px solid var(--cad-ink);
+    overflow-x: auto;
+  }
+
+  /* Cap the width so the next tab peeks in — otherwise nothing hints that the
+     rail scrolls. */
+  .cadTab {
+    flex: 0 0 auto;
+    max-width: 62%;
+  }
+
+  .cadStage,
+  .cadViewerLoading,
+  .cadEmpty,
+  .cadEmbedFrame {
+    min-height: 380px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cadTab {
+    transition: none;
+  }
+}

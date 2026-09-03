@@ -118,6 +118,10 @@ components/
   GaleForceChapterOne.css GaleForce Chapter 01 layout and media windows
   GaleForceSocial.tsx     GaelForce LinkedIn/Instagram feed + pinned posts
   GaleForceSocial.css     layout for that section
+  CadPortal.tsx           client — CAD document window: tabs, parts, mates
+  CadModelViewer.tsx      client — Three.js viewer for a glTF/GLB export
+  CadPortal.css           window, tab rail and inspector styling
+  GaleForceCad.tsx        the CAD section on the GaelForce page
   SocialFeed.tsx          client — auto-pulled latest posts, with fallback
   SocialPost.tsx          one chosen post, via the official embed iframe
   SocialWindows.css       shared window/card styling for both
@@ -125,9 +129,12 @@ components/
   cubi-runtime/           source copied from the working Cubi app
 lib/projects.ts           reads/sorts/types the MDX frontmatter
 lib/social.ts             embed-URL parsing + feed normalising
+lib/cad.ts                CAD types, Onshape/Fusion URL helpers
 content/
   site.ts                 name, hero copy, bench rows, contact links
   social.ts               social accounts, feed endpoint, pinned posts
+  cad.ts                  CAD documents, tabs and mates
+scripts/onshape-sync.mjs  build-time Onshape export (needs API keys)
   timeline.ts             timeline entries
   projects/*.mdx          one file per project
 public/albin-joby-cv.pdf  the Résumé ↓ button target
@@ -147,6 +154,23 @@ before touching these.
 Do not replace the real WebGL model with CSS mockups. This was tried and Albin
 explicitly rejected it. Reuse `components/cubi-runtime/` and the existing
 adapter instead.
+
+### CAD portal
+
+`/projects/gaelforce-ucd/` has a CAD window with a tab rail for a document's
+Part Studios and Assemblies, an interactive viewer, and the assembly's mates as
+live sliders.
+
+**Onshape cannot be iframed** — it sends frame-blocking headers, and this is not
+a setting. So Onshape tabs render a glTF/GLB export of the tab (committed under
+`public/models/`) in the same Three.js stack as the Cubi viewer, and link out to
+the live document. Fusion is the opposite: its public share links embed fine, so
+those tabs use Autodesk's own viewer.
+
+`scripts/onshape-sync.mjs` does the export and transcribes the mates, given API
+keys in the environment. The portal currently runs on a clearly-labelled sample
+model until `galeForceCadTabs` in `content/cad.ts` has real entries — delete the
+sample then. Read `docs/CAD_PORTAL.md` before touching any of this.
 
 ### Social widgets
 
