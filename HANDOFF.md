@@ -1,7 +1,7 @@
 # Agent handoff
 
 Context for an agent picking up this project cold. Read this before touching
-anything. Last updated 2 Sep 2026.
+anything. Last updated 4 Sep 2026.
 
 ---
 
@@ -76,6 +76,14 @@ also age badly, while "set up this event in 2026" stays true permanently.
 format and technical rules, secured sponsorship, set up operations), with no
 claim of ongoing involvement and no mention of his departure. Keep it that way.
 
+Every micromouse fact on the page — the date, venue, six-hour format, the
+eight-part kit, the briefing, the practice mazes, the judging, the sponsorship
+tiers, Anthropic and the UCD School of EEE as supporters — is transcribed from
+Albin's own event material in the `AJ_HackClub_267` repo (`micromouse.html`,
+`content/docs/Micromouse2026/`, `micromouse-reveal/`). Nothing is inferred. If a
+detail is not in that source, it does not go on the page. Re-read the source
+before adding to that section.
+
 ### 2. Never invent project facts
 
 Several projects are still scaffolds with `TODO` markers where a real build
@@ -118,6 +126,9 @@ components/
   GaleForceChapterOne.css GaleForce Chapter 01 layout and media windows
   CubiBaseViewer.tsx      portfolio adapter around copied Cubi runtime
   cubi-runtime/           source copied from the working Cubi app
+  MicromouseReveal.tsx    Micromouse hero — reveal film, uncropped, + event line
+  MicromouseOpen.tsx      Micromouse sections: kit, the day, campaign, sponsors
+  MicromouseOpen.css      coral ground, hard-shadow cards, dark campaign band
 lib/projects.ts           reads/sorts/types the MDX frontmatter
 content/
   site.ts                 name, hero copy, bench rows, contact links
@@ -127,6 +138,7 @@ public/albin-joby-cv.pdf  the Résumé ↓ button target
 public/models/cubi-base/  original Cubi Base GLB
 public/projects/cubi/     Cubi photography
 public/projects/galeforce/ GaleForce pitch deck PDF
+public/projects/micromouse/ reveal film, Anthropic mark, campaign/ poster series
 ```
 
 ### Cubi interactive case study
@@ -244,13 +256,14 @@ Verify with `read_page`, `get_page_text` or a JS query rather than chasing it.
 keyboard focus rings, reduced motion, clean `npm audit`, clean static export
 (11 pages).
 
-**Written up:** Cubi only. It now has a full multi-section build write-up, real
-product photography, the live-site link and three interactive demonstrations
-using code from Cubi itself.
+**Written up:** Cubi and Dublin Micromouse Open. Cubi has a full multi-section
+build write-up, real product photography, the live-site link and three
+interactive demonstrations using code from Cubi itself. Micromouse has a
+bespoke `MicromouseOpen` section, a long-form body, real specs, two note cards
+and the full campaign poster series.
 
 **Still scaffolds** (real CV facts in the frontmatter, `TODO` in the notes):
-GaelForce UCD, Dublin Micromouse Open, PCB & embedded builds, MakerLabs,
-Robo Expo.
+GaelForce UCD, PCB & embedded builds, MakerLabs, Robo Expo.
 
 **Photos:** Cubi now has a real hero photo. The remaining project media slots
 still use deliberate tinted placeholders. Real assets go in
@@ -274,6 +287,12 @@ Ask; don't decide these unilaterally.
 
 1. **GaelForce write-up** — it leads the page and is the weakest-to-strongest
    gap. Needs: specs, two real notes, a lede.
+1b. **Micromouse, from Albin:** two things are deliberately missing because only
+   he can supply them. (a) A personal note card — the current two are grounded
+   in documented format decisions, not in his own reflection on running the
+   thing. (b) `links` is empty: the event page has no confirmed public URL yet.
+   Add one once the Build Hub is deployed. A poster frame for the reveal film
+   would also stop the hero opening on black.
 2. Continue the Cubi case study only when Albin requests the next section. See
    `docs/CUBI_HANDOFF.md` for the current state and likely directions.
 3. Remaining four write-ups.

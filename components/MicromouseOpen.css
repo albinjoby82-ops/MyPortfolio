@@ -1,0 +1,487 @@
+/* Dublin Micromouse Open — bespoke sections for the project detail page.
+   Ground is the project tint; cards keep the handoff's hard-offset shadow.
+   The campaign band goes dark on purpose: it reproduces the poster series,
+   which is drawn on near-black with the ElecSoc orange and mint. */
+
+.mmSection {
+  padding-block: 86px 96px;
+  border-top: 2px solid #16181d;
+  background: #ee8570;
+}
+
+.mmBlock {
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+.mmBlock + .mmBlock {
+  margin-top: 88px;
+}
+
+.mmKicker {
+  display: inline-block;
+  border: 2px solid #16181d;
+  border-radius: 7px;
+  padding: 8px 12px;
+  background: #fff;
+  color: #16181d;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 #16181d;
+}
+
+.mmSection h2,
+.mmSection h3,
+.mmSection h4 {
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-weight: 800;
+  letter-spacing: -.055em;
+}
+
+.mmSection h2 {
+  max-width: 15ch;
+  margin: 30px 0 0;
+  font-size: clamp(38px, 5vw, 72px);
+  line-height: .9;
+}
+
+.mmSection h3 {
+  max-width: 16ch;
+  margin: 24px 0 18px;
+  font-size: clamp(30px, 3.6vw, 50px);
+  line-height: .94;
+}
+
+.mmCopy {
+  color: #3a1d16;
+  font-size: 16px;
+  font-weight: 540;
+  line-height: 1.68;
+}
+
+.mmCopy p {
+  margin: 0 0 18px;
+}
+
+.mmCopy p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- Intro ---- */
+
+.mmIntro {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: 52px 82px;
+  align-items: start;
+}
+
+/* Heading left, supporting copy right — keeps the wide blocks from leaving
+   half the row empty. */
+.mmHeadRow {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: 28px 82px;
+  align-items: end;
+}
+
+.mmHeadRow h3 {
+  margin-bottom: 0;
+}
+
+/* ---- Fact strip: date / venue / host ---- */
+
+.mmFacts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 34px;
+  overflow: hidden;
+  border: 2px solid #16181d;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.mmFacts div {
+  padding: 20px 22px;
+  border-left: 2px solid #16181d;
+}
+
+.mmFacts div:first-child {
+  border-left: 0;
+}
+
+.mmFacts dt {
+  color: #87837a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.mmFacts dd {
+  margin: 6px 0 0;
+  color: #16181d;
+  font-size: 17px;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+/* ---- Partner lockup ---- */
+
+.mmPartners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 22px;
+  border: 2px solid #16181d;
+  border-radius: 14px;
+  padding: 16px 20px;
+  background: #0c161a;
+}
+
+.mmPartnerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+}
+
+.mmPartnerLabel {
+  color: #7fd4bc;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.mmPartnerLogo {
+  display: block;
+  width: auto;
+  height: 17px;
+}
+
+.mmPartnerName {
+  color: #edf2f0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mmPartnerRule {
+  width: 2px;
+  height: 20px;
+  background: rgba(127, 212, 188, .35);
+}
+
+/* ---- The kit ---- */
+
+.mmKitBlock {
+  display: grid;
+  grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr);
+  gap: 52px;
+  align-items: start;
+}
+
+.mmKitGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.mmKitPart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid #16181d;
+  border-radius: 14px;
+  padding: 18px 16px 20px;
+  background: #fff;
+  box-shadow: 4px 4px 0 #16181d;
+}
+
+.mmKitPart span {
+  color: #d4451f;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mmKitPart strong {
+  color: #16181d;
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.3;
+}
+
+.mmKitPart em {
+  color: #6a625c;
+  font-size: 12.5px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+/* ---- The day ---- */
+
+.mmDayGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.mmDayStep {
+  border: 2px solid #16181d;
+  border-radius: 16px;
+  padding: 26px 24px 28px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.mmDayStep b {
+  display: block;
+  color: #d4451f;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.mmDayStep h4 {
+  margin: 12px 0 10px;
+  font-size: 26px;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+}
+
+.mmDayStep p {
+  margin: 0;
+  color: #4a473e;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.mmMazeNote {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px 52px;
+  margin-top: 18px;
+  border: 2px solid #16181d;
+  border-radius: 16px;
+  padding: 30px 28px;
+  background: #16181d;
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.mmMazeNote h4 {
+  margin: 0;
+  color: #fbf8f1;
+  font-size: 28px;
+  letter-spacing: -.035em;
+  line-height: 1.05;
+}
+
+.mmMazeNote p {
+  margin: 0;
+  color: #cfd8d4;
+  font-size: 15.5px;
+  line-height: 1.65;
+}
+
+/* ---- Campaign poster wall ---- */
+
+.mmCampaign {
+  border: 2px solid #16181d;
+  border-radius: 20px;
+  padding: 42px 34px 38px;
+  background:
+    linear-gradient(115deg, rgba(244, 81, 30, .09) 0 8%, transparent 8% 20%,
+                            rgba(244, 81, 30, .06) 20% 27%, transparent 27% 44%,
+                            rgba(244, 81, 30, .07) 44% 51%, transparent 51%),
+    #080f12;
+  box-shadow: 8px 8px 0 #16181d;
+}
+
+.mmCampaign .mmKicker {
+  border-color: #7fd4bc;
+  background: #0c161a;
+  color: #7fd4bc;
+  box-shadow: 4px 4px 0 rgba(127, 212, 188, .25);
+}
+
+.mmCampaign h3 {
+  max-width: 20ch;
+  color: #edf2f0;
+}
+
+.mmCampaignLede {
+  max-width: 62ch;
+  margin: 0 0 32px;
+  color: rgba(237, 242, 240, .72);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.mmPosterGrid {
+  columns: 4;
+  column-gap: 18px;
+}
+
+.mmPoster {
+  margin: 0 0 18px;
+  break-inside: avoid;
+  overflow: hidden;
+  border: 1px solid rgba(127, 212, 188, .28);
+  border-radius: 6px;
+  background: #0c161a;
+}
+
+.mmPoster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mmPoster figcaption {
+  padding: 12px 14px 14px;
+  color: rgba(237, 242, 240, .62);
+  font-size: 11.5px;
+  font-weight: 650;
+  letter-spacing: .04em;
+  line-height: 1.4;
+}
+
+/* ---- Backing the build ---- */
+
+.mmTierGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.mmTier {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #16181d;
+  border-radius: 16px;
+  padding: 26px 24px 28px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.mmTier.mmTierLead {
+  background: #f5c63c;
+}
+
+.mmTierNo {
+  color: #d4451f;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.mmTier h4 {
+  margin: 10px 0 4px;
+  font-size: 24px;
+  letter-spacing: -.03em;
+  line-height: 1.08;
+}
+
+.mmTierPrice {
+  margin: 0 0 14px;
+  color: #16181d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.mmTier p {
+  margin: 0;
+  color: #4a473e;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.mmTier .mmTierStatus {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 2px solid rgba(22, 24, 29, .18);
+  color: #16181d;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+/* ---- Guides written for the teams ---- */
+
+.mmGuideGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 34px;
+}
+
+.mmGuide {
+  border: 2px solid #16181d;
+  border-radius: 16px;
+  padding: 26px 24px 28px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.mmGuide b {
+  color: #87837a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.mmGuide h4 {
+  margin: 10px 0 10px;
+  font-size: 24px;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+}
+
+.mmGuide p {
+  margin: 0;
+  color: #4a473e;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 1040px) {
+  .mmPosterGrid { columns: 3; }
+  .mmKitGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  .mmIntro,
+  .mmHeadRow,
+  .mmKitBlock,
+  .mmMazeNote { grid-template-columns: minmax(0, 1fr); }
+  .mmDayGrid,
+  .mmTierGrid { grid-template-columns: minmax(0, 1fr); }
+  .mmFacts { grid-template-columns: minmax(0, 1fr); }
+  .mmFacts div { border-left: 0; border-top: 2px solid #16181d; }
+  .mmFacts div:first-child { border-top: 0; }
+}
+
+@media (max-width: 640px) {
+  .mmSection { padding-block: 60px 68px; }
+  .mmBlock + .mmBlock { margin-top: 60px; }
+  .mmPosterGrid { columns: 2; }
+  .mmKitGrid,
+  .mmGuideGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mmCampaign { padding: 30px 20px 26px; }
+}

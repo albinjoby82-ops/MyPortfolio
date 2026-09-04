@@ -1,0 +1,58 @@
+/* Hero frame for the Micromouse reveal animation. Near-black ground and mint
+   rules come from the campaign poster series; the border and hard offset
+   shadow are the portfolio's own. */
+
+.mmReveal {
+  overflow: hidden;
+  border: 2px solid #16181d;
+  border-radius: 16px;
+  background: #080f12;
+  box-shadow: var(--shadow-hard);
+}
+
+.mmRevealBar,
+.mmRevealMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 18px;
+  padding: 13px 18px;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.mmRevealBar {
+  border-bottom: 2px solid rgba(127, 212, 188, .22);
+  color: #7fd4bc;
+}
+
+.mmRevealBar span + span {
+  color: #f4511e;
+}
+
+.mmRevealStage video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #050b0d;
+}
+
+.mmRevealMeta {
+  justify-content: flex-start;
+  border-top: 2px solid rgba(127, 212, 188, .22);
+  color: rgba(237, 242, 240, .74);
+}
+
+.mmRevealMeta span + span::before {
+  content: "·";
+  margin-right: 18px;
+  color: #f4511e;
+}
+
+@media (max-width: 640px) {
+  .mmRevealMeta span + span::before { content: none; }
+}
