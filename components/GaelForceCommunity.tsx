@@ -78,6 +78,52 @@ export default function GaelForceCommunity() {
             caption="UCD's School of Electrical and Electronic Engineering publicly announced its support for GaelForce, giving the team visible institutional backing."
           />
         </div>
+
+        <div className="gaelForceSummerBlock">
+          <div className="gaelForceSummerHeading">
+            <span className="galeForceKicker">Keeping momentum over summer</span>
+            <h3>The semester ended. The work didn&apos;t.</h3>
+
+            <figure className="gaelForceTmeWindow">
+              <div className="gaelForceTmeWindowBar">
+                <span>TME · POLAND</span>
+                <span>SUMMER 2026</span>
+              </div>
+              <img
+                src="/projects/galeforce/tme-visit.jpeg"
+                alt="GaelForce co-founder Jan visiting TME in Poland"
+              />
+              <figcaption>Jan visiting TME in Poland.</figcaption>
+            </figure>
+          </div>
+
+          <div className="gaelForceSummerCopy">
+            <p>
+              We continued meeting throughout the summer to review our
+              progress, coordinate the different departments and make sure the
+              project remained on track while funding and procurement were
+              being finalised.
+            </p>
+            <p>
+              During this period, we secured three additional financial
+              sponsors. Their support brought us closer to the funding required
+              for official VEX components and helped turn GaelForce into a
+              properly resourced engineering team.
+            </p>
+            <p>
+              Our relationships with sponsors also began extending beyond
+              emails and online meetings. One of our co-founders had the
+              opportunity to tour TME&apos;s warehouse in Poland, giving the team a
+              closer look at the scale, organisation and logistics behind a
+              major international electronics supplier.
+            </p>
+            <p>
+              By September, months of fundraising, planning and coordination
+              had given us the resources and structure needed to move from
+              early mock-ups towards building with official components.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -73,14 +73,102 @@
   gap: 22px;
 }
 
+.gaelForceSummerBlock {
+  display: grid;
+  grid-template-columns: minmax(270px, .8fr) minmax(0, 1.2fr);
+  gap: 52px 82px;
+  align-items: start;
+  margin-top: 86px;
+  padding-top: 64px;
+  border-top: 2px solid rgba(22, 24, 29, .32);
+}
+
+.gaelForceSummerHeading h3 {
+  max-width: 10ch;
+  margin: 28px 0 0;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(36px, 4.2vw, 58px);
+  font-weight: 800;
+  letter-spacing: -.06em;
+  line-height: .93;
+}
+
+.gaelForceTmeWindow {
+  max-width: 440px;
+  margin: 34px 0 0;
+  overflow: hidden;
+  border: 2px solid #16181d;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.gaelForceTmeWindowBar {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 14px;
+  border-bottom: 2px solid #16181d;
+  background: #16181d;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .12em;
+}
+
+.gaelForceTmeWindow img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gaelForceTmeWindow figcaption {
+  margin: 0;
+  padding: 13px 15px;
+  border-top: 2px solid #16181d;
+  color: #263b47;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.gaelForceSummerCopy {
+  color: #263b47;
+  font-size: 16px;
+  font-weight: 540;
+  line-height: 1.68;
+}
+
+.gaelForceSummerCopy p {
+  margin: 0 0 18px;
+}
+
 @media (max-width: 900px) {
   .gaelForceCommunityIntro,
-  .gaelForceLinkedInGrid {
+  .gaelForceLinkedInGrid,
+  .gaelForceSummerBlock {
     grid-template-columns: 1fr;
   }
 
   .gaelForceCommunityIntro {
     gap: 32px;
+  }
+
+  .gaelForceSummerBlock {
+    gap: 32px;
+  }
+
+  .gaelForceSummerHeading h3 {
+    max-width: 14ch;
+  }
+
+  .gaelForceTmeWindow {
+    margin-inline: auto;
   }
 
   .gaelForceCommunityIntro h2 {
@@ -110,6 +198,15 @@
 
   .gaelForceLinkedInGrid {
     gap: 22px;
+  }
+
+  .gaelForceSummerBlock {
+    margin-top: 64px;
+    padding-top: 48px;
+  }
+
+  .gaelForceSummerHeading h3 {
+    font-size: 40px;
   }
 
   .socialWindowBar {
