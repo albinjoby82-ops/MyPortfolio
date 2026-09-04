@@ -1,0 +1,62 @@
+.socialWindow {
+  --social-ink: #16181d;
+  --social-muted: #263b47;
+  --social-shadow: 4px 4px 0 var(--social-ink);
+  margin: 0;
+  overflow: hidden;
+  border: 2px solid var(--social-ink);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--social-shadow);
+}
+
+.socialWindowBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 16px;
+  border-bottom: 2px solid var(--social-ink);
+  background: var(--social-ink);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.socialWindowBar a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.socialWindowFrame {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: #fff;
+}
+
+.socialWindowCaption {
+  margin: 0;
+  padding: 14px 16px;
+  border-top: 2px solid var(--social-ink);
+  color: var(--social-muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.socialWindowEmpty {
+  margin: 0;
+  padding: 20px 16px;
+  color: var(--social-muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.socialWindowEmpty code {
+  word-break: break-all;
+}
