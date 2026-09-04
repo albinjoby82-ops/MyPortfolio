@@ -7,13 +7,12 @@ const SPONSORSHIP_PHOTOS: SponsorPhoto[] = [
   {
     src: '/projects/galeforce/sponsor-deliveries/esun.jpeg',
     alt: 'GaelForce team member receiving eSUN filament and an eBOX Pro filament dryer',
-    caption:
-      'Receiving filament and an eBOX Pro filament dryer supplied by eSUN.',
+    caption: 'Thanks, eSUN!',
   },
   {
     src: '/projects/galeforce/sponsor-deliveries/sunlu.jpeg',
     alt: 'GaelForce team member receiving a SUNLU FilaDryer E2',
-    caption: 'Receiving a FilaDryer E2 supplied by SUNLU.',
+    caption: 'Thanks, SUNLU!',
   },
 ];
 
@@ -172,7 +171,17 @@ export default function GaleForceChapterOne() {
           <strong>eSUN</strong>
         </div>
 
-        <SponsorPhotoWindow photos={SPONSORSHIP_PHOTOS} />
+        <div className="galeForceSponsorDeliveryBlock">
+          <div className="galeForceSponsorDeliveryCopy">
+            <span className="galeForceKicker">Into the workshop</span>
+            <h4>The support became something we could build with.</h4>
+            <p>
+              Every delivery marked the point where a sponsorship conversation
+              became real equipment and materials in the team&apos;s hands.
+            </p>
+          </div>
+          <SponsorPhotoWindow photos={SPONSORSHIP_PHOTOS} />
+        </div>
 
         <div className="galeForcePdfWindow">
           <div className="galeForceWindowBar">
