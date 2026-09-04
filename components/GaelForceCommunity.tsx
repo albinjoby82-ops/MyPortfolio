@@ -1,4 +1,5 @@
 import SocialPost from './SocialPost';
+import SummerMeetingWindow from './SummerMeetingWindow';
 import './GaelForceCommunity.css';
 
 const APPLICATIONS_POST =
@@ -97,31 +98,35 @@ export default function GaelForceCommunity() {
             </figure>
           </div>
 
-          <div className="gaelForceSummerCopy">
-            <p>
-              We continued meeting throughout the summer to review our
-              progress, coordinate the different departments and make sure the
-              project remained on track while funding and procurement were
-              being finalised.
-            </p>
-            <p>
-              During this period, we secured three additional financial
-              sponsors. Their support brought us closer to the funding required
-              for official VEX components and helped turn GaelForce into a
-              properly resourced engineering team.
-            </p>
-            <p>
-              Our relationships with sponsors also began extending beyond
-              emails and online meetings. One of our co-founders had the
-              opportunity to tour TME&apos;s warehouse in Poland, giving the team a
-              closer look at the scale, organisation and logistics behind a
-              major international electronics supplier.
-            </p>
-            <p>
-              By September, months of fundraising, planning and coordination
-              had given us the resources and structure needed to move from
-              early mock-ups towards building with official components.
-            </p>
+          <div className="gaelForceSummerDetails">
+            <div className="gaelForceSummerCopy">
+              <p>
+                We continued meeting throughout the summer to review our
+                progress, coordinate the different departments and make sure the
+                project remained on track while funding and procurement were
+                being finalised.
+              </p>
+              <p>
+                During this period, we secured three additional financial
+                sponsors. Their support brought us closer to the funding required
+                for official VEX components and helped turn GaelForce into a
+                properly resourced engineering team.
+              </p>
+              <p>
+                Our relationships with sponsors also began extending beyond
+                emails and online meetings. One of our co-founders had the
+                opportunity to tour TME&apos;s warehouse in Poland, giving the team a
+                closer look at the scale, organisation and logistics behind a
+                major international electronics supplier.
+              </p>
+              <p>
+                By September, months of fundraising, planning and coordination
+                had given us the resources and structure needed to move from
+                early mock-ups towards building with official components.
+              </p>
+            </div>
+
+            <SummerMeetingWindow />
           </div>
         </div>
       </div>
