@@ -4,8 +4,8 @@ import './GaelForceCommunity.css';
 const APPLICATIONS_POST =
   'https://www.linkedin.com/posts/gaelforceucd_great-news-applications-are-now-open-for-activity-7448115698758946816-NNCI';
 
-const ROBOEXPO_POST =
-  'https://www.linkedin.com/posts/ucdelecsoc_elecsoc-roboexpo26-wrap-activity-7454505324557799424-72YB';
+const HARD_LAUNCH_POST =
+  'https://www.linkedin.com/posts/gaelforceucd_what-a-great-official-hard-launch-for-gaelforce-activity-7453171490084081664-5dJD';
 
 const SCHOOL_SUPPORT_POST =
   'https://www.linkedin.com/posts/ucd-electrical-and-electronic-engineering_engineering-vex-robotics-activity-7478378174746279936-1X3f';
@@ -62,16 +62,19 @@ export default function GaelForceCommunity() {
           <SocialPost
             network="linkedin"
             post={APPLICATIONS_POST}
+            height={760}
             caption="Opening applications was the step from a founding group to a multidisciplinary team built for a full VEX U season."
           />
           <SocialPost
             network="linkedin"
-            post={ROBOEXPO_POST}
-            caption="RoboExpo gave GaelForce an early public platform alongside student teams, industry contributors and hands-on engineering projects."
+            post={HARD_LAUNCH_POST}
+            height={760}
+            caption="Our official hard launch put GaelForce, its early prototype and its ambitions in front of UCD's wider engineering community."
           />
           <SocialPost
             network="linkedin"
             post={SCHOOL_SUPPORT_POST}
+            height={760}
             caption="UCD's School of Electrical and Electronic Engineering publicly announced its support for GaelForce, giving the team visible institutional backing."
           />
         </div>
