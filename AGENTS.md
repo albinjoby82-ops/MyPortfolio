@@ -1,7 +1,17 @@
 # Agent instructions
 
 Read `HANDOFF.md` before changing this project. For Cubi work, also read
-`docs/CUBI_HANDOFF.md`.
+`docs/CUBI_HANDOFF.md`. For the social widgets read `docs/SOCIAL_FEED.md`; for
+the CAD portal read `docs/CAD_PORTAL.md`.
+
+## Reusing this code in another repository
+
+The social widgets and the CAD portal are written to be copied into other
+projects. If that is what you are here for, read **`docs/PORTABLE_MODULES.md`**
+— it is the porting contract: file manifests, dependencies, host requirements,
+data contracts, the platform constraints that cannot be worked around, and how
+to verify the result in a browser. Do not copy `content/*.ts` values or the
+`GaleForce*` wrappers into another project; they are this site's content.
 
 ## Working rules
 

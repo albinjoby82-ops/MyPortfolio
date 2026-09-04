@@ -155,6 +155,15 @@ export function embedUrl(network: SocialNetwork, post: string): string | undefin
   return network === 'linkedin' ? linkedInEmbedUrl(post) : instagramEmbedUrl(post);
 }
 
+/** An account the widgets link out to. */
+export type SocialAccount = {
+  network: SocialNetwork;
+  /** Display handle, e.g. "@gaelforceucd". */
+  handle: string;
+  /** Public profile URL. Empty hides the link. */
+  url: string;
+};
+
 export const NETWORK_LABEL: Record<SocialNetwork, string> = {
   linkedin: 'LinkedIn',
   instagram: 'Instagram',

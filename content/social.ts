@@ -6,15 +6,9 @@
 // TODO (Albin): fill in the two account URLs and the feed endpoint. Until then
 // the widgets render their empty state rather than guessed handles.
 
-import type { SocialFeedItem, SocialNetwork } from '@/lib/social';
+import type { SocialAccount, SocialFeedItem, SocialNetwork } from '@/lib/social';
 
-export type SocialAccount = {
-  network: SocialNetwork;
-  /** Display handle, e.g. "@gaelforceucd". */
-  handle: string;
-  /** Public profile URL. */
-  url: string;
-};
+export type { SocialAccount };
 
 /** The accounts the widgets link out to. Leave `url` empty to hide the link. */
 export const galeForceAccounts: SocialAccount[] = [

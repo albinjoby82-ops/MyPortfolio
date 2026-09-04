@@ -6,10 +6,10 @@ import {
   formatPostedAt,
   normaliseFeed,
   sortByNewest,
+  type SocialAccount,
   type SocialFeedItem,
   type SocialNetwork,
 } from '@/lib/social';
-import type { SocialAccount } from '@/content/social';
 import './SocialWindows.css';
 
 type Props = {

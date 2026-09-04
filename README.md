@@ -51,7 +51,24 @@ photo still needs to be supplied.
 
 - `content/site.ts` — name, hero copy, "On the bench" panel, contact links
 - `content/timeline.ts` — the timeline entries
+- `content/social.ts` — LinkedIn/Instagram accounts, feed endpoint, pinned posts
+- `content/cad.ts` — CAD documents, their tabs and mates
 - `public/albin-joby-cv.pdf` — the file behind the Résumé button
+
+## Reusable modules
+
+Two features here are written to be copied into other projects:
+
+- **Social widgets** — a live LinkedIn/Instagram feed plus single-post embeds.
+  Setup: `docs/SOCIAL_FEED.md`.
+- **CAD portal** — an Onshape/Fusion document as a clickable window with a tab
+  rail, a Three.js viewer and the assembly's mates as live controls. Setup:
+  `docs/CAD_PORTAL.md`.
+
+To lift either into another repository, follow `docs/PORTABLE_MODULES.md` — file
+manifests, dependencies, data contracts and the platform limits that matter
+(most importantly: Onshape cannot be embedded in an iframe, and neither social
+API can be called from a browser).
 
 ## Design
 
