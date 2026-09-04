@@ -1,0 +1,147 @@
+.sponsorPhotoWindow {
+  max-width: 470px;
+  margin: 0 0 36px auto;
+  overflow: hidden;
+  border: 2px solid #16181d;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.sponsorPhotoWindowBar {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 15px;
+  border-bottom: 2px solid #16181d;
+  background: #16181d;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .11em;
+}
+
+.sponsorPhotoViewport {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #e9f3f8;
+}
+
+.sponsorPhotoViewport img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #e9f3f8;
+}
+
+.sponsorPhotoEmpty {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  color: #263b47;
+  text-align: center;
+}
+
+.sponsorPhotoEmpty > span {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  place-items: center;
+  border: 2px solid #16181d;
+  border-radius: 50%;
+  background: #fff;
+  color: #16181d;
+  font-size: 27px;
+  font-weight: 700;
+  box-shadow: 3px 3px 0 #16181d;
+}
+
+.sponsorPhotoEmpty strong {
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 20px;
+  letter-spacing: -.025em;
+}
+
+.sponsorPhotoEmpty p {
+  margin: 7px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sponsorPhotoControls {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  gap: 8px;
+}
+
+.sponsorPhotoControls button {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 2px solid #16181d;
+  border-radius: 50%;
+  background: #fff;
+  color: #16181d;
+  font-size: 19px;
+  font-weight: 800;
+  box-shadow: 3px 3px 0 #16181d;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.sponsorPhotoControls button:hover,
+.sponsorPhotoControls button:focus-visible {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #16181d;
+}
+
+.sponsorPhotoWindow figcaption {
+  margin: 0;
+  padding: 13px 15px;
+  border-top: 2px solid #16181d;
+  color: #4b626e;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.sponsorPhotoDots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 14px 13px;
+  border-top: 2px solid #16181d;
+}
+
+.sponsorPhotoDots button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1.5px solid #16181d;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.sponsorPhotoDots button.isActive {
+  background: #16181d;
+}
+
+@media (max-width: 900px) {
+  .sponsorPhotoWindow {
+    max-width: none;
+    margin-left: 0;
+  }
+}

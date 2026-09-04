@@ -1,6 +1,21 @@
 import './GaleForceChapterOne.css';
+import SponsorPhotoWindow, { type SponsorPhoto } from './SponsorPhotoWindow';
 
 const VIDEO_ID = '68NxYIAzbkY';
+
+const SPONSORSHIP_PHOTOS: SponsorPhoto[] = [
+  {
+    src: '/projects/galeforce/sponsor-deliveries/esun.jpeg',
+    alt: 'GaelForce team member receiving eSUN filament and an eBOX Pro filament dryer',
+    caption:
+      'Receiving filament and an eBOX Pro filament dryer supplied by eSUN.',
+  },
+  {
+    src: '/projects/galeforce/sponsor-deliveries/sunlu.jpeg',
+    alt: 'GaelForce team member receiving a SUNLU FilaDryer E2',
+    caption: 'Receiving a FilaDryer E2 supplied by SUNLU.',
+  },
+];
 
 export default function GaleForceChapterOne() {
   return (
@@ -156,6 +171,8 @@ export default function GaleForceChapterOne() {
           <strong>3DJake</strong>
           <strong>eSUN</strong>
         </div>
+
+        <SponsorPhotoWindow photos={SPONSORSHIP_PHOTOS} />
 
         <div className="galeForcePdfWindow">
           <div className="galeForceWindowBar">
