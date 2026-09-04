@@ -37,6 +37,7 @@
   width: 100%;
   border: 0;
   background: #fff;
+  overflow: auto;
 }
 
 .socialWindowCaption {

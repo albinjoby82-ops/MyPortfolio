@@ -49,7 +49,7 @@ export default function SocialPost({ network, post, caption, height }: Props) {
         frameBorder="0"
         allow="encrypted-media; picture-in-picture; web-share"
         allowFullScreen
-        scrolling="no"
+        scrolling="yes"
       />
       {caption && (
         <figcaption className="socialWindowCaption">{caption}</figcaption>
