@@ -8,6 +8,7 @@ import CubiColourLab from "@/components/CubiColourLab";
 import CubiWorkflow from "@/components/CubiWorkflow";
 import GaleForceChapterOne from "@/components/GaleForceChapterOne";
 import GaelForceCommunity from "@/components/GaelForceCommunity";
+import GaelForcePrototyping from "@/components/GaelForcePrototyping";
 import { getProject, getProjects } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -189,6 +190,8 @@ export default async function ProjectPage({
       {project.slug === "gaelforce-ucd" && <GaleForceChapterOne />}
 
       {project.slug === "gaelforce-ucd" && <GaelForceCommunity />}
+
+      {project.slug === "gaelforce-ucd" && <GaelForcePrototyping />}
 
       {project.body && (
         <section className="pb-14 gutter">
