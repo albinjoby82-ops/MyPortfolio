@@ -10,7 +10,7 @@ import GaleForceChapterOne from "@/components/GaleForceChapterOne";
 import GaelForceCommunity from "@/components/GaelForceCommunity";
 import GaelForcePrototyping from "@/components/GaelForcePrototyping";
 import MicromouseReveal from "@/components/MicromouseReveal";
-import MicromouseOpen from "@/components/MicromouseOpen";
+import MicromousePortal from "@/components/MicromousePortal";
 import { getProject, getProjects } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -197,7 +197,7 @@ export default async function ProjectPage({
 
       {project.slug === "gaelforce-ucd" && <GaelForcePrototyping />}
 
-      {project.slug === "dublin-micromouse-open" && <MicromouseOpen />}
+      {project.slug === "dublin-micromouse-open" && <MicromousePortal />}
 
       {project.body && (
         <section className="pb-14 gutter">

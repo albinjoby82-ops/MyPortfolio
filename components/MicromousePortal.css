@@ -1,0 +1,14 @@
+.mmPortalSection { padding-block: 70px; border-top: 2px solid var(--color-ink); background: #ee8570; }
+.mmPortalInner { max-width: 1240px; margin-inline: auto; }
+.mmPortalIntro { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 64px; align-items: end; margin-block: 24px 36px; }
+.mmPortalIntro h2 { max-width: 17ch; font-size: clamp(34px, 4.5vw, 60px); font-weight: 800; line-height: .96; letter-spacing: -.045em; }
+.mmPortalIntro p { margin: 0; max-width: 48ch; color: #3a1d16; font-size: 16px; line-height: 1.65; }
+.mmPortalWindow { overflow: hidden; border: 2px solid var(--color-ink); border-radius: 16px; background: #fff; box-shadow: var(--shadow-hard); }
+.mmPortalBar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 14px 18px; background: var(--color-ink); color: var(--color-paper); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.mmPortalBar a { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
+.mmPortalWindow iframe { display: block; width: 100%; height: 780px; border: 0; }
+@media (max-width: 760px) {
+  .mmPortalSection { padding-block: 52px; }
+  .mmPortalIntro { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .mmPortalWindow iframe { height: 680px; }
+}

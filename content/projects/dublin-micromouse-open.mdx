@@ -6,8 +6,8 @@ title: Dublin Micromouse Open
 year: "2026"
 sortYear: 2026
 tint: "#EE8570"
-blurb: "Ireland's first national micromouse competition, hosted by UCD ElecSoc. I wrote the six-hour build format and the technical rules, secured sponsorship, and set up how the event ran."
-lede: "Ireland's first national micromouse competition, hosted by UCD ElecSoc at UCD Village on 26 September 2026. Every team gets six hours and the same box of parts: design it, build it, program it and race it in a single day. I wrote the competition format and the technical rules, contacted engineering companies directly to secure sponsorship and prize support, set up event operations, and handled the branding and participant sign-up."
+blurb: "My journal of putting together the Dublin Micromouse Open: the format, technical rules, sponsorship and work behind the event."
+lede: "I wrote the competition format and technical rules, secured sponsorship, and worked on the branding, sign-up and operations for the Dublin Micromouse Open. This is my journal of putting it together."
 tags: ["Event design", "Competition format", "Technical rules", "Sponsorship", "Branding"]
 media:
   type: video
@@ -17,85 +17,7 @@ specs:
   - { key: "Date", value: "Sat 26 Sept 2026" }
   - { key: "Venue", value: "UCD Village" }
   - { key: "Hosted by", value: "UCD ElecSoc" }
-  - { key: "Build window", value: "Six hours" }
-  - { key: "Kit", value: "Identical, every team" }
-  - { key: "Main award", value: "Fastest verified run" }
-notes:
-  - heading: "The call that shaped the format"
-    body: "Most micromouse competitions are won by machines that took months to build, which quietly decides the entry list before anyone turns up. The format I wrote does the opposite: six hours, one day, and an identical box of parts for every team. Nobody arrives with a finished robot, so a first year who has never touched a soldering iron lines up against a final year team on genuinely equal terms. The build sprint is the competition."
-  - heading: "A maze that rewards thinking"
-    body: "One of the mini practice mazes is built deliberately so that the fastest route cuts the diagonals and takes a straight line through. A mouse that only knows how to follow the grid will still finish. A mouse that can reason about the path will win. It sits on the practice floor all day, which means teams meet that problem while they can still do something about it — not during their timed run."
-# The campaign artwork is portrait and text-heavy, so it lives in the
-# MicromouseOpen section at its real aspect ratio rather than in the
-# square-cropped build-photo grid.
+notes: []
 photos: []
 links: []
 ---
-
-A rulebook is mostly a list of decisions somebody had to make and then defend.
-Setting up a national competition from nothing meant answering a stack of
-questions that have very little to do with robots — what counts as a legal
-machine, how a run is timed and verified, what happens when a mouse fails
-mid-run, who pays for the parts, and how a complete beginner gets to the start
-line without being embarrassed.
-
-## Designing the format first
-
-The format came before everything else, because it decides who can enter.
-
-A months-long build favours teams who already have a workshop, a parts drawer and
-someone who has done it before. Compressing the whole thing into six hours on a
-single day, with an identical kit issued to every team, removes that advantage
-entirely. It also changes what the competition actually measures: not who owns
-the best equipment, but who can make decisions quickly and debug under pressure.
-
-Everything else in the rulebook follows from that decision. The kit is fixed, so
-the technical rules are about what you may do with it rather than what you may
-bring. The main award goes to the fastest verified run to the centre of the maze,
-with further awards for design and reliability, so a mouse that is quick but only
-finishes once does not beat one that works every time.
-
-## Making the kit modular on purpose
-
-Every team receives the same eight-part kit: an ESP32, encoded motors, a motor
-driver, an IMU, distance sensors, a battery management system, a buck converter
-and a battery pack.
-
-It is modular deliberately. There is no single correct mouse design, and the
-expectation is that very different machines come out of the same box of parts —
-different sensor placements, different chassis, different ideas about how much
-to trust the encoders versus the IMU. A kit that assembled only one way would
-have turned the day into a soldering exercise.
-
-## Removing the excuses not to enter
-
-"No experience needed" is easy to put on a poster and hard to actually deliver
-in six hours. The preparation is built in three layers.
-
-**Before the day.** A pre-recorded video series covering how to drive the sensors
-with the ESP32, plus written documentation and setup docs published in advance,
-so a team's first hour goes into the robot instead of into environment setup.
-
-**On the day.** A 30-minute opening briefing with all the electronics diagrams
-prepared in advance: how to use the encoded motors, the motor driver, the IMU and
-the distance sensors, why there is a battery management system in the kit, why
-there is a buck converter, and how the battery packs actually work. It also
-covers GitHub basics for anyone who has not used it, and walks through the
-different maze-solving strategies so teams pick an approach rather than guess at
-one.
-
-**Throughout.** ElecSoc committee members and postgraduate demonstrators on the
-floor all day, so a stuck team has someone standing next to them within a minute.
-
-## Funding it
-
-The competition is supported by Anthropic, providing a credits package for the
-winning team, and by the UCD School of Electrical and Electronic Engineering.
-
-The sponsorship structure is three tiers that run together rather than compete: a
-Presenting Event Partner carrying naming rights and the largest presence on every
-surface, an Official Prize Partner whose contribution is ring-fenced entirely for
-the prize pool, and up to three Official Technical Partners covering sensors,
-motors, batteries, PCBs, filament, tools and printing. Support is accepted as
-cash, product or in kind, which matters when the thing you need is a box of
-distance sensors rather than a transfer.
