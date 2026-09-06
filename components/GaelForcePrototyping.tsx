@@ -1,4 +1,5 @@
 import './GaelForcePrototyping.css';
+import GaelForceCad from './GaelForceCad';
 
 export default function GaelForcePrototyping() {
   return (
@@ -73,7 +74,7 @@ export default function GaelForcePrototyping() {
           </div>
         </div>
 
-        {/* Add prototype, CAD and research windows below this point. */}
+        <GaelForceCad />
       </div>
     </section>
   );

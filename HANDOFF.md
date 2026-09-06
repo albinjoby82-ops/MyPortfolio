@@ -307,6 +307,14 @@ Ask; don't decide these unilaterally.
 
 ## Commands
 
+### CAD viewer continuation (6 September 2026)
+
+Read `docs/CAD_PORTAL.md` before adding interactive CAD. `GaelForceCad` mounts
+below the chapter 04 workstream strip and renders entries from `content/cad.ts`.
+The chosen workflow uses simple local GLB snapshots exported from Onshape. Do
+not restore the discarded manual mate/motion system. `Prototype Lift V1` is the
+first window and uses `public/projects/galeforce/cad/prototype-lift-v1.glb`.
+
 ```bash
 npm install
 npm run dev      # http://localhost:3000
