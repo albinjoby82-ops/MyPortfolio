@@ -14,6 +14,7 @@ export const gaelForceCadDocuments: CadDocument[] = [
         kind: 'assembly',
         summary: 'Prototype Lift V1',
         model: '/projects/galeforce/cad/prototype-lift-v1.glb',
+        poster: '/projects/galeforce/cad/prototype-lift-v1-poster.jpg',
       },
     ],
   },

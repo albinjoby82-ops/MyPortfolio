@@ -25,4 +25,5 @@ over the local model and must use HTTPS on the `share.3dvizi.com` host.
 
 `Prototype Lift V1` is the first CAD entry. Its model is
 `public/projects/galeforce/cad/prototype-lift-v1.glb`, supplied by Albin as
-`V2 Rough Idea.glb` on 6 September 2026.
+`V2 Rough Idea.glb` on 6 September 2026. Its card uses a real render from that
+model at `public/projects/galeforce/cad/prototype-lift-v1-poster.jpg`.

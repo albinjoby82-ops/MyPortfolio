@@ -32,7 +32,7 @@ export default function CadModelViewer({ src, name }: { src: string; name: strin
         <Suspense fallback={<Html center className="cadModelLoading">Loading CAD…</Html>}>
           <Model src={src} />
         </Suspense>
-        <OrbitControls makeDefault enableDamping dampingFactor={0.08} />
+        <OrbitControls makeDefault enableZoom={false} enableDamping dampingFactor={0.08} />
       </Canvas>
       <button
         type="button"
