@@ -3,10 +3,10 @@ slug: serial-bus-robot-arm
 order: 7
 kind: Robotics
 title: Custom Serial-Bus Robot Arm
-year: "2025 — Present"
+year: "2025 to Present"
 sortYear: 2025
 tint: "#EE8570"
-blurb: "A work-in-progress robot arm built around Feetech STS3215 serial bus servos — Python servo control, motion recording, a URDF model and end-effector kinematics, powered from a 12 V supply."
+blurb: "A work-in-progress robot arm built around Feetech STS3215 serial bus servos. Python servo control, motion recording, a URDF model and end-effector kinematics, powered from a 12 V supply."
 lede: "I 3D printed and assembled an existing arm design, then focused on the electronics and control system: eight serial bus servos on a shared bus, Python control, motion recording, a URDF model, and the kinematics problem of holding end-effector orientation while the arm moves."
 tags: ["Electronics", "Robot control", "Serial communication", "Python", "URDF", "Kinematics"]
 media:
@@ -21,9 +21,9 @@ specs:
   - { key: "Software", value: "Python · URDF" }
 notes:
   - heading: "What went wrong"
-    body: "The software stopped detecting the servos when scanning the bus. Rather than assume the code was at fault, I worked through the full chain — computer, controller, bus, servo, power — and traced it to a likely fault in the servo driver board itself."
+    body: "The software stopped detecting the servos when scanning the bus. Rather than assume the code was at fault, I worked through the full chain: computer, controller, bus, servo, power. That traced it to a likely fault in the servo driver board itself."
   - heading: "What I learned"
-    body: "Controlling a robot at the joint level and controlling it in Cartesian space are fundamentally different problems, and a robot that works in software doesn't necessarily work in the real world — backlash, tolerances, friction and wiring all show up eventually."
+    body: "Controlling a robot at the joint level and controlling it in Cartesian space are fundamentally different problems. A robot that works in software doesn't necessarily work in the real world. Backlash, tolerances, friction and wiring all show up eventually."
 photos: []
 ---
 
@@ -104,8 +104,8 @@ abruptly between individual poses.
 
 As the project developed, I also began creating a URDF representation of the
 robot. The purpose of the URDF was to describe the arm as a system of links
-and joints rather than simply a collection of servo IDs — my introduction to
-representing a physical robot mathematically in software.
+and joints rather than simply a collection of servo IDs. This was my
+introduction to representing a physical robot mathematically in software.
 
 Each servo corresponds to a joint, while the printed mechanical components
 form links connecting those joints. Creating the model helped me understand
@@ -127,7 +127,7 @@ kinematics problem. It introduced me to the idea that controlling a robotic
 arm at the joint level and controlling it in Cartesian space are fundamentally
 different problems. Instead of saying "move servo 2 to this angle", I
 eventually wanted to be able to say "move the end effector here while
-maintaining this orientation" — which requires calculating the joint
+maintaining this orientation." That requires calculating the joint
 configuration necessary to produce the requested pose.
 
 ## Mechanical learning
@@ -140,7 +140,7 @@ Working with the physical robot helped me understand how factors such as
 servo placement, joint geometry, link length, mechanical tolerances, stiffness
 and weight distribution directly affect the electronics and control system.
 It also showed me that a robot which works correctly in software does not
-necessarily work correctly in the real world — backlash, printed-part
+necessarily work correctly in the real world. Backlash, printed-part
 tolerances, servo limitations, wiring, friction and the mass of the arm all
 influence its actual behaviour. That interaction between mechanical,
 electrical and software systems became one of the most useful parts of the
@@ -151,8 +151,8 @@ project.
 The project also gave me experience troubleshooting an actual hardware
 communication failure. At one point, my software stopped detecting the
 servos when scanning the serial bus. Instead of immediately assuming the code
-was wrong, I had to work through the complete signal chain: computer → servo
-controller → serial bus → servo → power system.
+was wrong, I had to work through the complete signal chain: computer, servo
+controller, serial bus, servo, power system.
 
 This meant considering power delivery, wiring, serial communication, servo
 IDs, controller configuration and whether the Waveshare interface itself had
@@ -166,7 +166,7 @@ communications, power and hardware all have to be considered together.
 My longer-term goal was to use the arm as a platform for experimenting with
 intelligent robotics. Rather than creating a robot that only executes
 predetermined movements, I wanted to investigate how perception and AI could
-be connected to physical hardware — a camera to recognise objects around my
+be connected to physical hardware: a camera to recognise objects around my
 desk, pointing toward tools or components, responding to voice commands and
 eventually performing simple autonomous actions.
 
@@ -176,8 +176,8 @@ tasks such as computer vision, voice processing and AI. The lower-level
 robot-control system would then translate those decisions into commands for
 the individual joints:
 
-Voice command → AI/perception → desired robot action → robot pose/trajectory
-→ joint commands → serial servo bus → physical movement
+Voice command → AI/perception → desired robot action → robot pose/trajectory →
+joint commands → serial servo bus → physical movement
 
 This part of the project remains largely experimental and is something I want
 to return to.
