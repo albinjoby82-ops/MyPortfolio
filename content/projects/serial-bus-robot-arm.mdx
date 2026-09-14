@@ -1,0 +1,230 @@
+---
+slug: serial-bus-robot-arm
+order: 7
+kind: Robotics
+title: Custom Serial-Bus Robot Arm
+year: "2025 — Present"
+sortYear: 2025
+tint: "#EE8570"
+blurb: "A work-in-progress robot arm built around Feetech STS3215 serial bus servos — Python servo control, motion recording, a URDF model and end-effector kinematics, powered from a 12 V supply."
+lede: "I 3D printed and assembled an existing arm design, then focused on the electronics and control system: eight serial bus servos on a shared bus, Python control, motion recording, a URDF model, and the kinematics problem of holding end-effector orientation while the arm moves."
+tags: ["Electronics", "Robot control", "Serial communication", "Python", "URDF", "Kinematics"]
+media:
+  type: photo
+  caption: "TODO: add photos and videos of the arm"
+specs:
+  - { key: "Status", value: "Work in progress" }
+  - { key: "Servos", value: "8 × Feetech STS3215" }
+  - { key: "Controller", value: "Waveshare Serial Bus Servo Driver" }
+  - { key: "Power", value: "12 V, 10 A" }
+  - { key: "Software", value: "Python · URDF" }
+notes:
+  - heading: "What went wrong"
+    body: "The software stopped detecting the servos when scanning the bus. Rather than assume the code was at fault, I worked through the full chain — computer, controller, bus, servo, power — and traced it to a likely fault in the servo driver board itself."
+  - heading: "What I learned"
+    body: "Controlling a robot at the joint level and controlling it in Cartesian space are fundamentally different problems, and a robot that works in software doesn't necessarily work in the real world — backlash, tolerances, friction and wiring all show up eventually."
+photos: []
+---
+
+## Overview
+
+This project started as an electronics and robotics project to learn how a
+multi-axis robotic arm actually works beyond simply buying a finished robot.
+
+I used an existing robot arm design available online and 3D printed the
+mechanical components myself. I did not design the original mechanical
+structure, but assembling, modifying and troubleshooting it gave me a much
+better understanding of mechanical concepts such as joint geometry, linkages,
+tolerances, servo mounting, range of motion and how the geometry of individual
+joints affects the overall workspace of a robot.
+
+The main part of the project for me was the electronics and control system.
+
+The arm uses eight Feetech STS3215 serial bus servos connected through a
+Waveshare Serial Bus Servo Driver and powered from a 12 V supply. Instead of
+controlling each servo independently using conventional PWM signals, the
+servos communicate over a shared serial bus and can be addressed individually
+using servo IDs.
+
+This gave me a platform for experimenting with servo communication, robot
+joint control, motion recording, coordinate systems and eventually
+higher-level autonomous control.
+
+## Electronics
+
+One of the first parts of the project was understanding how to correctly
+power and communicate with multiple relatively high-current servos.
+
+The arm uses:
+
+- 8 × Feetech STS3215 serial bus servos
+- Waveshare Serial Bus Servo Driver
+- 12 V, 10 A power supply
+- Serial communication between the computer/controller and servo bus
+
+Using serial bus servos was particularly interesting because multiple
+actuators can share the same communication bus while still being individually
+addressed. I worked with servo IDs, position commands and servo feedback
+rather than treating the actuators as simple PWM motors.
+
+This also introduced me to an important distinction in robotics between the
+control electronics and the power electronics. The servos require
+substantially more current than the control electronics can provide, meaning
+the servo power system has to be designed separately while still maintaining
+reliable communication between the controller and actuators.
+
+## Python servo control
+
+I began controlling the arm through Python using an STS3215-compatible Python
+library. The goal was to create software that could communicate directly with
+each servo and allow me to read and command individual joint positions.
+
+This involved learning how the servo bus worked, identifying individual
+servos using their IDs and converting between the servo's internal position
+representation and useful joint movements. Rather than only creating
+predetermined movements, I wanted the software architecture to eventually
+allow higher-level programs to control the arm.
+
+## Motion recording and replay
+
+One of the features I experimented with was recording and replaying robot
+movements. The idea was to capture the positions of each joint at different
+points in a movement and store these positions as a trajectory. The arm could
+then replay the recorded sequence by commanding each servo through the saved
+joint positions.
+
+This introduced me to the difference between simply commanding a robot to a
+position and controlling an entire trajectory. It also raised additional
+problems such as movement speed, synchronising multiple joints, interpolation
+between recorded positions and producing smooth motion rather than moving
+abruptly between individual poses.
+
+## Robot model and URDF
+
+As the project developed, I also began creating a URDF representation of the
+robot. The purpose of the URDF was to describe the arm as a system of links
+and joints rather than simply a collection of servo IDs — my introduction to
+representing a physical robot mathematically in software.
+
+Each servo corresponds to a joint, while the printed mechanical components
+form links connecting those joints. Creating the model helped me understand
+concepts such as joint axes, link lengths, joint limits, coordinate frames,
+parent and child links, and end-effector position and orientation. This
+connected the mechanical construction of the arm with the electronics and
+software controlling it.
+
+## End-effector orientation
+
+One problem I became interested in was maintaining a particular orientation
+of the end effector while moving the arm. For example, if the shoulder and
+elbow joints move, the orientation of the wrist naturally changes. If I want
+the end effector to remain perpendicular to the desk, another joint has to
+compensate for those movements.
+
+This turned what initially looked like a simple servo-control problem into a
+kinematics problem. It introduced me to the idea that controlling a robotic
+arm at the joint level and controlling it in Cartesian space are fundamentally
+different problems. Instead of saying "move servo 2 to this angle", I
+eventually wanted to be able to say "move the end effector here while
+maintaining this orientation" — which requires calculating the joint
+configuration necessary to produce the requested pose.
+
+## Mechanical learning
+
+Although this was primarily an electronics project, building the physical arm
+forced me to learn a significant amount of mechanical engineering along the
+way. I 3D printed the existing arm design and assembled the mechanism myself.
+
+Working with the physical robot helped me understand how factors such as
+servo placement, joint geometry, link length, mechanical tolerances, stiffness
+and weight distribution directly affect the electronics and control system.
+It also showed me that a robot which works correctly in software does not
+necessarily work correctly in the real world — backlash, printed-part
+tolerances, servo limitations, wiring, friction and the mass of the arm all
+influence its actual behaviour. That interaction between mechanical,
+electrical and software systems became one of the most useful parts of the
+project.
+
+## Debugging the servo bus
+
+The project also gave me experience troubleshooting an actual hardware
+communication failure. At one point, my software stopped detecting the
+servos when scanning the serial bus. Instead of immediately assuming the code
+was wrong, I had to work through the complete signal chain: computer → servo
+controller → serial bus → servo → power system.
+
+This meant considering power delivery, wiring, serial communication, servo
+IDs, controller configuration and whether the Waveshare interface itself had
+failed. The debugging eventually led me to suspect a problem with the servo
+driver/controller board. Although this stopped progress on parts of the
+project, it was also a useful lesson in electronics debugging: software,
+communications, power and hardware all have to be considered together.
+
+## Longer-term goal: desktop robot assistant
+
+My longer-term goal was to use the arm as a platform for experimenting with
+intelligent robotics. Rather than creating a robot that only executes
+predetermined movements, I wanted to investigate how perception and AI could
+be connected to physical hardware — a camera to recognise objects around my
+desk, pointing toward tools or components, responding to voice commands and
+eventually performing simple autonomous actions.
+
+The architecture I was considering separated the system into two levels. A
+higher-level computer, such as a Raspberry Pi, Jetson or PC, would handle
+tasks such as computer vision, voice processing and AI. The lower-level
+robot-control system would then translate those decisions into commands for
+the individual joints:
+
+Voice command → AI/perception → desired robot action → robot pose/trajectory
+→ joint commands → serial servo bus → physical movement
+
+This part of the project remains largely experimental and is something I want
+to return to.
+
+## What I actually built / worked on
+
+The completed and experimental work on the project included physically 3D
+printing and assembling the robot arm, installing and wiring eight serial bus
+servos, setting up the servo controller and external power system,
+communicating with STS3215 servos through Python, experimenting with
+individual joint control, investigating servo position feedback, working on
+motion recording and replay, creating a URDF representation of the arm,
+exploring end-effector orientation constraints, and troubleshooting
+communication failures on the servo bus.
+
+The mechanical design itself was sourced online rather than designed by me.
+However, manufacturing and assembling it gave me practical experience with
+mechanical systems that I had not originally expected from what began
+primarily as an electronics project.
+
+## What I want to do next
+
+The project is unfinished, and there are several areas I want to return to:
+
+- Repair or replace the failed servo communication hardware.
+- Restore reliable communication with all eight STS3215 servos.
+- Finish and validate the URDF against the physical robot.
+- Create a cleaner Python control interface for the complete arm.
+- Improve trajectory recording and playback.
+- Implement smooth interpolation between poses.
+- Explore forward and inverse kinematics.
+- Maintain end-effector orientation automatically during movement.
+- Add a camera for object detection and localisation.
+- Experiment with voice commands.
+- Connect higher-level AI decisions to robot actions.
+- Investigate autonomous object interaction.
+- Potentially use the arm as a platform for reinforcement learning or
+  imitation learning.
+
+## What I learned
+
+The biggest lesson from this project was how interconnected robotics
+disciplines are. I started the project mainly because I wanted to learn more
+about electronics and robot control. However, getting a physical arm working
+required me to deal with electronics, power delivery, serial communication,
+programming, mechanical assembly, coordinate systems and robot kinematics.
+
+It was also one of my first experiences of the gap between controlling
+something in software and making the same system work reliably in the
+physical world. Even though the project is unfinished, it became a useful
+foundation for the robotics projects I have worked on since.
