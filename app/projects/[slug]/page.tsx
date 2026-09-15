@@ -58,12 +58,19 @@ export default async function ProjectPage({
           }
         >
           <div>
-            <span
-              className="mb-[18px] inline-block rounded-[6px] px-3 py-[5px] text-[12px] font-bold uppercase tracking-[0.1em] text-ink"
-              style={{ backgroundColor: project.tint }}
-            >
-              {project.no} · {project.kind}
-            </span>
+            <div className="mb-[18px] flex flex-wrap items-center gap-[10px]">
+              <span
+                className="inline-block rounded-[6px] px-3 py-[5px] text-[12px] font-bold uppercase tracking-[0.1em] text-ink"
+                style={{ backgroundColor: project.tint }}
+              >
+                {project.no} · {project.kind}
+              </span>
+              {project.status && (
+                <span className="inline-block rounded-full border border-rust/40 bg-rust/10 px-3 py-[5px] text-[12px] font-bold uppercase tracking-[0.1em] text-rust">
+                  {project.status}
+                </span>
+              )}
+            </div>
 
             <h1 className="text-[clamp(34px,6.5vw,68px)] font-extrabold leading-[0.96] tracking-[-0.035em]">
               {project.title}
