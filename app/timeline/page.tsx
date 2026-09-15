@@ -24,6 +24,19 @@ export default function TimelinePage() {
         </p>
       </section>
 
+      {years.length === 0 && (
+        <section className="pb-14 gutter">
+          <div className="rounded-[16px] border-2 border-ink bg-card p-7 shadow-[var(--shadow-hard)]">
+            <span className="rounded-full border border-rust/40 bg-rust/10 px-3 py-[5px] text-[12px] font-bold uppercase tracking-[0.1em] text-rust">
+              To-do
+            </span>
+            <p className="pretty mt-4 max-w-[60ch] text-[16px] leading-[1.65]">
+              Haven&rsquo;t written this up yet. Check back soon.
+            </p>
+          </div>
+        </section>
+      )}
+
       <section className="pb-14 gutter">
         {years.map((year) => (
           <div key={year} className="border-t-2 border-ink pt-6 pb-2">
