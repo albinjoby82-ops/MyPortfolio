@@ -28,6 +28,8 @@ export type Project = {
   /** Manual ordering. Lower sorts first; unset falls back to year. */
   order: number;
   tint: string;
+  /** Optional short status pill, e.g. "In progress". Omit once finished. */
+  status: string;
   lede: string;
   media: Media;
   specs: Spec[];
@@ -62,6 +64,7 @@ export function getProjects(): Project[] {
       sortYear: Number(data.sortYear ?? 0),
       order: Number(data.order ?? Number.MAX_SAFE_INTEGER),
       tint: data.tint ?? "#E4DDCC",
+      status: data.status ?? "",
       lede: data.lede ?? data.blurb ?? "",
       media: data.media ?? { type: "photo" },
       specs: data.specs ?? [],

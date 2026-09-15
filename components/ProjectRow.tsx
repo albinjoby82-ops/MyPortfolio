@@ -73,6 +73,11 @@ export default function ProjectRow({ project }: { project: Project }) {
           <span className="text-[12px] font-bold uppercase tracking-[0.1em] text-muted">
             {project.kind}
           </span>
+          {project.status && (
+            <span className="rounded-full border border-rust/40 bg-rust/10 px-[9px] py-[2px] text-[10px] font-bold uppercase tracking-[0.08em] text-rust">
+              {project.status}
+            </span>
+          )}
           {/* On narrow screens the year joins the kind label. */}
           <span className="font-display ml-auto text-[13px] font-bold text-ink md:hidden">
             {project.year}
