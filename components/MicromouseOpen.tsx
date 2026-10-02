@@ -10,26 +10,24 @@ import './MicromouseOpen.css';
  */
 
 const KIT = [
-  { no: '01', name: 'ESP32', role: 'The microcontroller every mouse is built around.' },
-  { no: '02', name: 'Encoded motors', role: 'Drive wheels that also report how far they have turned.' },
-  { no: '03', name: 'Motor driver', role: 'Switches motor current from the controller’s logic signals.' },
-  { no: '04', name: 'IMU', role: 'Measures rotation, so a turn can be held straight.' },
-  { no: '05', name: 'Distance sensors', role: 'Find the walls the maze is made of.' },
-  { no: '06', name: 'Battery management system', role: 'Keeps the cells balanced and protected.' },
-  { no: '07', name: 'Buck converter', role: 'Steps the pack voltage down to the logic rail.' },
-  { no: '08', name: 'Battery pack', role: 'On-board power for the whole run.' },
+  { no: 'H1', name: 'ESP32-C6', role: 'The microcontroller every mouse is built around.' },
+  { no: 'H2', name: 'DFRobot DRI0044 motor driver', role: 'Switches motor current from the controller’s logic signals.' },
+  { no: 'H3', name: 'DFRobot SEN0142 IMU', role: 'Measures rotation, so a turn can be held straight.' },
+  { no: 'H4', name: '3× VL53L0X distance sensors', role: 'Find the walls the maze is made of.' },
+  { no: 'H5', name: '2S battery to 5V buck converter', role: 'Steps the battery voltage down to the logic rail.' },
+  { no: 'H6', name: '2× GA12-N20 micro gear motors with Hall encoders', role: 'Drive wheels that also report how far they have turned.' },
 ];
 
 const DAY = [
   {
     stamp: '30 minutes',
     title: 'Opening briefing',
-    body: 'Every electronics diagram prepared in advance: the encoded motors, the motor driver, the IMU, the distance sensors, why the kit carries a battery management system and a buck converter, and how the battery packs actually work. GitHub basics for anyone who has not used it, then a walk through the maze-solving strategies so teams choose an approach instead of guessing at one.',
+    body: 'Every electronics diagram prepared in advance: the encoded motors, the motor driver, the IMU, the distance sensors, why the kit carries a buck converter, and how the battery packs actually work. GitHub basics for anyone who has not used it, then a walk through the maze-solving strategies so teams choose an approach instead of guessing at one.',
   },
   {
     stamp: 'Six hours',
     title: 'Design, solder, code',
-    body: 'The whole build happens on the day, from the same box of parts. ElecSoc committee members and postgraduate demonstrators stay on the floor throughout, so a stuck team has someone standing next to them within a minute.',
+    body: 'The whole build happens on the day, from the same box of parts. ElecSoc committee members and postgraduate demonstrators stayed on the floor throughout, so a stuck team had someone standing next to them within a minute.',
   },
   {
     stamp: 'Then race it',
@@ -116,19 +114,19 @@ export default function MicromouseOpen() {
       <div className="mmBlock mmIntro">
         <div>
           <span className="mmKicker">01 · The event</span>
-          <h2 id="micromouse-open-title">Ireland had never run one. So we ran one.</h2>
+          <h2 id="micromouse-open-title">20 teams. 110 people. One day.</h2>
         </div>
         <div className="mmCopy">
           <p>
             Micromouse is one of the oldest challenges in robotics: a small robot
             that solves a maze entirely on its own, with no remote control and no
-            driver once the run starts. Ireland had never run a national one.
+            driver once the run starts.
           </p>
           <p>
-            The Dublin Micromouse Open is the first. It runs for a single day at
-            UCD Village, hosted by UCD ElecSoc, and the entire competition
-            &mdash; design, build, program, race &mdash; happens inside that one
-            day.
+            The Dublin Micromouse Open ran for a single day at the UCD
+            Engineering and Materials Science Centre, hosted by UCD ElecSoc.
+            20 teams and 110 participants built, programmed and raced their
+            robots inside that one day, all from the same kit.
           </p>
 
           <dl className="mmFacts">
@@ -138,7 +136,7 @@ export default function MicromouseOpen() {
             </div>
             <div>
               <dt>Venue</dt>
-              <dd>UCD Village, University College Dublin</dd>
+              <dd>UCD Engineering and Materials Science Centre, University College Dublin</dd>
             </div>
             <div>
               <dt>Hosted by</dt>
@@ -169,14 +167,14 @@ export default function MicromouseOpen() {
           <h3>Same box of parts. Every team.</h3>
           <div className="mmCopy">
             <p>
-              Every team receives an identical modular kit. Fixing the parts list
-              is what makes the six-hour format fair: nobody can buy an advantage
-              in advance, and the technical rules only have to describe what you
-              may do with the kit rather than what you may bring to it.
+              Every team received an identical modular kit. Fixing the parts list
+              made the six-hour format fair: nobody could buy an advantage
+              in advance, and the technical rules only had to describe what you
+              could do with the kit rather than what you could bring to it.
             </p>
             <p>
-              It is modular on purpose. There is no single correct mouse design,
-              and very different machines are expected to come out of the same
+              It was modular on purpose. There is no single correct mouse design,
+              and very different machines were expected to come out of the same
               box.
             </p>
           </div>
@@ -208,10 +206,10 @@ export default function MicromouseOpen() {
         </div>
 
         <div className="mmMazeNote">
-          <h4>Practice mazes are open all day.</h4>
+          <h4>Practice mazes were open all day.</h4>
           <p>
-            Full size and mini mazes sit alongside the build floor from the
-            start, so a team can tune its algorithm against real walls instead of
+            Full size and mini mazes sat alongside the build floor from the
+            start, so a team could tune its algorithm against real walls instead of
             against an assumption about walls &mdash; and find out what is wrong
             before the run that counts.
           </p>
@@ -281,7 +279,7 @@ export default function MicromouseOpen() {
           <div className="mmCopy">
             <p>
               &ldquo;No experience needed&rdquo; is easy to put on a poster and
-              hard to deliver in six hours. Teams get a pre-recorded video series
+              hard to deliver in six hours. Teams got a pre-recorded video series
               on driving the sensors with the ESP32, plus written documentation
               and setup docs published in advance, so the first hour of the build
               goes into the robot rather than into a toolchain. Two of the

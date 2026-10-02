@@ -7,8 +7,8 @@ year: "2026"
 sortYear: 2026
 tint: "#EE8570"
 status: "To-do"
-blurb: "My journal of putting together the Dublin Micromouse Open: the format, technical rules, sponsorship and work behind the event."
-lede: "I wrote the competition format and technical rules, secured sponsorship, and worked on the branding, sign-up and operations for the Dublin Micromouse Open. This is my journal of putting it together."
+blurb: "I set up and directed a one-day Micromouse competition where 20 teams and 110 participants built and raced maze-solving robots from the same kit."
+lede: "I set up and directed the Dublin Micromouse Open, which ran on Saturday 26 September 2026. 20 teams and 110 participants each built an autonomous maze-solving robot from the same kit and raced it the same day. I wrote the competition format and technical rules, secured sponsorship, and worked on the branding, sign-up and operations."
 tags: ["Event design", "Competition format", "Technical rules", "Sponsorship", "Branding"]
 media:
   type: video
@@ -16,9 +16,54 @@ media:
   caption: "The reveal animation that launched the campaign — the maze route resolves into the ElecSoc logo."
 specs:
   - { key: "Date", value: "Sat 26 Sept 2026" }
-  - { key: "Venue", value: "UCD Village" }
+  - { key: "Venue", value: "UCD Engineering and Materials Science Centre" }
   - { key: "Hosted by", value: "UCD ElecSoc" }
+  - { key: "Teams", value: "20" }
+  - { key: "Participants", value: "110" }
+  - { key: "Format", value: "6-hour build, then timed races on a 16 × 16 maze" }
+  - { key: "Kit", value: "Same for every team" }
 notes: []
 photos: []
 links: []
 ---
+
+## Nobody needed to know anything already
+
+I designed the whole event around one rule: nobody should need to know anything already. No robotics, no embedded programming, no soldering. Most people assume a robot competition is for people who have already built robots, so I wanted to make one for the people who haven't.
+
+That rule decided almost everything else. Every team got the same kit, so nobody could get ahead by buying better parts. There was a briefing to start the day, mentors and postgraduate demonstrators on the floor throughout, and learning material published before the day.
+
+It also decided where I spent my time. I presoldered the components with the team, so that beginners were not learning to solder on the day, and I worked on the help section of the website, making sure there was a step-by-step plan anyone could follow. That is what let teams spend the six hours building a robot instead of working out the tools.
+
+## What every team got
+
+My team designed and 3D printed the mouse itself, and every team was handed one. We made 25 kits for the 20 teams, and my team presoldered every one, so all a team had to bring was a battery.
+
+The printed case holds three distance sensors, one at the front, one on the left and one on the right, so the mouse can see the walls it is driving between. Inside each kit:
+
+- **ESP32-C6:** the microcontroller.
+- **DFRobot DRI0044 motor driver:** switches the motor current from the controller's signals.
+- **DFRobot SEN0142 IMU:** measures rotation, so a turn can be held straight.
+- **3× VL53L0X distance sensors:** find the walls of the maze.
+- **2S battery to 5V buck converter:** steps the battery voltage down for the electronics.
+- **2× GA12-N20 micro gear motors with Hall encoders:** drive the wheels and report how far they have turned.
+- **Wheels and the 3D printed case.**
+
+<!-- posters -->
+
+## Selling the vision
+
+ElecSoc already had a sponsorship deck. I threw it out. It described the society, and what I needed to sell was the vision for one event. So I designed a new deck from the ground up for Micromouse.
+
+It makes the case in a fixed order: why Ireland needs a competition like this, proof that ElecSoc can deliver, how Micromouse works, and then the ask. The ask was three tiers of partnership, from €200 to €1,200+, accepted as cash, product or in kind.
+
+<!-- deck -->
+
+I did not land any cash sponsors. What the deck did was make the event look credible enough that people backed it in other ways.
+
+- **Anthropic:** came on board as prize sponsor, with $250 in credits.
+- **Red Bull:** sent 96 cans.
+- **UCD School of Electrical and Electronic Engineering:** did all the purchasing for the event, and bought 40 large pizzas.
+- **UCD Innovation Academy and Makerspace:** gave us the materials to manufacture the maze.
+
+None of it was cash, and all of it came from the same deck. The deck sold our credibility.

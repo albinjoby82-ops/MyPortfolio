@@ -1,0 +1,112 @@
+.mmbSection { padding-bottom: 64px; }
+.mmbTitle {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 14px;
+}
+.mmbLede { max-width: 60ch; font-size: 16px; line-height: 1.65; margin: 0 0 36px; }
+
+/* ---- The book ----------------------------------------------------- */
+.mmbBook {
+  --page-ratio: 4 / 5;
+  position: relative;
+  margin: 0 auto;
+  outline: none;
+  touch-action: pan-y;
+  user-select: none;
+}
+.mmbBook:focus-visible { outline: 2px solid var(--color-rust); outline-offset: 10px; border-radius: 16px; }
+.mmbSpread { width: min(1040px, 100%); }
+.mmbSingle { width: min(440px, 100%); }
+
+/* Hardcover: ink board, hard shadow like every other card on the site. */
+.mmbCover {
+  padding: 12px;
+  border: 2px solid var(--color-ink);
+  border-radius: 14px;
+  background: var(--color-ink);
+  box-shadow: var(--shadow-hard);
+}
+.mmbPages {
+  position: relative;
+  perspective: 2600px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #d9d4c6;
+}
+/* Empty half of a spread shows the inside of the board. */
+.mmbSpread[data-open='false'] .mmbPages { background: linear-gradient(to right, #23262d 50%, #d9d4c6 50%); }
+.mmbSpread[data-end='true'] .mmbPages { background: linear-gradient(to right, #d9d4c6 50%, #23262d 50%); }
+.mmbSpread .mmbPages { aspect-ratio: 8 / 5; }
+.mmbSingle .mmbPages { aspect-ratio: 4 / 5; }
+
+/* ---- Leaves ------------------------------------------------------- */
+.mmbLeaf {
+  position: absolute;
+  top: 0; bottom: 0;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 950ms cubic-bezier(.45,.05,.25,1), z-index 0s linear 475ms;
+  will-change: transform;
+}
+.mmbSpread .mmbLeaf { left: 50%; width: 50%; }
+.mmbSingle .mmbLeaf { left: 0; width: 100%; }
+.mmbTurned { transform: rotateY(-180deg); }
+
+.mmbFace {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+.mmbBack { transform: rotateY(180deg); }
+.mmbFace img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
+
+/* Paper curve near the spine + page edge, so each face reads as paper. */
+.mmbShade { position: absolute; inset: 0; pointer-events: none; }
+.mmbFront .mmbShade { background: linear-gradient(to right, rgba(0,0,0,.34), rgba(0,0,0,0) 9%, rgba(0,0,0,0) 94%, rgba(0,0,0,.14)); }
+.mmbBack .mmbShade { background: linear-gradient(to left, rgba(0,0,0,.34), rgba(0,0,0,0) 9%, rgba(0,0,0,0) 94%, rgba(0,0,0,.14)); }
+
+/* Crease down the middle of a spread. */
+.mmbSpine {
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 42px; margin-left: -21px;
+  pointer-events: none; z-index: 999;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,.30) 50%, transparent);
+}
+.mmbSingle .mmbSpine { display: none; }
+
+/* Click zones: outer pages turn, the cursor says which way. */
+.mmbHit { position: absolute; top: 0; bottom: 0; z-index: 1000; border: 0; background: transparent; padding: 0; }
+.mmbHit:disabled { cursor: default; }
+.mmbHitL { left: 0; width: 50%; cursor: w-resize; }
+.mmbHitR { right: 0; width: 50%; cursor: e-resize; }
+.mmbHitAll { inset: 0; cursor: e-resize; }
+
+/* ---- Controls ----------------------------------------------------- */
+.mmbBar {
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  margin: 34px auto 0; max-width: 620px;
+}
+.mmbBtn {
+  flex: none; width: 44px; height: 44px; border-radius: 999px;
+  border: 2px solid var(--color-ink); background: var(--color-sun); color: var(--color-ink);
+  font-size: 18px; font-weight: 800; cursor: pointer;
+  box-shadow: 2px 2px 0 var(--color-ink);
+  transition: transform 120ms, box-shadow 120ms;
+}
+.mmbBtn:hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--color-ink); }
+.mmbBtn:disabled { opacity: 0.35; cursor: default; box-shadow: none; }
+.mmbMeta { flex: 1; text-align: center; display: flex; flex-direction: column; gap: 4px; min-height: 42px; }
+.mmbCaption { font-size: 14.5px; font-weight: 700; }
+.mmbCount { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); }
+
+@media (max-width: 899px) {
+  .mmbCover { padding: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mmbLeaf, .mmbCover { transition: none; }
+}

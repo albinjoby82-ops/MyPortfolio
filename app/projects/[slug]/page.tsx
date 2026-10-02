@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Panel from "@/components/Panel";
 import Prose from "@/components/Prose";
+import MicromousePosters from "@/components/MicromousePosters";
+import MicromouseDeck from "@/components/MicromouseDeck";
 import CubiPortal from "@/components/CubiPortal";
 import CubiLogoLab from "@/components/CubiLogoLab";
 import CubiColourLab from "@/components/CubiColourLab";
@@ -9,8 +11,6 @@ import CubiWorkflow from "@/components/CubiWorkflow";
 import GaleForceChapterOne from "@/components/GaleForceChapterOne";
 import GaelForceCommunity from "@/components/GaelForceCommunity";
 import GaelForcePrototyping from "@/components/GaelForcePrototyping";
-import MicromouseReveal from "@/components/MicromouseReveal";
-import MicromousePortal from "@/components/MicromousePortal";
 import { getProject, getProjects } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -109,7 +109,7 @@ export default async function ProjectPage({
       </section>
 
       {/* Hero media — real video/image when supplied, tinted block until then. */}
-      <section className="pb-11 gutter">
+      {project.slug !== "dublin-micromouse-open" && (<section className="pb-11 gutter">
         {project.slug === "cubi" && project.media.src ? (
           <div className="grid overflow-hidden rounded-[16px] border-2 border-ink bg-[#111525] shadow-[var(--shadow-hard)] md:grid-cols-[44%_56%]">
             <div className="relative min-h-[520px] overflow-hidden md:min-h-[650px]">
@@ -154,8 +154,6 @@ export default async function ProjectPage({
               </div>
             </div>
           </div>
-        ) : project.slug === "dublin-micromouse-open" ? (
-          <MicromouseReveal media={project.media} />
         ) : project.media.src && project.media.type === "video" ? (
           <video
             controls
@@ -188,7 +186,7 @@ export default async function ProjectPage({
             {project.media.caption}
           </p>
         )}
-      </section>
+      </section>)}
 
       {project.slug === "cubi" && <CubiPortal />}
 
@@ -204,12 +202,25 @@ export default async function ProjectPage({
 
       {project.slug === "gaelforce-ucd" && <GaelForcePrototyping />}
 
-      {project.slug === "dublin-micromouse-open" && <MicromousePortal />}
-
+      {/* Micromouse interleaves a component mid-story: the body splits at a
+          "<!-- posters -->" line, with the poster book between the halves. */}
       {project.body && (
         <section className="pb-14 gutter">
           <h2 className="eyebrow mb-6 block">The build</h2>
-          <Prose>{project.body}</Prose>
+          <Prose>{project.body.split("<!-- posters -->")[0]}</Prose>
+        </section>
+      )}
+
+      {project.slug === "dublin-micromouse-open" && <MicromousePosters />}
+
+      {project.body?.includes("<!-- posters -->") && (
+        <section className="pb-14 gutter">
+          {project.body.split("<!-- posters -->")[1].split("<!-- deck -->").map((part, i) => (
+            <div key={i}>
+              {i > 0 && <MicromouseDeck />}
+              <Prose>{part}</Prose>
+            </div>
+          ))}
         </section>
       )}
 
