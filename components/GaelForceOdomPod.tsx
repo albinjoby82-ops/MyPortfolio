@@ -498,9 +498,9 @@ export default function GaelForceOdomPod() {
 
           <Details title="V1 firmware and pin map">
             <p>
-              The V1 firmware is Ronan&apos;s <code>gaelforce_esp32</code> at
-              commit <code>f138950</code> (Sep 30, &ldquo;pin changes&rdquo;).
-              It differs from the breadboard firmware in the pin numbers only.
+              Ronan Hawkins wrote all of the V1 firmware: his{' '}
+              <code>gaelforce_esp32</code> at commit <code>f138950</code>{' '}
+              (Sep 30, &ldquo;pin changes&rdquo;). It differs from the breadboard firmware in the pin numbers only.
               Two signals moved: the horizontal encoder from GPIO 4/5 to 3/4,
               and the ToF I²C pins from SDA/SCL 15/16 to 16/15.
             </p>
@@ -577,10 +577,9 @@ export default function GaelForceOdomPod() {
             </p>
             <h4>The V2 firmware</h4>
             <p>
-              The V2 firmware is the V1 firmware with the new pin numbers,
-              plus the later ToF mask-order fix and a ToF bench test. It was
-              written by Ronan Hawkins and me, at commit <code>986a2f3</code>.
-              V1 and V2 firmware are not interchangeable: GPIO 1, 2 and 4 were
+              The V2 firmware is Ronan&apos;s V1 code with the new pin
+              numbers, plus the later ToF mask-order fix and a ToF bench test,
+              at commit <code>986a2f3</code>. I made the V2 pin changes. V1 and V2 firmware are not interchangeable: GPIO 1, 2 and 4 were
               encoder inputs on V1 and are ToF enable outputs on V2, so
               flashing the wrong firmware drives the wrong wire.
             </p>
