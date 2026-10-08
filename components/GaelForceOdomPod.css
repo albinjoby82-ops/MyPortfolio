@@ -1,0 +1,536 @@
+.odomPod {
+  padding-block: 92px 110px;
+  border-top: 2px solid #16181d;
+  background: #f5f3ed;
+}
+
+.odomInner {
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+.odomIntro {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: 52px 82px;
+  align-items: start;
+}
+
+.odomIntro h2 {
+  max-width: 12ch;
+  margin: 30px 0 0;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(40px, 5vw, 70px);
+  font-weight: 800;
+  letter-spacing: -.065em;
+  line-height: .92;
+}
+
+.odomCopy {
+  color: #302d27;
+  font-size: 16px;
+  font-weight: 560;
+  line-height: 1.68;
+}
+
+.odomCopy p {
+  margin: 0 0 18px;
+}
+
+.odomCopy h4,
+.odomSub {
+  margin: 0 0 12px;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1.1;
+}
+
+.odomCopy code,
+.odomSource code,
+.odomDetails code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(22, 24, 29, .08);
+  font-size: .9em;
+}
+
+.odomWide {
+  max-width: 78ch;
+}
+
+.odomLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.odomLinks a {
+  border: 2px solid #16181d;
+  border-radius: 10px;
+  padding: 11px 18px;
+  background: #fff;
+  color: #16181d;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 4px 4px 0 #16181d;
+  transition: transform .12s, box-shadow .12s;
+}
+
+.odomLinks a:first-child {
+  background: #16181d;
+  color: #fff;
+}
+
+.odomLinks a:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #16181d;
+}
+
+.odomTracks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+  margin-top: 64px;
+  border: 2px solid #16181d;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.odomTracks > div {
+  padding: 22px 24px;
+  border-left: 2px solid #16181d;
+}
+
+.odomTracks > div:first-child {
+  border-left: 0;
+}
+
+.odomTracks span,
+.odomTracks strong {
+  display: block;
+}
+
+.odomTracks span,
+.odomCard > span,
+.odomCallout > span,
+.odomThree span {
+  margin-bottom: 12px;
+  color: #6c665b;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.odomTracks strong {
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(18px, 2vw, 25px);
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1.08;
+}
+
+/* ── Chapters ───────────────────────────────────────────── */
+.odomChapter {
+  margin-top: 88px;
+  padding-top: 40px;
+  border-top: 2px solid #16181d;
+}
+
+.odomChapterHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  margin-bottom: 30px;
+}
+
+.odomChapterHead h3 {
+  margin: 0;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 800;
+  letter-spacing: -.055em;
+  line-height: .98;
+}
+
+.odomNo,
+.odomStatus {
+  border: 2px solid #16181d;
+  border-radius: 7px;
+  padding: 6px 10px;
+  background: #c6e4f5;
+  color: #16181d;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.odomStatus {
+  background: #ffd9b8;
+}
+
+/* ── Component cards ────────────────────────────────────── */
+.odomCards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 42px;
+}
+
+.odomCard {
+  border: 2px solid #16181d;
+  border-radius: 16px;
+  padding: 26px 28px 12px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+  color: #302d27;
+  font-size: 15px;
+  font-weight: 540;
+  line-height: 1.64;
+}
+
+.odomCard:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.odomCard > span {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.odomCard h4 {
+  margin: 0 0 14px;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: 1.05;
+}
+
+.odomCard p {
+  margin: 0 0 14px;
+}
+
+/* ── Figures ────────────────────────────────────────────── */
+.odomSplit {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: 40px 56px;
+  align-items: start;
+}
+
+.odomGrid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+
+.odomPhotos {
+  margin-top: 32px;
+}
+
+.odomFigure {
+  margin: 0;
+}
+
+.odomFigure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid #16181d;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 5px 5px 0 #16181d;
+}
+
+.odomFigure a {
+  display: block;
+}
+
+.odomFigure figcaption {
+  margin-top: 16px;
+  color: #4d483f;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.odomTall img {
+  max-height: 640px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.odomWideFig {
+  margin-top: 22px;
+}
+
+.odomSub {
+  margin-top: 56px;
+}
+
+.odomLead {
+  margin: 0 0 24px;
+  color: #302d27;
+  font-weight: 560;
+}
+
+.odomVideo {
+  margin-top: 40px;
+  max-width: 760px;
+}
+
+.odomVideo video {
+  display: block;
+  width: 100%;
+  border: 2px solid #16181d;
+  border-radius: 14px;
+  background: #16181d;
+  box-shadow: 5px 5px 0 #16181d;
+}
+
+.odomVideo p {
+  margin: 16px 0 0;
+  color: #4d483f;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+/* ── Callouts ───────────────────────────────────────────── */
+.odomCallouts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 40px;
+}
+
+.odomCallout {
+  border: 2px solid #16181d;
+  border-radius: 16px;
+  padding: 26px 28px 14px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+  color: #302d27;
+  font-size: 15.5px;
+  font-weight: 560;
+  line-height: 1.66;
+}
+
+.odomCallout > span {
+  display: block;
+  color: #16181d;
+}
+
+.odomCallout p {
+  margin: 0 0 16px;
+}
+
+.odomBad {
+  background: #ffe9dc;
+}
+
+.odomGood {
+  background: #e3f1d3;
+}
+
+.odomStatusBox {
+  max-width: 78ch;
+  margin-top: 34px;
+  background: #fff3c9;
+}
+
+.odomThree {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+  margin-bottom: 32px;
+  border: 2px solid #16181d;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.odomThree > div {
+  padding: 22px 24px 6px;
+  border-left: 2px solid #16181d;
+  color: #302d27;
+  font-size: 15px;
+  font-weight: 560;
+  line-height: 1.62;
+}
+
+.odomThree > div:first-child {
+  border-left: 0;
+}
+
+.odomThree span {
+  display: block;
+  color: #16181d;
+}
+
+.odomThree p {
+  margin: 0 0 16px;
+}
+
+/* ── Tables / details ───────────────────────────────────── */
+.odomTableWrap {
+  overflow-x: auto;
+  margin: 16px 0;
+  border: 2px solid #16181d;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.odomTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.odomTable th,
+.odomTable td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(22, 24, 29, .16);
+  text-align: left;
+  vertical-align: top;
+}
+
+.odomTable th {
+  background: #16181d;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.odomTable tr:last-child td {
+  border-bottom: 0;
+}
+
+.odomDetails {
+  margin-top: 22px;
+  border: 2px solid #16181d;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.odomDetails summary {
+  padding: 14px 18px;
+  color: #16181d;
+  font-size: 14px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.odomDetails > div {
+  padding: 0 18px 8px;
+  color: #302d27;
+  font-size: 14.5px;
+  font-weight: 560;
+  line-height: 1.62;
+}
+
+.odomNotes {
+  margin: 4px 0 12px;
+  padding-left: 20px;
+}
+
+.odomNotes li {
+  margin-bottom: 6px;
+}
+
+.odomSource {
+  max-width: 78ch;
+  margin: 26px 0 0;
+  color: #4d483f;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.odomSource a {
+  color: #16181d;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .odomIntro,
+  .odomSplit,
+  .odomCards,
+  .odomGrid2,
+  .odomCallouts {
+    grid-template-columns: 1fr;
+  }
+
+  .odomIntro {
+    gap: 34px;
+  }
+
+  .odomIntro h2 {
+    max-width: 14ch;
+  }
+
+  .odomTall img {
+    max-height: 520px;
+  }
+}
+
+@media (max-width: 700px) {
+  .odomTracks,
+  .odomThree {
+    grid-template-columns: 1fr;
+  }
+
+  .odomTracks {
+    margin-top: 48px;
+  }
+
+  .odomTracks > div,
+  .odomThree > div {
+    border-top: 2px solid #16181d;
+    border-left: 0;
+  }
+
+  .odomTracks > div:first-child,
+  .odomThree > div:first-child {
+    border-top: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .odomPod {
+    padding-block: 62px 76px;
+  }
+
+  .odomIntro h2 {
+    margin-top: 24px;
+    font-size: clamp(38px, 11.5vw, 54px);
+  }
+
+  .odomChapter {
+    margin-top: 64px;
+  }
+
+  .odomCard,
+  .odomCallout {
+    padding-inline: 20px;
+  }
+}
