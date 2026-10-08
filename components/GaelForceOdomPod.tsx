@@ -577,9 +577,10 @@ export default function GaelForceOdomPod() {
             </p>
             <h4>The V2 firmware</h4>
             <p>
-              The V2 firmware is Ronan&apos;s V1 code with the new pin
-              numbers, plus the later ToF mask-order fix and a ToF bench test,
-              at commit <code>986a2f3</code>. I made the V2 pin changes. V1 and V2 firmware are not interchangeable: GPIO 1, 2 and 4 were
+              The V2 firmware is Ronan&apos;s V1 code with my changes on top,
+              at commit <code>986a2f3</code>. I made the V2 pin changes, fixed
+              the order the ToF mask is downloaded in, and added a ToF bench
+              test. V1 and V2 firmware are not interchangeable: GPIO 1, 2 and 4 were
               encoder inputs on V1 and are ToF enable outputs on V2, so
               flashing the wrong firmware drives the wrong wire.
             </p>
