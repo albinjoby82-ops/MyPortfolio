@@ -198,7 +198,7 @@ export default function GaelForceOdomPod() {
             <p>
               This is the whole story so far, from choosing the parts, to a
               breadboard that worked, to a first PCB that taught us something,
-              to a second PCB that is out being made. The design files,
+              to a second PCB that has now been made and soldered. The design files,
               Gerbers, firmware and the original write-up live on GitHub.
             </p>
             <div className="odomLinks">
@@ -521,32 +521,24 @@ export default function GaelForceOdomPod() {
           <div className="odomChapterHead">
             <span className="odomNo">Part 4</span>
             <h3>PCB V2</h3>
-            <span className="odomStatus">Sent for fabrication · not yet tested</span>
+            <span className="odomStatus">Made and soldered · awaiting tests</span>
           </div>
 
           <div className="odomCopy odomWide">
             <p>
-              V2 fixes what went wrong with V1. It has three changes: a fixed
-              IMU ground, a much smaller board, and a pin map that follows
-              where the cables leave the board.
+              V2 fixes what went wrong with V1. It has two changes: a fixed
+              IMU ground, and a pin map that follows where the cables leave
+              the board.
             </p>
           </div>
 
-          <div className="odomThree">
+          <div className="odomThree odomTwo">
             <div>
               <span>The IMU ground</span>
               <p>
                 On V1, the ground trace for the IMU was on the top layer when
                 it should have been on the bottom. V2 has it on the bottom
                 layer.
-              </p>
-            </div>
-            <div>
-              <span>The size</span>
-              <p>
-                V2 is about 60% smaller than V1. On V1 the copper was routed
-                over the top of the ESP32, which took a lot of board. On V2 it
-                is routed underneath the ESP32 instead.
               </p>
             </div>
             <div>
@@ -586,14 +578,60 @@ export default function GaelForceOdomPod() {
             </p>
           </div>
 
+          <h4 className="odomSub">Status</h4>
+          <div className="odomGrid2 odomPhotos">
+            <Figure
+              className="odomTall"
+              src={`${IMG}/04-pcb-v2-board.jpg`}
+              alt="The bare V2 board, a tall narrow green board with white copper traces and silkscreen labels such as 5V, GND, B4 and B3 along the bottom"
+              caption="The V2 board right after it came off the machine at the Elecworkshop."
+            />
+            <Figure
+              src={`${IMG}/04-pcb-v2-soldering.jpg`}
+              alt="Two people soldering parts onto a V2 board held on a breadboard strip, one holding a part in place and the other using a soldering iron"
+              caption="Soldering the V2 board with Selma."
+            />
+          </div>
+
           <div className="odomCallout odomStatusBox">
             <span>Where it stands</span>
             <p>
-              V2 has been sent to the Elecworkshop to be made. It has not been
-              built or tested yet, so there are no results to show. That is the
-              next chapter.
+              The V2 board is soldered and finished. It is waiting to be
+              tested, so there are no results to show yet. That is the next
+              chapter.
             </p>
           </div>
+
+          <h4 className="odomSub">Design files</h4>
+          <div className="odomGrid2">
+            <Figure
+              src={`${IMG}/04-pcb-v2-3d.png`}
+              alt="A 3D render of the V2 board from KiCad: a tall green board with the IMU breakout outline at the top, the ESP32-S3 outline in the middle, four resistors and the level converter below it, and rows of single-pin connectors at the bottom and along the sides"
+              caption="A 3D render of the V2 board from KiCad. The board is long and narrow. The IMU breakout is at the top, the ESP32-S3 is in the middle, and the four resistors and the level converter are below it. The ESP32-S3 and the IMU show only as outlines, because their 3D models are not in the project."
+            />
+            <Figure
+              className="odomTall odomContain"
+              src={`${IMG}/04-pcb-v2-layout.png`}
+              href={gh('hardware/v2/ODOM-V2-pcb-layout.pdf')}
+              alt="The V2 board layout in KiCad, front copper in red and back copper in blue, with traces running from the ESP32-S3 pins to single-pin connectors at the bottom and along the sides"
+              caption="The V2 layout from the KiCad PCB editor. Front copper is red and back copper is blue. Traces run from the ESP32-S3 pins and the level converter to the single-pin connectors at the bottom and along the sides. Click for the PDF on GitHub."
+            />
+          </div>
+          <Figure
+            className="odomWideFig"
+            src={`${IMG}/04-pcb-v2-schematic.png`}
+            href={gh('hardware/v2/ODOM-V2-schematic.pdf')}
+            alt="The V2 schematic: the ESP32-S3 dev board, the IMU breakout, the level converter with four resistors, and a column of single-pin connectors on the right"
+            caption="The V2 schematic: the ESP32-S3 dev board, the IMU breakout, the level converter and four resistors, and a single-pin connector for each off-board wire. Click for the PDF on GitHub."
+          />
+
+          <p className="odomSource">
+            Download the{' '}
+            <a href={gh('hardware/v2/ODOM-V2-schematic.pdf')} target="_blank" rel="noreferrer">schematic</a>,{' '}
+            <a href={gh('hardware/v2/ODOM-V2-pcb-layout.pdf')} target="_blank" rel="noreferrer">PCB layout</a>,{' '}
+            <a href={gh('hardware/v2/gerbers.zip')} target="_blank" rel="noreferrer">Gerbers</a> and the{' '}
+            <a href={gh('hardware/v2', 'tree')} target="_blank" rel="noreferrer">KiCad project</a> from GitHub.
+          </p>
 
           <p className="odomSource">
             Every pin move with its reason is in{' '}
