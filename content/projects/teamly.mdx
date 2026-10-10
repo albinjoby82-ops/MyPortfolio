@@ -1,0 +1,63 @@
+---
+slug: teamly
+order: 7
+kind: Software
+title: Teamly
+year: "2026"
+sortYear: 2026
+tint: "#C6E4F5"
+status: "Hackathon"
+blurb: "A hackathon prototype for student teams: draw your team as a flowchart and every purchase, budget and borrowed tool follows it."
+lede: "Built at Hack UCD in one day with Team 5. Student teams buy things from one shared account and nobody knows who approves what. Teamly makes the org chart the engine: it decides who approves each request, how budgets split by department and who can see which records."
+tags: ["React", "TypeScript", "Vite", "Zustand", "Cloudflare Workers", "OpenRouter", "Stripe"]
+media:
+  type: photo
+  caption: "TODO: add a screenshot of the flowchart builder"
+specs:
+  - { key: "Event", value: "Hack UCD, 10 Oct 2026" }
+  - { key: "Built with", value: "Team 5" }
+  - { key: "Stack", value: "React 18 · TypeScript · Vite" }
+  - { key: "State", value: "Zustand, saved in the browser" }
+  - { key: "Hosting", value: "Cloudflare Workers" }
+  - { key: "AI", value: "OpenRouter, behind a Worker proxy" }
+notes:
+  - heading: "What went wrong"
+    body: "TODO — a real moment from the day, in your words."
+  - heading: "What I learned"
+    body: "TODO — what building this in a day changed about how you work."
+photos: []
+---
+
+## The problem
+
+Student engineering teams, societies and early-stage startups all share one pattern: many people across several departments buy things from one shared account. Nothing connects those purchases to the team's structure, so the same problems keep appearing. Nobody knows who approves what. Department leads cannot see what is left. Teams buy parts they already own. Shared tools go missing. Admin software assumes a company, with fixed roles and approval limits that a rotating student committee does not have.
+
+## The idea
+
+Build your team's structure once, and Teamly routes every purchase to the right person, keeps the money organised and tracks every item your team and the teams around you own. The chart is not a picture. Change it and everything re-routes.
+
+## What it does
+
+- **Team structure.** A drag-and-drop flowchart builder with templates for engineering teams, societies and startups. Drop a box onto another to change who it reports to, and trace any person's approval route.
+- **Purchase requests.** Requests move up the chart: approve, pass up, send back or reject, with a full activity trail. A before-you-buy check searches your own inventory and nearby teams first. Receipt reading is simulated.
+- **Finance.** A mid-season catch-up for teams that join late: import a bank export or a spending sheet, confirm the column mappings, review duplicates and link payments to requests, then preview the budgets before saving.
+- **Inventory.** CSV import with mapping, editable review and duplicate protection, plus manual add and edit, take and return, and sharing with the cluster.
+- **Cluster.** Nearby teams lend chosen items to each other. The owning department's lead approves each borrow request and overdue returns are tracked.
+
+## AI, with guardrails
+
+The finance catch-up makes three real OpenRouter calls through a Cloudflare Worker, so the key never reaches the browser: suggest which CSV columns are date, description and amounts; suggest a department and category for rows the rules could not settle; and write a plain-English summary of totals.
+
+The rules around it matter more than the calls. The AI never calculates, and any number it adds is discarded. Every suggestion carries a confidence score and a person confirms it, and low-confidence rows block the preview until reviewed. Descriptions are redacted in the browser and again in the Worker, and person-to-person transfers are never sent. If the AI is unavailable the import falls back to manual review. The repo includes tests and an evaluation harness run on a synthetic labelled set.
+
+## Stripe sandbox
+
+The landing page offers a simulated €9.99 a month subscription through Stripe test mode, built with a teammate. Live keys are rejected, no real payments are taken and no account access is granted. It is a payment-flow demo.
+
+## Demo data
+
+The demo includes a sample team modelled on GaelForce UCD at week six of the season, with mock purchase requests and a bank export for the catch-up demo.
+
+## Not in scope
+
+Live bank connections, real payments, email delivery and Google sign-in. There is no backend for team data: each visitor gets their own copy in browser storage.

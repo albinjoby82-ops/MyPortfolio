@@ -54,5 +54,5 @@ export const site = {
 } as const;
 
 /** Filter chips on the home page, in display order. */
-export const KINDS = ["Robotics", "Hardware", "Electronics", "Events"] as const;
+export const KINDS = ["Robotics", "Hardware", "Electronics", "Events", "Software"] as const;
 export type Kind = (typeof KINDS)[number];

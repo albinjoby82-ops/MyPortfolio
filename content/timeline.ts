@@ -13,4 +13,11 @@ export type TimelineEntry = {
   slug?: string;
 };
 
-export const timeline: TimelineEntry[] = [];
+export const timeline: TimelineEntry[] = [
+  {
+    year: "2026",
+    title: "Teamly at Hack UCD",
+    body: "Built a prototype in one day with Team 5: a team flowchart that routes purchases, budgets and shared equipment.",
+    slug: "teamly",
+  },
+];
