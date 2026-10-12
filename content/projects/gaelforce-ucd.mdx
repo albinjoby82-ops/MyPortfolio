@@ -22,7 +22,7 @@ specs:
   - { key: "Tools", value: "Fusion 360" }
 notes:
   - heading: "What went wrong"
-    body: "TODO — the part that failed, and what you changed. This card is the most convincing thing on the page, so write it honestly and specifically: what broke, the measurement that was off, what you replaced it with."
+    body: "The ODOM POD's PCB V2 didn't work when I tested it on 12 October. V1 had the IMU ground on the wrong layer, and V2 was meant to fix it, but the ground doesn't exist at all on the built board. The ground for ToF sensors 1 and 3 is on the wrong layer, and Encoder B needs more through holes. The wire to ToF 3 also broke during testing, so that has to be re-done. It took about two hours to debug, and the fixes are planned for Wednesday's team meeting."
   - heading: "What I learned"
     body: "TODO — the lesson you'd give someone starting a VEX U team from nothing. Something you actually do differently now."
 photos: []
