@@ -16,6 +16,12 @@ export type TimelineEntry = {
 export const timeline: TimelineEntry[] = [
   {
     year: "2026",
+    title: "Lock-In study repos",
+    body: "Made up a study method and built a repo for each module with it: Solid State Devices, then Digital Electronics with its own quiz site.",
+    slug: "lock-in",
+  },
+  {
+    year: "2026",
     title: "Teamly at Hack UCD",
     body: "Built a prototype in one day with Team 5: a team flowchart that routes purchases, budgets and shared equipment.",
     slug: "teamly",
