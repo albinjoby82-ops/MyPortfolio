@@ -47,8 +47,7 @@ export const site = {
         accent: true,
       },
       { label: "GitHub", href: "https://github.com/albinjoby82-ops", accent: false },
-      // TODO: swap for your LinkedIn / Instagram handle
-      { label: "LinkedIn", href: "#", accent: false },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/albin-andrews-joby-94a045404", accent: false },
     ],
   },
 } as const;
