@@ -1,9 +1,16 @@
 import './GaelForceOdomPod.css';
+import SummerMeetingWindow, { type FlickPhoto } from './SummerMeetingWindow';
 
 const REPO = 'https://github.com/albinjoby82-ops/ODOM-Wirte-UP';
 const gh = (path: string, kind: 'blob' | 'tree' = 'blob') =>
   `${REPO}/${kind}/HEAD/${path}`;
 const IMG = '/projects/galeforce/odom';
+const CAD_REPO =
+  'https://github.com/albinjoby82-ops/claude-made-cad-files/tree/main/projects';
+const V_POD_REPO = `${CAD_REPO}/2026-11-03-v-odom-pod`;
+const LINEAR_POD_REPO = `${CAD_REPO}/2026-11-03-linear-odom-pods`;
+const BRACE_REPO =
+  'https://github.com/albinjoby82-ops/claude-made-cad-files/tree/main/projects/2026-10-31-odom-wheel-brace';
 
 type Row = string[];
 
@@ -174,6 +181,21 @@ const V2_PINS: Row[] = [
   ['RS-485 DE/RE', '21', '7', 'Nearest free pin that is not a strapping pin'],
 ];
 
+const LINK_PHOTOS: FlickPhoto[] = [
+  {
+    src: `${IMG}/05-link-bad.jpg`,
+    alt: 'The V5 brain screen showing X, Y and H all at 0.0 and LINK: BAD',
+  },
+  {
+    src: `${IMG}/05-link-brain-screen-land.jpg`,
+    alt: 'The V5 brain screen showing the gaelforce program',
+  },
+  {
+    src: `${IMG}/05-link-debugging-land.jpg`,
+    alt: 'Two people debugging the pod wiring with a multimeter',
+  },
+];
+
 export default function GaelForceOdomPod() {
   return (
     <section className="odomPod gutter" aria-labelledby="odom-pod-title">
@@ -181,7 +203,7 @@ export default function GaelForceOdomPod() {
         {/* ── Intro ───────────────────────────────────────────── */}
         <div className="odomIntro">
           <div>
-            <span className="galeForceKicker">05 · The ODOM POD</span>
+            <span className="galeForceKicker">The ODOM POD</span>
             <h2 id="odom-pod-title">
               The V5 is a good motor controller and a poor sensor platform.
             </h2>
@@ -198,7 +220,7 @@ export default function GaelForceOdomPod() {
             <p>
               This is the whole story so far, from choosing the parts, to a
               breadboard that worked, to a first PCB that taught us something,
-              to a second PCB that has now been made and soldered. The design files,
+              to a second PCB that needed a few hand fixes but now works. The design files,
               Gerbers, firmware and the original write-up live on GitHub.
             </p>
             <div className="odomLinks">
@@ -521,14 +543,16 @@ export default function GaelForceOdomPod() {
           <div className="odomChapterHead">
             <span className="odomNo">Part 4</span>
             <h3>PCB V2</h3>
-            <span className="odomStatus">Made and soldered · awaiting tests</span>
+            <span className="odomStatus">Tested · fixed by hand</span>
           </div>
 
           <div className="odomCopy odomWide">
             <p>
-              V2 fixes what went wrong with V1. It has two changes: a fixed
-              IMU ground, and a pin map that follows where the cables leave
-              the board.
+              V2 was meant to fix what went wrong with V1. It has two changes:
+              an IMU ground fix, and a pin map that follows where the cables
+              leave the board. It needed a few hand fixes after testing, but we
+              ended up with a working V2, so the next step is testing the MCL
+              firmware on it.
             </p>
           </div>
 
@@ -537,8 +561,9 @@ export default function GaelForceOdomPod() {
               <span>The IMU ground</span>
               <p>
                 On V1, the ground trace for the IMU was on the top layer when
-                it should have been on the bottom. V2 has it on the bottom
-                layer.
+                it should have been on the bottom. V2 was meant to put it on the
+                bottom layer, but the ground doesn&apos;t exist on the built
+                board, so I fixed it by soldering.
               </p>
             </div>
             <div>
@@ -593,15 +618,6 @@ export default function GaelForceOdomPod() {
             />
           </div>
 
-          <div className="odomCallout odomStatusBox">
-            <span>Where it stands</span>
-            <p>
-              The V2 board is soldered and finished. It is waiting to be
-              tested, so there are no results to show yet. That is the next
-              chapter.
-            </p>
-          </div>
-
           <h4 className="odomSub">Design files</h4>
           <div className="odomGrid2">
             <Figure
@@ -641,6 +657,107 @@ export default function GaelForceOdomPod() {
             . The{' '}
             <a href={gh('docs', 'tree')} target="_blank" rel="noreferrer">full write-up ↗</a>{' '}
             is on GitHub.
+          </p>
+        </div>
+
+        {/* ── 5. The link to the brain ────────────────────────── */}
+        <div className="odomChapter">
+          <div className="odomChapterHead">
+            <span className="odomNo">Part 5</span>
+            <h3>The link to the brain</h3>
+            <span className="odomStatus">Working</span>
+          </div>
+
+          <div className="odomCopy odomWide">
+            <p>
+              Once the PCB was working with the ESP32, Ronan and I started on
+              the link between the pod and the V5 brain. It needed connecting
+              up, and once it was, the brain could read the pod&apos;s data.
+            </p>
+          </div>
+
+          <div className="mt-6 max-w-[680px]">
+            <SummerMeetingWindow
+              photos={LINK_PHOTOS}
+              label="ODOM POD · THE LINK"
+              noun="link photo"
+            />
+          </div>
+        </div>
+
+        {/* ── 6. On the drivetrain ────────────────────────────── */}
+        <div className="odomChapter">
+          <div className="odomChapterHead">
+            <span className="odomNo">Part 6</span>
+            <h3>On the drivetrain</h3>
+            <span className="odomStatus">Waiting for the field</span>
+          </div>
+
+          <div className="odomCopy odomWide">
+            <p>
+              The next step is testing MCL on the real drivetrain, out on the
+              field. For that I designed and 3D printed the odom pods. They
+              are printed and we are waiting for a slot to test them on the
+              field.
+            </p>
+            <p>
+              For the small drivetrain I also made a test brace. It holds two
+              2.75&Prime; tracking wheels at 90&deg; to each other, one for
+              each direction, between the drivetrain&apos;s C-channels and the
+              motors, with an encoder mount built in for each wheel. It is only
+              there so we can test MCL. It is not the final one.
+            </p>
+            <div className="odomLinks">
+              <a href={BRACE_REPO} target="_blank" rel="noreferrer">
+                Brace CAD and design process ↗
+              </a>
+            </div>
+          </div>
+
+          <div className="odomGrid2">
+            <Figure
+              src={`${IMG}/06-odom-brace-onshape-1.png`}
+              href={BRACE_REPO}
+              alt="An Onshape screenshot of the test brace: a light T-shaped brace between four black motors and two C-channels, with an omni wheel under the arm"
+              caption="The test brace between the motors on the small drivetrain, in Onshape."
+            />
+            <Figure
+              src={`${IMG}/06-odom-brace-onshape-2.png`}
+              href={BRACE_REPO}
+              alt="The same Onshape assembly of the test brace from another angle"
+              caption="The same assembly from another angle."
+            />
+          </div>
+
+          <div className="odomCopy odomWide">
+            <h4>Two designs for the big bot</h4>
+            <p>
+              The big bot is a different drivetrain, with a CNC&apos;d
+              baseplate, so it needs its own pods. I have two designs for it.
+              Both are CAD only so far and neither is printed.
+            </p>
+          </div>
+
+          <div className="odomGrid2">
+            <Figure
+              src={`${IMG}/07-v-odom-pod-onshape.png`}
+              href={V_POD_REPO}
+              alt="An Onshape screenshot of the V odom pod: two omni wheels in a V under a flat plate, each with its own housing and a bar across the top"
+              caption="The V pod. Two 2.75″ wheels in a 90° V, each on its own spring-loaded swing arm, bolted on top of the baseplate with the wheels dropping through slots in it. This was the first idea, and the linear pods replaced it."
+            />
+            <Figure
+              src={`${IMG}/07-linear-odom-pods-onshape.png`}
+              href={LINEAR_POD_REPO}
+              alt="An Onshape screenshot of a linear odom pod: a blue carriage inside a frame with a cap, with an omni wheel dropping through the plate and a spring at the axle"
+              caption="The linear pods. Two separate single-wheel pods, placed at 90° to each other wherever there is room. Each wheel is on a carriage that slides on two sprung rails printed into the frame, so the spring force goes straight down instead of through a hinge."
+            />
+          </div>
+
+          <p className="odomSource">
+            CAD and design process for the{' '}
+            <a href={V_POD_REPO} target="_blank" rel="noreferrer">V pod ↗</a>{' '}
+            and the{' '}
+            <a href={LINEAR_POD_REPO} target="_blank" rel="noreferrer">linear pods ↗</a>.
           </p>
         </div>
       </div>

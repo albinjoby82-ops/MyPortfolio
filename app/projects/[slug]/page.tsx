@@ -11,7 +11,9 @@ import CubiWorkflow from "@/components/CubiWorkflow";
 import GaleForceChapterOne from "@/components/GaleForceChapterOne";
 import GaelForceCommunity from "@/components/GaelForceCommunity";
 import GaelForcePrototyping from "@/components/GaelForcePrototyping";
+import GaelForceRecruiting from "@/components/GaelForceRecruiting";
 import GaelForceOdomPod from "@/components/GaelForceOdomPod";
+import PcbProjects from "@/components/PcbProjects";
 import { getProject, getProjects } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -203,7 +205,11 @@ export default async function ProjectPage({
 
       {project.slug === "gaelforce-ucd" && <GaelForcePrototyping />}
 
-      {project.slug === "gaelforce-ucd" && <GaelForceOdomPod />}
+      {project.slug === "gaelforce-ucd" && <GaelForceRecruiting />}
+
+      {project.slug === "pcb-embedded-builds" && (
+        <PcbProjects odom={<GaelForceOdomPod />} />
+      )}
 
       {/* Micromouse interleaves a component mid-story: the body splits at a
           "<!-- posters -->" line, with the poster book between the halves. */}

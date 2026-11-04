@@ -3,7 +3,9 @@
 import { useRef, useState, type TouchEvent } from 'react';
 import './SummerMeetingWindow.css';
 
-const SUMMER_PHOTOS = [
+export type FlickPhoto = { src: string; alt: string; caption?: string };
+
+const SUMMER_PHOTOS: FlickPhoto[] = [
   {
     src: '/projects/galeforce/summer-meetings/meeting-01.jpeg',
     alt: 'GaelForce members reviewing robot concepts during a summer meeting',
@@ -41,20 +43,30 @@ const SUMMER_PHOTOS = [
   },
 ];
 
-export default function SummerMeetingWindow() {
+// Defaults are the summer work log. Pass `photos` and `label` to reuse the
+// same flick-through window for another set of photos.
+export default function SummerMeetingWindow({
+  photos = SUMMER_PHOTOS,
+  label = 'GAELFORCE · SUMMER WORK LOG',
+  noun = 'summer photo',
+}: {
+  photos?: FlickPhoto[];
+  label?: string;
+  noun?: string;
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
-  const activePhoto = SUMMER_PHOTOS[activeIndex];
+  const activePhoto = photos[activeIndex];
 
   function showPrevious() {
     setActiveIndex((current) =>
-      current === 0 ? SUMMER_PHOTOS.length - 1 : current - 1,
+      current === 0 ? photos.length - 1 : current - 1,
     );
   }
 
   function showNext() {
     setActiveIndex((current) =>
-      current === SUMMER_PHOTOS.length - 1 ? 0 : current + 1,
+      current === photos.length - 1 ? 0 : current + 1,
     );
   }
 
@@ -77,10 +89,10 @@ export default function SummerMeetingWindow() {
   return (
     <figure className="summerMeetingWindow">
       <div className="summerMeetingWindowBar">
-        <span>GAELFORCE · SUMMER WORK LOG</span>
+        <span>{label}</span>
         <span aria-live="polite">
           {String(activeIndex + 1).padStart(2, '0')} /{' '}
-          {String(SUMMER_PHOTOS.length).padStart(2, '0')}
+          {String(photos.length).padStart(2, '0')}
         </span>
       </div>
 
@@ -103,25 +115,25 @@ export default function SummerMeetingWindow() {
         />
 
         <div className="summerMeetingControls">
-          <button type="button" onClick={showPrevious} aria-label="Show previous summer photo">
+          <button type="button" onClick={showPrevious} aria-label={`Show previous ${noun}`}>
             ←
           </button>
-          <button type="button" onClick={showNext} aria-label="Show next summer photo">
+          <button type="button" onClick={showNext} aria-label={`Show next ${noun}`}>
             →
           </button>
         </div>
       </div>
 
-      <figcaption>{activePhoto.caption}</figcaption>
+      {activePhoto.caption && <figcaption>{activePhoto.caption}</figcaption>}
 
-      <div className="summerMeetingDots" aria-label="Choose summer work photo">
-        {SUMMER_PHOTOS.map((photo, index) => (
+      <div className="summerMeetingDots" aria-label={`Choose ${noun}`}>
+        {photos.map((photo, index) => (
           <button
             key={photo.src}
             type="button"
             className={index === activeIndex ? 'isActive' : undefined}
             onClick={() => setActiveIndex(index)}
-            aria-label={`Show summer photo ${index + 1}`}
+            aria-label={`Show ${noun} ${index + 1}`}
             aria-current={index === activeIndex ? 'true' : undefined}
           />
         ))}

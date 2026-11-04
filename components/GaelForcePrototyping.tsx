@@ -1,5 +1,4 @@
 import './GaelForcePrototyping.css';
-import GaelForceCad from './GaelForceCad';
 
 export default function GaelForcePrototyping() {
   return (
@@ -58,23 +57,6 @@ export default function GaelForcePrototyping() {
             </p>
           </div>
         </div>
-
-        <div className="gaelForcePrototypeTracks" aria-label="Prototyping workstreams">
-          <div>
-            <span>Physical mock-ups</span>
-            <strong>Drivetrain · Odometry · Claw</strong>
-          </div>
-          <div>
-            <span>CAD studies</span>
-            <strong>Cascade lift · Omni wheels</strong>
-          </div>
-          <div>
-            <span>Design research</span>
-            <strong>Robots · Matches · Mechanisms</strong>
-          </div>
-        </div>
-
-        <GaelForceCad />
       </div>
     </section>
   );
