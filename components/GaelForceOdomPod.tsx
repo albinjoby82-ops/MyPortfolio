@@ -82,55 +82,6 @@ function Details({
   );
 }
 
-const COMPONENTS: { tag: string; title: string; body: string[] }[] = [
-  {
-    tag: 'Brain',
-    title: 'ESP32-S3',
-    body: [
-      'The S3 has hardware quadrature decoding (PCNT) and two cores that map directly onto the I/O and math split the design needs. It also brings three UARTs (console, BNO085, RS-485), ESP-IDF/FreeRTOS, and comes as a cheap, compact module with no exotic sourcing. The N8R8 module has 8 MB of PSRAM, but the build leaves it off: the particle filter is only about 19 KB and runs faster in internal SRAM.',
-      'The alternatives were rejected for concrete reasons. A Raspberry Pi has scheduler jitter and no hardware quadrature decoder. An AVR Arduino counts on interrupts, does software float and has too little RAM. A Teensy 4.1 has a genuinely better encoder peripheral, but it is single-core and a costly rewrite for a problem that is not currently compute-bound. The RT1170 is best on paper, but there is no board suitable for a competition robot. The ESP32-P4 is the upgrade path if compute ever does become the limit.',
-      'Two liabilities need to stay visible. PCNT is 16-bit, so it wraps roughly every 4 revolutions at 8192 CPR, which means the overflow ISR has to be high-priority and sanity-checked. And there is no double-precision FPU, so accidental doubles in the math path are a real failure mode, not a style nitpick.',
-    ],
-  },
-  {
-    tag: 'Odometry',
-    title: '2× AMT102-V encoders',
-    body: [
-      'These give 8192 CPR (2048 PPR × 4), which on a 2.75" wheel works out to roughly 0.027 mm per count, against 0.054 mm for the V5 Rotation Sensor and 0.61 mm for the ADI optical encoder.',
-      'But resolution is not actually the win. Both smart-sensor options already sit far below the real error floor of the system, so squeezing more counts out of them would not move the needle. The real win is zero transport delay versus smart-port polling, and that only exists because the encoders go through the ESP32. Wired into ADI ports instead, they would have to be throttled to 96 PPR, which throws away the entire reason for buying them.',
-      'The trade-off worth naming: these are incremental encoders, with no absolute position across power cycles. That is fine here, because pose is seeded with SET_POSE at the start rather than recovered from the encoders. Their 5 V outputs go through an SN74LVC245 buffer down to 3.3 V logic. The physical setup is two-pod diamond odometry, with heading supplied separately by the IMU.',
-    ],
-  },
-  {
-    tag: 'Heading',
-    title: 'BNO085 IMU, UART-RVC mode',
-    body: [
-      'The deciding factor is bias handling under this robot’s usage pattern. The BNO085’s SH-2 firmware re-estimates gyro bias whenever the robot is stationary, and this robot stops every couple of seconds, so it gets frequent bias refreshes for free. The V5’s own IMU calibrates once at init and then runs open-loop as it warms up. Since heading error couples directly into position error, that matters more than raw sensor specs.',
-      'Timing tells the same story: the BNO085 free-runs at 100 Hz and the ESP32 timestamps every frame, versus a polled V5 IMU whose jitter is never observable from outside. It also holds up under hard impacts in a way the V5 IMU does not.',
-      'RVC mode was chosen because it sends unsolicited 19-byte frames at 115200 baud with no host protocol overhead, and because it does not share the I²C bus with the ToF sensors, which keeps the IMU’s timing independent of whatever the ToF chain is doing. Two wiring details are deliberate: PS0 is tied to the rail via the breakout’s own solder jumper rather than a GPIO, to avoid a power-sequencing race, and RST goes to GPIO 38 so firmware can re-latch the mode if needed.',
-      'Two parts were rejected on paper, not in practice. The ICM-42688-P and ADIS16505 both have better raw bias stability, but neither has onboard sensor fusion. Given how often this robot stops, the plan is to keep the BNO085 and add zero-velocity updates (ZUPTs) on top, rather than chase raw IMU specs that matter less for this usage pattern.',
-    ],
-  },
-  {
-    tag: 'Ground truth',
-    title: '4× TMF8821 ToF sensors',
-    body: [
-      'These exist to bound odometry drift by giving the particle filter absolute corrections. Odometry alone only ever gets worse over time, and something has to anchor it back to the field.',
-      'Multizone sensing matters because a single TMF8821 yields both perpendicular distance and wall angle from one reading. That angle constrains heading directly, which is what is needed to hit the ±2° target, but only if the zones are pre-processed into a (distance, angle) pair before they reach the filter. Feeding raw zones in as independent measurements breaks the math.',
-      'One sensor faces each direction (front, right, rear, left), so some wall is visible from almost anywhere on the field, and they are staggered at 90° phase offsets to smooth corrections over time and spread CPU load. They are at their best near walls at close to normal incidence, which is exactly where Gate 2 is measured. They have no moving parts to take hits, and each reading is a single snapshot with no scan skew to correct for.',
-      'The known weaknesses are real: each zone covers roughly 10°, so readings start blending in clutter at range; readings are biased at oblique angles; and the sensor only delivers about 15 Hz in 4×4 mode. A 2D lidar (LD06 or STL-27L) is the fallback, but only if the characterization matrix actually fails.',
-    ],
-  },
-  {
-    tag: 'Link',
-    title: 'RS-485 to the V5',
-    body: [
-      'The smart port is physically RS-485 under the hood, so the ESP32 side uses an SP3485 half-duplex transceiver with hardware DE/RE control to match. The brain stays bus master throughout, using request/response framing to avoid bus contention.',
-      'The link runs at 230400 baud rather than the 460800 the latency analysis assumed, because the V5’s oscillator carries roughly 1.5% error at 460800 against a 2–3% total error budget, which is not enough margin to run that fast safely. kLinkBaud lives in link.hpp as the single source of truth. The latency numbers quoted above were measured at 460800 and still need re-running at 230400.',
-    ],
-  },
-];
-
 const PIN_MAP: Row[] = [
   ['Vertical encoder', 'A', '1'],
   ['Vertical encoder', 'B', '2'],
@@ -218,10 +169,11 @@ export default function GaelForceOdomPod() {
               never touches a motor command.
             </p>
             <p>
-              This is the whole story so far, from choosing the parts, to a
-              breadboard that worked, to a first PCB that taught us something,
-              to a second PCB that needed a few hand fixes but now works. The design files,
-              Gerbers, firmware and the original write-up live on GitHub.
+              This page starts at the breadboard that worked, then goes to a
+              first PCB that taught us something, a second PCB that needed a
+              few hand fixes but now works, and the pods for the drivetrain.
+              Why I chose each part is in the full write-up on GitHub, along
+              with the design files, Gerbers and firmware.
             </p>
             <div className="odomLinks">
               <a href={REPO} target="_blank" rel="noreferrer">
@@ -252,76 +204,10 @@ export default function GaelForceOdomPod() {
           </div>
         </div>
 
-        {/* ── 1. Components ───────────────────────────────────── */}
+        {/* ── 1. Breadboard ───────────────────────────────────── */}
         <div className="odomChapter">
           <div className="odomChapterHead">
             <span className="odomNo">Part 1</span>
-            <h3>Why these components</h3>
-          </div>
-
-          <div className="odomCopy odomWide">
-            <h4>Sensing on an ESP32-S3, motion control on the V5</h4>
-            <p>
-              Every choice in this pod traces back to one split. The V5
-              can&apos;t host these sensors well. Smart ports run a closed
-              RS-485 protocol, the brain exposes no user I²C, SPI or UART for
-              a BNO085 or TMF8821s, and the ADI 3-wire quadrature path was
-              designed around 360 CPR encoders and drops counts once
-              you&apos;re running 8192 CPR. Even where the brain can read a
-              sensor, smart-port devices are polled on the same bus as motor
-              commands, with a 10 ms default and a 5 ms floor, so the data a
-              controller sees is stale and jittery by the time it arrives. On
-              the ESP32, an encoder read is a direct register access, the IMU
-              is a timestamped 100 Hz stream, and dt is known exactly rather
-              than inferred.
-            </p>
-            <p>
-              That precision needs somewhere to run without interference. Core
-              0 handles all I/O; Core 1 runs the math, including 200 Hz MCL
-              prediction, with nothing from the PROS scheduler competing for
-              cycles. That two-core split is the design intent. The first
-              breadboard build runs everything in one task at 100 Hz, which was
-              enough to prove the sensors and the link.
-            </p>
-            <p>
-              None of this makes the V5 obsolete as a pose source. It never was
-              one. The brain carries no IMU and no tracking encoders of its
-              own. LinkPoseSource is its only pose source, and the custom PROS
-              motion code consumes it through IPoseSource, which is why
-              runMotion gates on healthy(), staleness and bootId: it has to
-              assume the link can go bad. Motion control itself stays on the
-              V5 for two reasons that aren&apos;t up for debate. Motors must be
-              VEX, and you never put a network link inside a feedback loop.
-            </p>
-            <p>
-              It&apos;s worth being honest about what this buys. End-to-end
-              latency over the link is roughly at parity with reading native
-              V5 sensors over the smart port (about 13 ms mean and 26 ms tail
-              in the 460800 baud, 200 Hz analysis). The real advantage
-              isn&apos;t speed, it&apos;s determinism: synchronous sampling,
-              timestampable delay, and access to sensors the brain physically
-              cannot read. And it&apos;s legal, because VUR12 explicitly
-              allows external electronics and non-VEX sensors.
-            </p>
-          </div>
-
-          <div className="odomCards">
-            {COMPONENTS.map((c) => (
-              <article key={c.title} className="odomCard">
-                <span>{c.tag}</span>
-                <h4>{c.title}</h4>
-                {c.body.map((p) => (
-                  <p key={p.slice(0, 32)}>{p}</p>
-                ))}
-              </article>
-            ))}
-          </div>
-        </div>
-
-        {/* ── 2. Breadboard ───────────────────────────────────── */}
-        <div className="odomChapter">
-          <div className="odomChapterHead">
-            <span className="odomNo">Part 2</span>
             <h3>What we built on the breadboard</h3>
           </div>
 
@@ -334,7 +220,10 @@ export default function GaelForceOdomPod() {
             />
             <div className="odomCopy">
               <p>
-                When the parts arrived, we wired every component from Part 1
+                When the parts arrived, we wired every component from the{' '}
+                <a href={REPO} target="_blank" rel="noreferrer">
+                  write-up
+                </a>{' '}
                 onto a breadboard and flashed one firmware image to the
                 ESP32-S3.
               </p>
@@ -351,7 +240,7 @@ export default function GaelForceOdomPod() {
                 once a second.
               </p>
               <p>
-                It differs from the design intent in Part 1 in three ways: one
+                It differs from the design intent in the write-up in three ways: one
                 task at 100 Hz instead of the two-core split, PSRAM left off,
                 and one median distance per ToF sensor going to the filter
                 instead of a distance-and-angle pair.
@@ -427,10 +316,10 @@ export default function GaelForceOdomPod() {
           </p>
         </div>
 
-        {/* ── 3. PCB V1 ───────────────────────────────────────── */}
+        {/* ── 2. PCB V1 ───────────────────────────────────────── */}
         <div className="odomChapter">
           <div className="odomChapterHead">
-            <span className="odomNo">Part 3</span>
+            <span className="odomNo">Part 2</span>
             <h3>PCB V1</h3>
           </div>
 
@@ -538,10 +427,10 @@ export default function GaelForceOdomPod() {
           </p>
         </div>
 
-        {/* ── 4. PCB V2 ───────────────────────────────────────── */}
+        {/* ── 3. PCB V2 ───────────────────────────────────────── */}
         <div className="odomChapter">
           <div className="odomChapterHead">
-            <span className="odomNo">Part 4</span>
+            <span className="odomNo">Part 3</span>
             <h3>PCB V2</h3>
             <span className="odomStatus">Tested · fixed by hand</span>
           </div>
@@ -660,10 +549,10 @@ export default function GaelForceOdomPod() {
           </p>
         </div>
 
-        {/* ── 5. The link to the brain ────────────────────────── */}
+        {/* ── 4. The link to the brain ────────────────────────── */}
         <div className="odomChapter">
           <div className="odomChapterHead">
-            <span className="odomNo">Part 5</span>
+            <span className="odomNo">Part 4</span>
             <h3>The link to the brain</h3>
             <span className="odomStatus">Working</span>
           </div>
@@ -685,10 +574,10 @@ export default function GaelForceOdomPod() {
           </div>
         </div>
 
-        {/* ── 6. On the drivetrain ────────────────────────────── */}
+        {/* ── 5. On the drivetrain ────────────────────────────── */}
         <div className="odomChapter">
           <div className="odomChapterHead">
-            <span className="odomNo">Part 6</span>
+            <span className="odomNo">Part 5</span>
             <h3>On the drivetrain</h3>
             <span className="odomStatus">Waiting for the field</span>
           </div>
