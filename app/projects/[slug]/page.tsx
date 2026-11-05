@@ -174,6 +174,7 @@ export default async function ProjectPage({
               backgroundImage: project.media.src
                 ? `url(${project.media.src})`
                 : undefined,
+              backgroundPosition: project.media.position,
             }}
           >
             {!project.media.src && project.media.type === "video" && (

@@ -12,6 +12,8 @@ export type Media = {
   src?: string;
   poster?: string;
   caption?: string;
+  /** CSS background-position for the cover crop, e.g. "50% 75%". */
+  position?: string;
 };
 
 export type Project = {
