@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import SnowflakePcb from "./SnowflakePcb";
 
 type PcbProject = {
   id: string;
@@ -20,9 +21,9 @@ const PROJECTS: PcbProject[] = [
   {
     id: "project-2",
     no: "Project 2",
-    title: "TODO — name",
-    blurb: "TODO — one line on what it is and what it's for.",
-    todo: true,
+    title: "Snowflake",
+    blurb:
+      "A simple 5 V snowflake-shaped PCB with six LEDs, each with its own resistor. All through-hole.",
   },
 ];
 
@@ -59,16 +60,14 @@ export default function PcbProjects({ odom }: { odom: ReactNode }) {
         {odom}
       </div>
 
-      <section id="project-2" className="scroll-mt-6 pb-14 gutter">
-        <span className="inline-block rounded-[6px] bg-ink px-3 py-[5px] text-[12px] font-bold uppercase tracking-[0.1em] text-paper">
-          {PROJECTS[1].no} · {PROJECTS[1].title}
-        </span>
-        <div className="mt-5 rounded-[16px] border-2 border-dashed border-ink p-8">
-          <p className="text-[16px] leading-[1.65] text-muted">
-            TODO — the second build goes here once I have the details.
-          </p>
+      <div id="project-2" className="scroll-mt-6 pb-14">
+        <div className="gutter pb-2">
+          <span className="inline-block rounded-[6px] bg-ink px-3 py-[5px] text-[12px] font-bold uppercase tracking-[0.1em] text-paper">
+            {PROJECTS[1].no} · {PROJECTS[1].title}
+          </span>
         </div>
-      </section>
+        <SnowflakePcb />
+      </div>
     </>
   );
 }
