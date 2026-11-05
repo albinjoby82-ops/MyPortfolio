@@ -112,7 +112,7 @@ export default async function ProjectPage({
       </section>
 
       {/* Hero media — real video/image when supplied, tinted block until then. */}
-      {project.slug !== "dublin-micromouse-open" && (<section className="pb-11 gutter">
+      {project.slug !== "dublin-micromouse-open" && project.slug !== "teamly" && (<section className="pb-11 gutter">
         {project.slug === "cubi" && project.media.src ? (
           <div className="grid overflow-hidden rounded-[16px] border-2 border-ink bg-[#111525] shadow-[var(--shadow-hard)] md:grid-cols-[44%_56%]">
             <div className="relative min-h-[520px] overflow-hidden md:min-h-[650px]">
