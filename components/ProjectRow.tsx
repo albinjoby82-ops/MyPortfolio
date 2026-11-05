@@ -33,6 +33,7 @@ export default function ProjectRow({ project }: { project: Project }) {
         className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[10px] bg-cover bg-center text-[13px] font-bold text-[rgba(22,24,29,0.45)]"
         style={{
           backgroundColor: project.tint,
+          backgroundPosition: project.media.position,
           backgroundImage: project.media.src && project.slug !== "cubi"
             ? `url(${project.media.src})`
             : undefined,
