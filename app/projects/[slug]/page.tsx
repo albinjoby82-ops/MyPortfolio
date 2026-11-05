@@ -2,8 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Panel from "@/components/Panel";
 import Prose from "@/components/Prose";
-import MicromousePosters from "@/components/MicromousePosters";
-import MicromouseDeck from "@/components/MicromouseDeck";
+import MicromouseChapters from "@/components/MicromouseChapters";
 import CubiPortal from "@/components/CubiPortal";
 import CubiLogoLab from "@/components/CubiLogoLab";
 import CubiColourLab from "@/components/CubiColourLab";
@@ -215,25 +214,14 @@ export default async function ProjectPage({
         <PcbProjects odom={<GaelForceOdomPod />} />
       )}
 
-      {/* Micromouse interleaves a component mid-story: the body splits at a
-          "<!-- posters -->" line, with the poster book between the halves. */}
-      {project.body && (
+      {/* Micromouse is told as a three-chapter book (copy lives in the
+          component; the MDX body is kept as the plain-text source). */}
+      {project.slug === "dublin-micromouse-open" && <MicromouseChapters />}
+
+      {project.body && project.slug !== "dublin-micromouse-open" && (
         <section className="pb-14 gutter">
           <h2 className="eyebrow mb-6 block">The build</h2>
-          <Prose>{project.body.split("<!-- posters -->")[0]}</Prose>
-        </section>
-      )}
-
-      {project.slug === "dublin-micromouse-open" && <MicromousePosters />}
-
-      {project.body?.includes("<!-- posters -->") && (
-        <section className="pb-14 gutter">
-          {project.body.split("<!-- posters -->")[1].split("<!-- deck -->").map((part, i) => (
-            <div key={i}>
-              {i > 0 && <MicromouseDeck />}
-              <Prose>{part}</Prose>
-            </div>
-          ))}
+          <Prose>{project.body}</Prose>
         </section>
       )}
 

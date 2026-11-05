@@ -34,7 +34,7 @@ export default function RootLayout({
       <body>
         {/* The page shell: a 1440px sheet of paper floating on the desk. */}
         <div className="mx-auto max-w-[1440px] px-0 py-0 md:p-[26px]">
-          <div className="overflow-hidden rounded-[20px] bg-paper shadow-[var(--shadow-shell)]">
+          <div className="overflow-clip rounded-[20px] bg-paper shadow-[var(--shadow-shell)]">
             <Nav />
             {children}
           </div>

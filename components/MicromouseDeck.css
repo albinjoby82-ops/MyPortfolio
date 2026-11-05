@@ -22,8 +22,8 @@
   letter-spacing: .11em;
 }
 .mmdBar a { color: #f5c63c; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-.mmdWindow iframe { display: block; width: 100%; height: 680px; border: 0; background: #f5f3ed; }
+.mmdWindow iframe { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; background: #f5f3ed; }
 @media (max-width: 760px) {
   .mmdWindow { box-shadow: 5px 5px 0 #16181d; margin-bottom: 44px; }
-  .mmdWindow iframe { height: 460px; }
+  .mmdWindow iframe { height: auto; }
 }

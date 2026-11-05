@@ -14,7 +14,7 @@ export default function MicromouseDeck() {
         </a>
       </div>
       <iframe
-        src="/projects/micromouse/sponsorship-deck.pdf#view=FitH&navpanes=0"
+        src="/projects/micromouse/sponsorship-deck.pdf#toolbar=0&navpanes=0&view=Fit"
         title="Dublin Micromouse Open sponsorship deck"
         loading="lazy"
       />
