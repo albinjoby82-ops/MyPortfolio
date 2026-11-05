@@ -111,6 +111,16 @@ export default async function ProjectPage({
         </div>
       </section>
 
+      {project.slug === "dublin-micromouse-open" && (
+        <section className="pb-11 gutter">
+          <img
+            src="/projects/micromouse/cover.webp"
+            alt="The welcome slide on the projector above the finished maze, with a mouse sitting in it"
+            className="aspect-[16/8] w-full rounded-[16px] border-2 border-ink object-cover object-[50%_30%] shadow-[var(--shadow-hard)]"
+          />
+        </section>
+      )}
+
       {/* Hero media — real video/image when supplied, tinted block until then. */}
       {project.slug !== "dublin-micromouse-open" && project.slug !== "teamly" && (<section className="pb-11 gutter">
         {project.slug === "cubi" && project.media.src ? (
