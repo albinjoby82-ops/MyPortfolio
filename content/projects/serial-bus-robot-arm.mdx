@@ -20,11 +20,7 @@ specs:
   - { key: "Controller", value: "Waveshare Serial Bus Servo Driver" }
   - { key: "Power", value: "12 V, 10 A" }
   - { key: "Software", value: "Python · URDF" }
-notes:
-  - heading: "What went wrong"
-    body: "The software stopped detecting the servos when scanning the bus. Rather than assume the code was at fault, I worked through the full chain: computer, controller, bus, servo, power. That traced it to a likely fault in the servo driver board itself."
-  - heading: "What I learned"
-    body: "Controlling a robot at the joint level and controlling it in Cartesian space are fundamentally different problems. A robot that works in software doesn't necessarily work in the real world. Backlash, tolerances, friction and wiring all show up eventually."
+notes: []
 photos: []
 ---
 
