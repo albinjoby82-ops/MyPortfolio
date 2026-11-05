@@ -13,6 +13,7 @@ import GaelForceCommunity from "@/components/GaelForceCommunity";
 import GaelForcePrototyping from "@/components/GaelForcePrototyping";
 import GaelForceRecruiting from "@/components/GaelForceRecruiting";
 import GaelForceOdomPod from "@/components/GaelForceOdomPod";
+import RobotArmTesting from "@/components/RobotArmTesting";
 import PcbProjects from "@/components/PcbProjects";
 import { getProject, getProjects } from "@/lib/projects";
 
@@ -191,6 +192,8 @@ export default async function ProjectPage({
           </p>
         )}
       </section>)}
+
+      {project.slug === "serial-bus-robot-arm" && <RobotArmTesting />}
 
       {project.slug === "cubi" && <CubiPortal />}
 

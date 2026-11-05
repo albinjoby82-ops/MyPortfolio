@@ -1,0 +1,155 @@
+.armTest {
+  padding-block: 88px 104px;
+  border-top: 2px solid #16181d;
+  background: #ee8570;
+  background-image: radial-gradient(#16181d22 1.4px, transparent 1.4px);
+  background-size: 22px 22px;
+}
+
+.armTestInner {
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+.armTestHead {
+  display: grid;
+  gap: 22px;
+  max-width: 820px;
+  margin-bottom: 64px;
+}
+
+.armTestKicker {
+  justify-self: start;
+  border: 2px solid #16181d;
+  border-radius: 7px;
+  padding: 8px 12px;
+  background: #fff;
+  color: #16181d;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.armTestHead h2 {
+  margin: 0;
+  color: #16181d;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: clamp(48px, 7vw, 104px);
+  font-weight: 800;
+  letter-spacing: -.065em;
+  line-height: .88;
+}
+
+.armTestHead p {
+  max-width: 52ch;
+  margin: 0;
+  color: #16181d;
+  font-size: 18px;
+  font-weight: 560;
+  line-height: 1.55;
+}
+
+.armTestGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 38px 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.armTestCard {
+  transform: rotate(var(--tilt));
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  border: 2px solid #16181d;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 4px 4px 0 #16181d;
+  overflow: hidden;
+}
+
+.armTestCard:hover {
+  transform: rotate(0deg) translateY(-2px);
+  box-shadow: 6px 6px 0 #16181d;
+}
+
+.armTestCard.isWide {
+  grid-column: span 2;
+}
+
+.armTestMedia {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  background: #16181d;
+  border-bottom: 2px solid #16181d;
+}
+
+.isWide .armTestMedia {
+  aspect-ratio: 16 / 12;
+}
+
+.armTestMedia video,
+.armTestMedia img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.isWide .armTestMedia video {
+  object-fit: contain;
+}
+
+.armTestNo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 6px;
+  padding: 3px 8px;
+  background: #16181d;
+  color: #f6d776;
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  pointer-events: none;
+}
+
+.armTestCaption {
+  display: grid;
+  gap: 3px;
+  padding: 12px 14px 14px;
+  color: #302d27;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.armTestCaption strong {
+  color: #16181d;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+
+.armTestTag {
+  color: #b8452d;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1000px) {
+  .armTestGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 520px) {
+  .armTest { padding-block: 64px 72px; }
+  .armTestGrid { gap: 28px 14px; }
+  .armTestCard.isWide { grid-column: span 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .armTestCard { transform: none; }
+}
