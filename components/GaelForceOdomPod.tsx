@@ -733,8 +733,9 @@ export default function GaelForceOdomPod() {
             <h4>Two designs for the big bot</h4>
             <p>
               The big bot is a different drivetrain, with a CNC&apos;d
-              baseplate, so it needs its own pods. I have two designs for it.
-              Both are CAD only so far and neither is printed.
+              baseplate, so it needs its own pods. I have two designs for it,
+              plus a newer version further down. The first two are CAD only so
+              far and neither is printed.
             </p>
           </div>
 
@@ -759,6 +760,23 @@ export default function GaelForceOdomPod() {
             and the{' '}
             <a href={LINEAR_POD_REPO} target="_blank" rel="noreferrer">linear pods ↗</a>.
           </p>
+
+          <div className="odomCopy odomWide">
+            <h4>Another version</h4>
+            <p>
+              I have since made another version of the pod. It keeps one
+              wheel per pod, but the wheel now sits in a window in a flat
+              orange arm, with a vertical guide post at each end of the arm
+              and a base flange under each end that bolts down.
+            </p>
+          </div>
+
+          <Figure
+            className="odomWideFig"
+            src={`${IMG}/08-odom-pod-another-version-onshape.jpg`}
+            alt="An Onshape screenshot of another odom pod version: a 2.75 inch omni wheel in a window in a flat orange arm, with a vertical guide post and cap at each end of the arm and a light blue base flange with screw holes under each end"
+            caption="The other version of the pod, in Onshape. The omni wheel sits in a window in the orange arm, with a guide post and cap at each end, and a blue base flange under each end."
+          />
         </div>
       </div>
     </section>
