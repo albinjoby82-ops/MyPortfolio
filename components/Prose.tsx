@@ -57,6 +57,12 @@ export default function Prose({ children }: { children: string }) {
               {children}
             </code>
           ),
+          // A highlighted callout bubble, used for a short personal intro.
+          blockquote: ({ children }) => (
+            <blockquote className="mb-10 rounded-[20px] border-[3px] border-ink bg-sun p-7 text-ink shadow-[var(--shadow-hard)] md:p-8 [&>p]:text-[18px] [&>p]:leading-[1.6] [&>p:last-child]:mb-0">
+              {children}
+            </blockquote>
+          ),
           hr: () => <hr className="my-10 border-t-2 border-hairline" />,
         }}
       >
