@@ -17,7 +17,7 @@ export const site = {
   heroHeadline: "Robots, circuit boards, and a team built from scratch.",
 
   heroLede:
-    "Engineering student at UCD. I co-founded Ireland's first VEX U robotics team, started a small NFC hardware company, and set up a national micromouse competition.",
+    "Engineering student at UCD. I co-founded Ireland's first VEX U robotics team, started a small NFC hardware company, and led the team behind a national micromouse competition.",
 
   /** Hero buttons. */
   primaryCta: { label: "See what I've built", href: "#projects" },

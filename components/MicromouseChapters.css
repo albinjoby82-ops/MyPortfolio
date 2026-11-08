@@ -202,3 +202,16 @@
 .mmcReelClip iframe { width: 328px; height: 1000px; }
 
 .mmcFour { grid-template-columns: repeat(auto-fit, minmax(min(100%,300px), 1fr)); }
+
+.mmcCh4 { background: #f5c63c; border-top: 2px solid var(--ink); }
+.mmcCh5 { background: #fbf8f1; border-top: 2px solid var(--ink); }
+.mmcPosts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,340px), 1fr)); gap: 28px; margin-top: 56px; align-items: start; }
+.mmcPosts .socialWindow { margin: 0; }
+.mmcEmpty { margin: 56px 0 0; padding: 40px 20px; border: 2px dashed rgba(22,24,29,.4); border-radius: 14px; text-align: center; font-weight: 700; color: rgba(22,24,29,.6); }
+.mmcCredits { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,280px), 1fr)); gap: 18px; }
+.mmcCredits li { padding: 18px; border: 2px solid var(--ink); border-radius: 14px; background: #fff; box-shadow: 4px 4px 0 var(--ink); }
+.mmcCredits b { display: block; font-family: var(--font-display); font-size: 22px; font-weight: 800; letter-spacing: -.03em; color: var(--ink); }
+.mmcCredits span { display: block; margin-top: 6px; font-size: 14.5px; line-height: 1.55; color: var(--body); }
+
+.mmcCreditsProse { max-width: 70ch; margin-top: 56px; font-size: 18px; line-height: 1.75; }
+.mmcCreditsProse p { margin-bottom: 22px; }

@@ -12,12 +12,13 @@ export function linkedInEmbedUrl(post: string): string | undefined {
     urn = `urn:li:share:${trimmed}`;
   } else {
     const fromUpdate = trimmed.match(/urn:li:(activity|share|ugcPost):(\d+)/i);
-    const fromSlug = trimmed.match(/activity[-:](\d{15,})/i);
+    const fromSlug = trimmed.match(/(activity|share|ugcPost)[-:](\d{15,})/i);
 
     if (fromUpdate) {
       urn = `urn:li:${fromUpdate[1]}:${fromUpdate[2]}`;
     } else if (fromSlug) {
-      urn = `urn:li:activity:${fromSlug[1]}`;
+      const kind = fromSlug[1].toLowerCase() === 'ugcpost' ? 'ugcPost' : fromSlug[1].toLowerCase();
+      urn = `urn:li:${kind}:${fromSlug[2]}`;
     }
   }
 

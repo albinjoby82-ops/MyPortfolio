@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import MicromousePosters from './MicromousePosters';
 import MicromouseDeck from './MicromouseDeck';
+import SocialPost from './SocialPost';
 import './MicromouseChapters.css';
 
 /**
@@ -18,12 +19,14 @@ const MouseCadViewer = dynamic(() => import('./MouseCadViewer'), {
   loading: () => <div className="mmcCad" />,
 });
 
-type Chapter = 1 | 2 | 3;
+type Chapter = 1 | 2 | 3 | 4 | 5;
 
 const CHAPTERS: { n: Chapter; tab: string; bg: string }[] = [
   { n: 1, tab: 'The idea', bg: '#fbf8f1' },
   { n: 2, tab: 'Design & prep', bg: '#ee8570' },
   { n: 3, tab: 'The hype & the day', bg: '#f5f3ed' },
+  { n: 4, tab: 'Aftermath', bg: '#f5c63c' },
+  { n: 5, tab: 'Credits', bg: '#fbf8f1' },
 ];
 
 /* ---- Media primitives ------------------------------------------------ */
@@ -205,9 +208,9 @@ function ChapterOne() {
 
         <div className="mmcIntro">
           <div className="mmcProse">
-            <p>I designed the whole event around one rule: nobody should need to know anything already. No robotics, no embedded programming, no soldering. Most people assume a robot competition is for people who have already built robots, so I wanted to make one for the people who haven&apos;t.</p>
+            <p>We designed the whole event around one rule: nobody should need to know anything already. No robotics, no embedded programming, no soldering. Most people assume a robot competition is for people who have already built robots, so we wanted to make one for the people who haven&apos;t.</p>
             <p>That rule decided almost everything else. Every team got the same kit, so nobody could get ahead by buying better parts. There was a briefing to start the day, mentors and postgraduate demonstrators on the floor throughout, and learning material published before the day.</p>
-            <p>It also decided where I spent my time. I presoldered the components with the team, so that beginners were not learning to solder on the day, and I worked on the help section of the website, making sure there was a step-by-step plan anyone could follow. That is what let teams spend the six hours building a robot instead of working out the tools.</p>
+            <p>It also decided where the team spent its time. We presoldered the components, so that beginners were not learning to solder on the day, and built a help section on the website with a step-by-step plan anyone could follow. That is what let teams spend the six hours building a robot instead of working out the tools.</p>
           </div>
           <article className="mmcPost mmcLuma">
             <header className="mmcPostBar">
@@ -246,10 +249,10 @@ function ChapterOne() {
         <div className="mmcSell">
           <div>
             <span className="mmcEyebrow">Selling the vision</span>
-            <h3>I threw out the old deck and built one for the event.</h3>
+            <h3>We threw out the old deck and built one for the event.</h3>
           </div>
           <div className="mmcProse">
-            <p>ElecSoc already had a sponsorship deck. It described the society, and what I needed to sell was the vision for one event. So I designed a new deck from the ground up for Micromouse.</p>
+            <p>ElecSoc already had a sponsorship deck. It described the society, and what we needed to sell was the vision for one event. So we designed a new deck from the ground up for Micromouse.</p>
             <p>It makes the case in a fixed order: why Ireland needs a competition like this, proof that ElecSoc can deliver, how Micromouse works, and then the ask. The ask was three tiers of partnership, from €200 to €1,200+, accepted as cash, product or in kind.</p>
           </div>
         </div>
@@ -260,7 +263,7 @@ function ChapterOne() {
 
         <div className="mmcSubHead">
           <span>The deck sold our credibility.</span>
-          <p>I did not land any cash sponsors. What the deck did was make the event look credible enough that people backed it in other ways.</p>
+          <p>We did not land any cash sponsors. What the deck did was make the event look credible enough that people backed it in other ways.</p>
         </div>
         <div className="mmcBackers">
           {BACKERS.map((b) => (
@@ -380,7 +383,7 @@ function ChapterTwo() {
           n="02"
           name="Design & prep"
           title="Same box of parts. Every team."
-          aside="My team designed and 3D printed the mouse itself. We made 25 kits for the 20 teams and presoldered every one, so all a team had to bring was a battery."
+          aside="The team designed and 3D printed the mouse itself. We made 25 kits for the 20 teams and presoldered every one, so all a team had to bring was a battery."
         />
         <div className="mmcTimeline">
           <span className="mmcSpine" aria-hidden="true" />
@@ -437,7 +440,7 @@ function ChapterTwo() {
                 </div>
               }
             >
-              I presoldered the components with the team, so that beginners were not learning to solder on the day.
+              The team presoldered the components, so that beginners were not learning to solder on the day.
             </Post>
           </Step>
 
@@ -580,6 +583,7 @@ function ChapterThree() {
               media={
                 <div className="mmcGrid mmcMaze">
                   <Video label="Walking the floor during the day" chip="ON THE DAY" ratio="16 / 9" size={72} rust className="mmcFull" src="/projects/micromouse/day/race.mp4" poster="/projects/micromouse/day/race-poster.jpg" />
+                  <Slot label="Teams crowding round the maze, laptop in hand, as a mouse sets off" src="/projects/micromouse/day/race-crowd.webp" ratio="16 / 10" className="mmcFull" />
                   <Slot label="A mouse waiting at the edge of the maze" src="/projects/micromouse/day/race-mouse-maze.webp" ratio="4 / 3" />
                   <Slot label="Close-up of a mouse and its wiring in a corridor" src="/projects/micromouse/day/race-wires.webp" ratio="4 / 3" />
                   <Slot label="Competitors watching a run at the maze" src="/projects/micromouse/day/race-watching.webp" ratio="4 / 3" />
@@ -598,6 +602,69 @@ function ChapterThree() {
   );
 }
 
+/* ---- Chapter 4: aftermath -------------------------------------------- */
+
+// LinkedIn post URLs about the event. Paste each full post URL here.
+const AFTERMATH_POSTS: { url: string; caption?: string }[] = [
+  { url: 'https://www.linkedin.com/posts/micromouse-ucd-engineering-share-7514418320566030336-r86U/' },
+  { url: 'https://www.linkedin.com/posts/ronanhawkins_we-won-the-dublin-micromouse-open-today-ugcPost-7509690119231262721-McZz/' },
+  { url: 'https://www.linkedin.com/posts/chelsea-valderama-031a1171004a17c_ucd-robotics-dublinmicromouseopen-ugcPost-7511793251004272641-i6XJ/' },
+  { url: 'https://www.linkedin.com/posts/nathan-luis-alvares-1000061bb_micromouse-robotics-embeddedsystems-ugcPost-7516150704340901888--gHt/' },
+  { url: 'https://www.linkedin.com/posts/dublin-micromouse-open-2026-is-almost-share-7507475039903014912-C4ub/' },
+  { url: 'https://www.linkedin.com/posts/akshat-abhilash-850415395_last-saturday-26th-september-my-team-and-share-7512544732590411777-BVi_/' },
+  { url: 'https://www.linkedin.com/feed/update/urn:li:activity:7509748241383440384/' },
+];
+
+function ChapterFour() {
+  return (
+    <section id="ch4" className="mmcChapter mmcCh4">
+      <div className="mmcInner">
+        <ChapterHead n="04" name="Aftermath" title="The event, in LinkedIn posts." />
+        {AFTERMATH_POSTS.length > 0 ? (
+          <div className="mmcPosts">
+            {AFTERMATH_POSTS.map((p) => (
+              <SocialPost key={p.url} network="linkedin" post={p.url} caption={p.caption} />
+            ))}
+          </div>
+        ) : (
+          <p className="mmcEmpty">LinkedIn posts go here.</p>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ---- Chapter 5: credits ---------------------------------------------- */
+
+// The people and organisations behind the event, as prose.
+const CREDITS: string[] = [
+  'Zaid designed the maze and laser cut every single piece, and designed and 3D printed every connector piece for it. The Innovation Academy, UCD Makerspace and the EE Workshop let us use their laser cutters.',
+  'Liam designed the mouse. Zaid, Archit, Harish, Peter and Andrea, along with the EE Workshop and UCD Makerspace, 3D printed all the parts. Nick, Ray, CJ, Joel, Jan and Fionn hand-soldered every laser sensor, IMU and motor driver.',
+  'Nick, CJ and Fionn built the website that every team followed on the day. Zaid, Harish, Nick, Peter and Fahad assembled the maze over three days.',
+  'Ben spent four weeks coordinating the event with UCD Estates, and got Red Bull to ship out 96 cans. Nick chased down sponsors from a different country, set up the Luma and LinkedIn pages, and posted every reel. Joe coordinated the pizza, and Andrea ordered it along with the bulk of the components. Jesse and Mike coordinated the event and pushed the bills of materials through. Joe and Mark temporarily bankrolled the event.',
+  'Joe and Jan filmed videos and promoted the event, and Frudi did the camerawork. Ronan helped move the tables.',
+  'A huge amount of work went into making this happen, and many people behind the scenes made it possible. Thank you to everyone who helped pull it off.',
+];
+
+function ChapterFive() {
+  return (
+    <section id="ch5" className="mmcChapter mmcCh5">
+      <div className="mmcInner">
+        <ChapterHead
+          n="05"
+          name="Credits"
+          title="Made possible by."
+        />
+        <div className="mmcProse mmcCreditsProse">
+          {CREDITS.map((para) => (
+            <p key={para.slice(0, 24)}>{para}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---- The book -------------------------------------------------------- */
 
 export default function MicromouseChapters() {
@@ -609,7 +676,7 @@ export default function MicromouseChapters() {
   // Open on the chapter named in the URL hash (#ch1..#ch3).
   useEffect(() => {
     const read = () => {
-      const m = /^#ch([123])$/.exec(window.location.hash);
+      const m = /^#ch([1-5])$/.exec(window.location.hash);
       if (m) setChapter(Number(m[1]) as Chapter);
     };
     read();
@@ -666,7 +733,7 @@ export default function MicromouseChapters() {
   return (
     <div className="mmc">
       <div ref={tabsRef} className="mmcTabs">
-        <span className="mmcTabsLabel">The story in three chapters</span>
+        <span className="mmcTabsLabel">The story in five chapters</span>
         <div className="mmcTabList" role="tablist">
           {CHAPTERS.map((c) => (
             <button
@@ -692,6 +759,8 @@ export default function MicromouseChapters() {
           {chapter === 1 && <ChapterOne />}
           {chapter === 2 && <ChapterTwo />}
           {chapter === 3 && <ChapterThree />}
+          {chapter === 4 && <ChapterFour />}
+          {chapter === 5 && <ChapterFive />}
         </div>
       </div>
 

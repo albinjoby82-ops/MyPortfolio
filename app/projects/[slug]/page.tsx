@@ -115,8 +115,8 @@ export default async function ProjectPage({
         <section className="pb-11 gutter">
           <img
             src="/projects/micromouse/cover.webp"
-            alt="The welcome slide on the projector above the finished maze, with a mouse sitting in it"
-            className="aspect-[16/8] w-full rounded-[16px] border-2 border-ink object-cover object-[50%_30%] shadow-[var(--shadow-hard)]"
+            alt="The finished 16 × 16 maze laid out on the floor beneath the welcome slide"
+            className="aspect-[16/8] w-full rounded-[16px] border-2 border-ink object-cover object-[50%_55%] shadow-[var(--shadow-hard)]"
           />
         </section>
       )}
