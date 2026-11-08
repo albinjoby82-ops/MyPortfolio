@@ -473,8 +473,15 @@ function ChapterTwo() {
 
 /* ---- Chapter 3 ------------------------------------------------------- */
 
-const REELS = ['Reel 01', 'Reel 02', 'Reel 03'];
-const VLOGS = ['Vlog 01', 'Vlog 02'];
+// `ig` is an Instagram reel id (the bit after /reel/ in the URL).
+// `h` is the height (px) to crop each Instagram embed to, so only its header and video show.
+const REELS: { name: string; ig?: string; h?: number }[] = [
+  { name: 'Reel 01', ig: 'DcGmX6Tzk_W', h: 445 },
+  { name: 'Reel 02', ig: 'DcKMGD0zdv-', h: 445 },
+  { name: 'Reel 03', ig: 'Dcebk8uySQt', h: 230 },
+  { name: 'Reel 04', ig: 'Ddb38P5TNmo', h: 444 },
+  { name: 'Reel 05', ig: 'DdtK5RQoWP5', h: 444 },
+];
 
 function ChapterThree() {
   return (
@@ -487,17 +494,36 @@ function ChapterThree() {
         </div>
 
         <div className="mmcSubHead mmcSubHeadPlain">
-          <span>Three short reels.</span>
-          <p>The build-up, in vertical. Drop each reel&apos;s cover frame here.</p>
+          <span>Five short reels.</span>
+          <p>The build-up, in vertical. Directed and made by me.</p>
         </div>
         <div className="mmcReels">
-          {REELS.map((r) => (
-            <figure key={r}>
-              <Video label={`${r} cover`} chip={r.toUpperCase()} ratio="9 / 16" rust />
-              {/* TODO: reel title */}
-              <figcaption>Reel title</figcaption>
-            </figure>
-          ))}
+          {REELS.map((r) =>
+            r.ig ? (
+              <figure key={r.name} className="mmcReelEmbed">
+                <div className="mmcReelClip" style={{ height: r.h }}>
+                  <iframe
+                    src={`https://www.instagram.com/reel/${r.ig}/embed`}
+                    title={`${r.name} on Instagram`}
+                    loading="lazy"
+                    allow="encrypted-media; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+                <figcaption>
+                  <a href={`https://www.instagram.com/reel/${r.ig}/`} target="_blank" rel="noopener noreferrer">
+                    {r.name} · Watch on Instagram ↗
+                  </a>
+                </figcaption>
+              </figure>
+            ) : (
+              <figure key={r.name}>
+                <Video label={`${r.name} cover`} chip={r.name.toUpperCase()} ratio="9 / 16" rust />
+                {/* TODO: reel title */}
+                <figcaption>Reel title</figcaption>
+              </figure>
+            ),
+          )}
         </div>
 
         <div className="mmcDay">
@@ -515,10 +541,11 @@ function ChapterThree() {
             <Post
               heading="Opening briefing"
               media={
-                <div className="mmcGrid mmcThree">
-                  <Slot label="The room during the briefing" ratio="4 / 3" />
-                  <Slot label="Slides on screen" ratio="4 / 3" />
-                  <Slot label="Teams listening" ratio="4 / 3" />
+                <div className="mmcGrid mmcFour">
+                  <Slot label="Presenting the briefing at the lectern" src="/projects/micromouse/day/briefing-lectern.webp" ratio="4 / 3" />
+                  <Slot label="The room full of teams during the briefing" src="/projects/micromouse/day/briefing-room.webp" ratio="4 / 3" />
+                  <Slot label="Talking a group of teams through the day" src="/projects/micromouse/day/briefing-talk.webp" ratio="4 / 3" />
+                  <Slot label="Teams gathered around the floor as the day gets going" src="/projects/micromouse/day/briefing-floor.webp" ratio="4 / 3" />
                 </div>
               }
             >
@@ -531,15 +558,15 @@ function ChapterThree() {
               heading="Design, solder, code"
               media={
                 <div className="mmcGrid mmcBento">
-                  <Slot label="Hero shot: the build floor" className="mmcSpan22" />
-                  <Slot label="Wiring up" ratio="1 / 1" />
-                  <Slot label="Laptop + code" ratio="1 / 1" />
-                  <Slot label="Mentor helping" ratio="1 / 1" />
-                  <Slot label="First mouse moving" ratio="1 / 1" />
-                  <Slot label="Team portrait" ratio="1 / 1" />
-                  <Slot label="Team portrait" ratio="1 / 1" />
-                  <Slot label="Close-up of a mouse" ratio="1 / 1" />
-                  <Slot label="Debugging" ratio="1 / 1" />
+                  <Slot label="Testing a mouse with a multimeter during the build" src="/projects/micromouse/day/build-hero.webp" className="mmcSpan22" />
+                  <Slot label="Two teammates building and coding side by side" src="/projects/micromouse/day/build-laugh.webp" ratio="1 / 1" />
+                  <Slot label="A team working through the wiring around one table" src="/projects/micromouse/day/build-wiring-group.webp" ratio="1 / 1" />
+                  <Slot label="Two teammates assembling a mouse" src="/projects/micromouse/day/build-assembling.webp" ratio="1 / 1" />
+                  <Slot label="Teammates debugging at the laptop" src="/projects/micromouse/day/build-laptop-group.webp" ratio="1 / 1" />
+                  <Slot label="Three teammates wiring up a mouse" src="/projects/micromouse/day/build-wiring-trio.webp" ratio="1 / 1" />
+                  <Slot label="Close-up of a mouse and its wiring" src="/projects/micromouse/day/build-closeup.webp" ratio="1 / 1" />
+                  <Slot label="A team crowding round a mouse" src="/projects/micromouse/day/build-reaction.webp" ratio="1 / 1" />
+                  <Slot label="A team reacting around a table of wiring" src="/projects/micromouse/day/build-debug.webp" ratio="1 / 1" />
                 </div>
               }
             >
@@ -547,69 +574,24 @@ function ChapterThree() {
             </Post>
           </Step>
 
-          <Step num="3.3" label="Practice" sub="All day">
-            <Post
-              heading="Practice mazes were open all day."
-              media={
-                <div className="mmcGrid mmcReel5">
-                  <Video label="Clip: a mouse on the practice maze" chip="CLIP" ratio="9 / 16" rust />
-                  <div className="mmcStack mmcStackWide">
-                    <Slot label="Full-size practice maze" />
-                    <Slot label="Mini maze" />
-                  </div>
-                </div>
-              }
-            >
-              Full size and mini mazes sat alongside the build floor from the start, so a team could tune its algorithm against real walls instead of against an assumption about walls — and find out what is wrong before the run that counts.
-            </Post>
-          </Step>
-
-          <Step num="3.4" label="Race it" sub="Timed runs" accent>
+          <Step num="3.3" label="Race it" sub="Timed runs" accent>
             <Post
               heading="Timed runs"
               media={
                 <div className="mmcGrid mmcMaze">
-                  <Video label="Race footage cover: the winning run" chip="RACE FOOTAGE" ratio="16 / 9" size={72} rust className="mmcFull" />
-                  <Slot label="Start line" ratio="4 / 3" />
-                  <Slot label="Crowd around the maze" ratio="4 / 3" />
-                  <Slot label="Reaching the centre" ratio="4 / 3" />
+                  <Video label="Walking the floor during the day" chip="ON THE DAY" ratio="16 / 9" size={72} rust className="mmcFull" src="/projects/micromouse/day/race.mp4" poster="/projects/micromouse/day/race-poster.jpg" />
+                  <Slot label="A mouse waiting at the edge of the maze" src="/projects/micromouse/day/race-mouse-maze.webp" ratio="4 / 3" />
+                  <Slot label="Close-up of a mouse and its wiring in a corridor" src="/projects/micromouse/day/race-wires.webp" ratio="4 / 3" />
+                  <Slot label="Competitors watching a run at the maze" src="/projects/micromouse/day/race-watching.webp" ratio="4 / 3" />
+                  <Slot label="Two mice side by side in the maze" src="/projects/micromouse/day/race-two-mice.webp" ratio="4 / 3" />
+                  <Slot label="A competitor kneeling to watch a mouse in the maze" src="/projects/micromouse/day/race-kneeling.webp" ratio="4 / 3" />
+                  <Slot label="Tuning a mouse's code on a laptop beside the maze" src="/projects/micromouse/day/race-coding.webp" ratio="4 / 3" />
                 </div>
               }
             >
               The main award goes to the fastest verified run to the centre of the maze, with further awards for design and reliability — so a mouse that is quick once does not beat one that works every time.
             </Post>
           </Step>
-
-          <Step num="3.5" label="Awards" sub="End of the day">
-            <Post
-              heading="Fastest, best designed, most reliable."
-              media={
-                <div className="mmcGrid mmcThree">
-                  <Slot label="Winners with the prize" ratio="4 / 5" />
-                  <Slot label="Everyone, group photo" ratio="4 / 5" />
-                  <Slot label="Pizza + Red Bull table" ratio="4 / 5" />
-                </div>
-              }
-            >
-              {/* TODO: replace with the winners and a line about the room at the end of the day. */}
-              Add the winners and a line about the room at the end of the day.
-            </Post>
-          </Step>
-        </div>
-
-        <div className="mmcSubHead mmcSubHeadPlain">
-          <span>The two long-form vlogs.</span>
-          <p>The whole thing, start to finish, directed by me.</p>
-        </div>
-        <div className="mmcVlogs">
-          {VLOGS.map((v) => (
-            <figure key={v}>
-              <div className="mmcVlogBar"><span>{v}</span><span>Watch ↗</span></div>
-              <Video label={`${v} thumbnail`} chip={v.toUpperCase()} ratio="16 / 9" size={64} rust />
-              {/* TODO: vlog title */}
-              <figcaption>Vlog title</figcaption>
-            </figure>
-          ))}
         </div>
       </div>
     </section>

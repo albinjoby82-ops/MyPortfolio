@@ -188,3 +188,17 @@
 .mmcHubList b { display: block; font-size: 12.5px; }
 .mmcHubList em { display: block; font-style: normal; font-size: 11px; color: #6b6258; line-height: 1.35; }
 .mmcSlot img[src*="-cad-"] { object-fit: contain; background: #fff; }
+
+.mmcReels { grid-template-columns: repeat(auto-fit, minmax(min(100%,300px), 1fr)); max-width: 980px; }
+/* Crop the Instagram embed to its header + video: the likes / comment footer and the scrollbar sit outside the clip. */
+.mmcReelClip { container-type: inline-size; position: relative; width: 100%; height: calc(110cqw + 72px); overflow: hidden; background: #fff; }
+.mmcReelClip iframe { position: absolute; top: 0; left: 0; display: block; width: calc(100% + 24px); height: 900px; border: 0; background: #fff; }
+.mmcReelEmbed figcaption a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Reel embeds: Instagram lays its embed out in fixed pixels, so use a fixed card width and crop at a fixed height. */
+.mmcReels { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 22px; max-width: none; }
+.mmcReels figure { width: 332px; flex: none; }
+.mmcReelClip { container-type: normal; width: 328px; height: 474px; }
+.mmcReelClip iframe { width: 328px; height: 1000px; }
+
+.mmcFour { grid-template-columns: repeat(auto-fit, minmax(min(100%,300px), 1fr)); }
