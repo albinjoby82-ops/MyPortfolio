@@ -41,6 +41,8 @@ export type Project = {
   links: ProjectLink[];
   /** Optional long-form MDX body. */
   body: string;
+  /** Hidden projects keep their page (other pages can link to it) but are left out of the project list. */
+  hidden: boolean;
 };
 
 const DIR = path.join(process.cwd(), "content", "projects");
@@ -50,7 +52,7 @@ const DIR = path.join(process.cwd(), "content", "projects");
  * Adding a project is dropping a file in that folder — the home page,
  * filters and detail routes all follow automatically.
  */
-export function getProjects(): Project[] {
+export function getProjects({ includeHidden = false } = {}): Project[] {
   const files = fs.readdirSync(DIR).filter((f) => f.endsWith(".mdx"));
 
   const parsed = files.map((file) => {
@@ -74,6 +76,7 @@ export function getProjects(): Project[] {
       photos: data.photos ?? [],
       links: data.links ?? [],
       body: content.trim(),
+      hidden: data.hidden === true,
     };
   });
 
@@ -86,12 +89,14 @@ export function getProjects(): Project[] {
       a.title.localeCompare(b.title),
   );
 
-  return parsed.map((p, i) => ({
-    ...p,
-    no: String(i + 1).padStart(2, "0"),
-  }));
+  return parsed
+    .filter((p) => includeHidden || !p.hidden)
+    .map((p, i) => ({
+      ...p,
+      no: String(i + 1).padStart(2, "0"),
+    }));
 }
 
 export function getProject(slug: string): Project | undefined {
-  return getProjects().find((p) => p.slug === slug);
+  return getProjects({ includeHidden: true }).find((p) => p.slug === slug);
 }
