@@ -14,6 +14,7 @@ import GaelForceRecruiting from "@/components/GaelForceRecruiting";
 import GaelForceOdomPod from "@/components/GaelForceOdomPod";
 import RobotArmTesting from "@/components/RobotArmTesting";
 import PcbProjects from "@/components/PcbProjects";
+import AiExperiments from "@/components/AiExperiments";
 import { getProject, getProjects } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -201,6 +202,8 @@ export default async function ProjectPage({
           </p>
         )}
       </section>)}
+
+      {project.slug === "ai-experiments" && <AiExperiments />}
 
       {project.slug === "serial-bus-robot-arm" && <RobotArmTesting />}
 
