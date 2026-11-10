@@ -8,7 +8,10 @@ export const site = {
   /** Nav wordmark. */
   wordmark: "ALBIN J.",
   name: "Albin Andrews Joby",
-  url: "https://albinjoby.com", // TODO: set once a custom domain is attached
+  /** Live origin. Link previews (Open Graph) build absolute URLs from this. */
+  url: "https://myportfolio.albinjoby82.workers.dev", // TODO: change once a custom domain is attached
+  /** Image shown when the home page (or a project with no cover) is shared. */
+  shareImage: "/projects/galeforce/galeforce-main.jpg",
 
   /** Rotated yellow tag above the hero headline. */
   heroTag: "First year at UCD · builds things that move",
@@ -17,7 +20,7 @@ export const site = {
   heroHeadline: "Robots, circuit boards, and a team built from scratch.",
 
   heroLede:
-    "Engineering student at UCD. I co-founded Ireland's first VEX U robotics team, started a small NFC hardware company, and led the team behind a national micromouse competition.",
+    "Stage 2 Electrical and Electronic Engineering student at University College Dublin. I'm Co-founder and Head of Electronics at GaelForce UCD, Ireland's first VEX U robotics team, and an Electrical Engineer at UCD Formula Student, where I'm developing the accumulator (the car's high-voltage battery pack). My focus is embedded systems, PCB design, motor control, 3D printing and rapid prototyping.",
 
   /** Hero buttons. */
   primaryCta: { label: "See what I've built", href: "#projects" },

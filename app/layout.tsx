@@ -19,9 +19,27 @@ const publicSans = Public_Sans({
   display: "swap",
 });
 
+const title = `${site.name} — Engineering portfolio`;
+
 export const metadata: Metadata = {
-  title: `${site.name} — Engineering portfolio`,
+  // Makes every Open Graph image/URL below absolute, which link previews need.
+  metadataBase: new URL(site.url),
+  title,
   description: site.heroLede,
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title,
+    description: site.heroLede,
+    url: "/",
+    images: [site.shareImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description: site.heroLede,
+    images: [site.shareImage],
+  },
 };
 
 export default function RootLayout({

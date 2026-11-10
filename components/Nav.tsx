@@ -6,7 +6,6 @@ import { site } from "@/content/site";
 
 const links = [
   { label: "Projects", href: "/" },
-  { label: "Timeline", href: "/timeline" },
 ];
 
 export default function Nav() {
@@ -40,6 +39,18 @@ export default function Nav() {
             </Link>
           );
         })}
+
+        <a
+          href="https://forgeire.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-col items-center text-sub-text transition-colors duration-[120ms] hover:text-ink"
+        >
+          ForgÉire ↗
+          <span className="mt-[3px] whitespace-nowrap text-[10px] font-extrabold uppercase tracking-[0.1em] text-rust">
+            Top secret · in progress
+          </span>
+        </a>
 
         <a
           href={site.resume.href}

@@ -14,6 +14,8 @@ export type Media = {
   caption?: string;
   /** CSS background-position for the cover crop, e.g. "50% 75%". */
   position?: string;
+  /** Show as a 4:5 card on the project page (for portrait photos). */
+  portrait?: boolean;
 };
 
 export type Project = {
@@ -89,11 +91,13 @@ export function getProjects({ includeHidden = false } = {}): Project[] {
       a.title.localeCompare(b.title),
   );
 
+  // Only listed projects get a display number; hidden ones have none.
+  let n = 0;
   return parsed
     .filter((p) => includeHidden || !p.hidden)
-    .map((p, i) => ({
+    .map((p) => ({
       ...p,
-      no: String(i + 1).padStart(2, "0"),
+      no: p.hidden ? "" : String(++n).padStart(2, "0"),
     }));
 }
 

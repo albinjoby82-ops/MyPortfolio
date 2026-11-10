@@ -3,6 +3,10 @@ import { notFound } from "next/navigation";
 import Panel from "@/components/Panel";
 import Prose from "@/components/Prose";
 import MicromouseChapters from "@/components/MicromouseChapters";
+import HeroFlipbook from "@/components/HeroFlipbook";
+import ProjectMedia from "@/components/ProjectMedia";
+import SocialPost from "@/components/SocialPost";
+import { getGallery, getVideos } from "@/lib/gallery";
 import CubiPortal from "@/components/CubiPortal";
 import CubiLogoLab from "@/components/CubiLogoLab";
 import CubiColourLab from "@/components/CubiColourLab";
@@ -16,6 +20,29 @@ import RobotArmTesting from "@/components/RobotArmTesting";
 import PcbProjects from "@/components/PcbProjects";
 import AiExperiments from "@/components/AiExperiments";
 import { getProject, getProjects } from "@/lib/projects";
+import { site } from "@/content/site";
+
+// Instagram posts shown at the top of the Robo Expo page.
+const ROBO_EXPO_POSTS = [
+  "https://www.instagram.com/reel/DXM2VrEjPCj/",
+  "https://www.instagram.com/p/DXUlCELjBl-/",
+  "https://www.instagram.com/p/DXXOJ9-DFSW/",
+];
+
+const ROBO_EXPO_ALTS = [
+  "The four presenters with their arms round each other behind the sand art machine and a small robot",
+  "Two presenters leaning over a small robot, one pointing at it and laughing",
+  "Someone playing a game on a laptop with a hand-built controller wired to an Arduino",
+  "A close-up of a hand holding a custom controller board with two thumb joysticks",
+];
+
+const CARS_GO_BURR_ALTS = [
+  "A crowd gathered round the race table as the cars go head to head",
+  "Someone talking through the setup at the whiteboard, laptop in hand",
+  "Two decorated cars on a lab bench",
+  "A blue car with red lights driving across the carpet",
+  "A car on the race track, seen from the side",
+];
 
 export function generateStaticParams() {
   return getProjects({ includeHidden: true }).map((p) => ({ slug: p.slug }));
@@ -28,9 +55,33 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const project = getProject(slug);
+  if (!project) return { title: "Not found" };
+
+  const title = `${project.title} | ${site.name}`;
+  // Link previews need a still image: the cover photo, a video's poster,
+  // or the site-wide fallback when the project has neither yet.
+  const image =
+    (project.media.type === "video"
+      ? project.media.poster
+      : project.media.src) ?? site.shareImage;
+
   return {
-    title: project ? `${project.title} | Albin Andrews Joby` : "Not found",
-    description: project?.blurb,
+    title,
+    description: project.blurb,
+    openGraph: {
+      type: "article",
+      siteName: site.name,
+      title,
+      description: project.blurb,
+      url: `/projects/${project.slug}/`,
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: project.blurb,
+      images: [image],
+    },
   };
 }
 
@@ -44,6 +95,7 @@ export default async function ProjectPage({
   if (!project) notFound();
 
   const hasSpecs = project.specs.length > 0;
+  const gallery = getGallery(project.slug);
 
   return (
     <>
@@ -67,7 +119,7 @@ export default async function ProjectPage({
                 className="inline-block rounded-[6px] px-3 py-[5px] text-[12px] font-bold uppercase tracking-[0.1em] text-ink"
                 style={{ backgroundColor: project.tint }}
               >
-                {project.no} · {project.kind}
+                {project.no ? `${project.no} · ` : ""}{project.kind}
               </span>
               {project.status && (
                 <span className="inline-block rounded-full border border-rust/40 bg-rust/10 px-3 py-[5px] text-[12px] font-bold uppercase tracking-[0.1em] text-rust">
@@ -123,7 +175,18 @@ export default async function ProjectPage({
       )}
 
       {/* Hero media — real video/image when supplied, tinted block until then. */}
-      {project.slug !== "dublin-micromouse-open" && (<section className="pb-11 gutter">
+      {project.slug === "robo-expo" && (
+        <section className="pb-11 gutter">
+          <h2 className="eyebrow mb-[18px] block">From the day</h2>
+          <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-3 [&_.socialWindow]:m-0">
+            {ROBO_EXPO_POSTS.map((url) => (
+              <SocialPost key={url} network="instagram" post={url} height={640} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {project.slug !== "dublin-micromouse-open" && project.slug !== "robo-expo" && (<section className="pb-11 gutter">
         {project.slug === "cubi" && project.media.src ? (
           <div className="grid overflow-hidden rounded-[16px] border-2 border-ink bg-[#111525] shadow-[var(--shadow-hard)] md:grid-cols-[44%_56%]">
             <div className="relative min-h-[520px] overflow-hidden md:min-h-[650px]">
@@ -177,6 +240,23 @@ export default async function ProjectPage({
           >
             <source src={project.media.src} />
           </video>
+        ) : project.media.src && project.media.portrait ? (
+          // Portrait photos are shown as a 4:5 card instead of being blown up across the page.
+          // A project with a gallery folder gets a flipbook of those photos beside it.
+          <div className="flex flex-wrap items-start gap-8">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={project.media.src}
+              alt={project.title}
+              className="aspect-[4/5] w-full max-w-[440px] rounded-[16px] border-2 border-ink object-cover shadow-[var(--shadow-hard)]"
+              style={{ objectPosition: project.media.position }}
+            />
+            {gallery.length > 0 && (
+              <div className="w-full max-w-[440px] [&_.hfb]:mt-0">
+                <HeroFlipbook pages={gallery} />
+              </div>
+            )}
+          </div>
         ) : (
           <div
             className="flex aspect-[16/8] items-center justify-center rounded-[16px] border-2 border-ink bg-cover bg-center"
@@ -236,6 +316,23 @@ export default async function ProjectPage({
           <h2 className="eyebrow mb-6 block">The build</h2>
           <Prose>{project.body}</Prose>
         </section>
+      )}
+
+      {project.slug === "robo-expo" && (
+        <ProjectMedia
+          photos={gallery.map((g, i) => ({ ...g, alt: ROBO_EXPO_ALTS[i] ?? "A photo from the Robo Expo" }))}
+          videos={getVideos(project.slug)}
+          photosTitle="On the day"
+        />
+      )}
+
+      {project.slug === "cars-go-burr" && (
+        <ProjectMedia
+          photos={gallery.map((g, i) => ({ ...g, alt: CARS_GO_BURR_ALTS[i] ?? "A photo from Cars Go Burr" }))}
+          videos={getVideos(project.slug)}
+          photosTitle="On the night"
+          videosTitle="The cars"
+        />
       )}
 
       {project.photos.length > 0 && (
