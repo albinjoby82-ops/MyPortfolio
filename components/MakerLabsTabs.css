@@ -1,0 +1,9 @@
+.mlTabs { position: sticky; top: 0; z-index: 50; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; padding: 14px 44px 0; border-top: 2px solid #16181d; border-bottom: 2px solid #16181d; background: #e6e2d8; margin-bottom: 40px; }
+.mlTabsLabel { padding-bottom: 14px; font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #16181d; }
+.mlTabList { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px; margin-bottom: -2px; }
+.mlTab { display: flex; align-items: center; gap: 8px; padding: 8px 16px 8px 10px; border: 2px solid #16181d; border-radius: 12px 12px 0 0; font-family: var(--font-body); font-weight: 800; font-size: 13px; color: #16181d; text-decoration: none; opacity: .72; transition: padding 200ms, opacity 200ms; }
+.mlTab:hover { opacity: 1; }
+.mlTab[data-active='true'] { padding: 12px 18px 12px 10px; opacity: 1; }
+.mlTabNum { display: flex; width: 22px; height: 22px; align-items: center; justify-content: center; border-radius: 999px; background: #16181d; color: #fff; font-size: 10px; }
+@media (max-width: 760px) { .mlTabs { padding-inline: 20px; } }
+@media (prefers-reduced-motion: reduce) { .mlTab { transition: none; } }

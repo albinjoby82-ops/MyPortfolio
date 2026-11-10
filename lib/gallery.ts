@@ -8,9 +8,10 @@ const IMAGE = /\.(jpe?g|png|webp|avif|gif)$/i;
  * Drop a photo into one of these folders and it joins the book on the next build.
  */
 const GALLERIES: Record<string, string[]> = {
-  makerlabs: ["makerlabs/gallery", "cars-go-burr/gallery", "robo-expo/gallery"],
+  makerlabs: ["makerlabs/gallery", "cars-go-burr/gallery", "robo-expo/gallery", "patch-makerthon/gallery"],
   "cars-go-burr": ["cars-go-burr/gallery"],
   "robo-expo": ["robo-expo/gallery"],
+  "patch-makerthon": ["patch-makerthon/gallery"],
 };
 
 export type GalleryImage = { src: string; alt: string };

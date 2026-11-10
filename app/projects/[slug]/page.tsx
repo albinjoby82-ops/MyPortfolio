@@ -5,6 +5,7 @@ import Prose from "@/components/Prose";
 import MicromouseChapters from "@/components/MicromouseChapters";
 import HeroFlipbook from "@/components/HeroFlipbook";
 import ProjectMedia from "@/components/ProjectMedia";
+import MakerLabsTabs, { MAKERLABS_TAB_SLUGS } from "@/components/MakerLabsTabs";
 import SocialPost from "@/components/SocialPost";
 import { getGallery, getVideos } from "@/lib/gallery";
 import CubiPortal from "@/components/CubiPortal";
@@ -22,18 +23,36 @@ import AiExperiments from "@/components/AiExperiments";
 import { getProject, getProjects } from "@/lib/projects";
 import { site } from "@/content/site";
 
-// Instagram posts shown at the top of the Robo Expo page.
-const ROBO_EXPO_POSTS = [
-  "https://www.instagram.com/reel/DXM2VrEjPCj/",
-  "https://www.instagram.com/p/DXUlCELjBl-/",
-  "https://www.instagram.com/p/DXXOJ9-DFSW/",
-];
+// Social posts shown at the top of an event page, under the intro.
+const TOP_POSTS: Record<string, { network: "instagram" | "linkedin"; url: string }[]> = {
+  "robo-expo": [
+    { network: "instagram", url: "https://www.instagram.com/reel/DXM2VrEjPCj/" },
+    { network: "instagram", url: "https://www.instagram.com/p/DXUlCELjBl-/" },
+    { network: "instagram", url: "https://www.instagram.com/p/DXXOJ9-DFSW/" },
+  ],
+  "patch-makerthon": [
+    { network: "instagram", url: "https://www.instagram.com/p/DVikE8DDIZl/" },
+    {
+      network: "linkedin",
+      url: "https://www.linkedin.com/posts/ucdelecsoc_its-a-wrap-elecsocs-first-makerthon-activity-7433104397410304000-pTO5",
+    },
+  ],
+};
 
 const ROBO_EXPO_ALTS = [
   "The four presenters with their arms round each other behind the sand art machine and a small robot",
   "Two presenters leaning over a small robot, one pointing at it and laughing",
   "Someone playing a game on a laptop with a hand-built controller wired to an Arduino",
   "A close-up of a hand holding a custom controller board with two thumb joysticks",
+];
+
+const SIDE_FLIPBOOK = ["cars-go-burr", "robo-expo", "patch-makerthon"];
+
+const PATCH_MAKERTHON_ALTS = [
+  "The room mid-sprint, with teams spread across the tables",
+  "A wide view of the room with teams working at every table",
+  "A round table set out with a kit at every seat",
+  "Three people holding up a Makerthon poster",
 ];
 
 const CARS_GO_BURR_ALTS = [
@@ -174,19 +193,21 @@ export default async function ProjectPage({
         </section>
       )}
 
+      {MAKERLABS_TAB_SLUGS.includes(project.slug) && <MakerLabsTabs active={project.slug} />}
+
       {/* Hero media — real video/image when supplied, tinted block until then. */}
-      {project.slug === "robo-expo" && (
+      {TOP_POSTS[project.slug] && (
         <section className="pb-11 gutter">
           <h2 className="eyebrow mb-[18px] block">From the day</h2>
           <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-3 [&_.socialWindow]:m-0">
-            {ROBO_EXPO_POSTS.map((url) => (
-              <SocialPost key={url} network="instagram" post={url} height={640} />
+            {TOP_POSTS[project.slug].map((p) => (
+              <SocialPost key={p.url} network={p.network} post={p.url} height={640} />
             ))}
           </div>
         </section>
       )}
 
-      {project.slug !== "dublin-micromouse-open" && project.slug !== "robo-expo" && (<section className="pb-11 gutter">
+      {project.slug !== "dublin-micromouse-open" && !TOP_POSTS[project.slug] && (<section className="pb-11 gutter">
         {project.slug === "cubi" && project.media.src ? (
           <div className="grid overflow-hidden rounded-[16px] border-2 border-ink bg-[#111525] shadow-[var(--shadow-hard)] md:grid-cols-[44%_56%]">
             <div className="relative min-h-[520px] overflow-hidden md:min-h-[650px]">
@@ -314,7 +335,17 @@ export default async function ProjectPage({
       {project.body && project.slug !== "dublin-micromouse-open" && (
         <section className="pb-14 gutter">
           <h2 className="eyebrow mb-6 block">The build</h2>
-          <Prose>{project.body}</Prose>
+          {SIDE_FLIPBOOK.includes(project.slug) && gallery.length > 0 ? (
+            // Event pages: the text sits beside a flipbook of the event's photos instead of leaving the right half empty.
+            <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,1fr)_440px]">
+              <Prose>{project.body}</Prose>
+              <div className="w-full max-w-[440px] lg:sticky lg:top-8 [&_.hfb]:mt-0">
+                <HeroFlipbook pages={gallery} />
+              </div>
+            </div>
+          ) : (
+            <Prose>{project.body}</Prose>
+          )}
         </section>
       )}
 
@@ -323,6 +354,14 @@ export default async function ProjectPage({
           photos={gallery.map((g, i) => ({ ...g, alt: ROBO_EXPO_ALTS[i] ?? "A photo from the Robo Expo" }))}
           videos={getVideos(project.slug)}
           photosTitle="On the day"
+        />
+      )}
+
+      {project.slug === "patch-makerthon" && (
+        <ProjectMedia
+          photos={gallery.map((g, i) => ({ ...g, alt: PATCH_MAKERTHON_ALTS[i] ?? "A photo from the Makerthon" }))}
+          videos={getVideos(project.slug)}
+          photosTitle="On the night"
         />
       )}
 
