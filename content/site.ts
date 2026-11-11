@@ -14,7 +14,7 @@ export const site = {
   shareImage: "/projects/galeforce/galeforce-main.jpg",
 
   /** Rotated yellow tag above the hero headline. */
-  heroTag: "First year at UCD · builds things that move",
+  heroTag: "Stage 2 at UCD · builds things that move",
 
   /** 86px display headline. Keep it short — it wraps at 12ch. */
   heroHeadline: "Robots, circuit boards, and a team built from scratch.",
@@ -33,7 +33,7 @@ export const site = {
    * Update these freely; they're meant to look current.
    */
   bench: [
-    { key: "Right now", value: "GaelForce robot v2" },
+    { key: "Right now", value: "Odometry pod V2 firmware · FS accumulator" },
     { key: "Learning", value: "Embedded control" },
     { key: "Tools", value: "Fusion 360 · KiCad" },
     { key: "Where", value: "Dublin, Ireland" },
