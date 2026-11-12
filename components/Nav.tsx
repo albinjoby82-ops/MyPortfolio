@@ -53,6 +53,15 @@ export default function Nav() {
         </a>
 
         <a
+          href={site.linkedin.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-[10px] border-2 border-ink bg-paper px-5 py-[10px] font-bold text-ink transition-colors duration-[120ms] hover:bg-ink hover:text-paper"
+        >
+          {site.linkedin.label}
+        </a>
+
+        <a
           href={site.resume.href}
           className="rounded-[10px] border-2 border-ink bg-sun px-5 py-[10px] font-bold text-ink transition-colors duration-[120ms] hover:bg-ink hover:text-paper"
         >

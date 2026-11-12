@@ -29,6 +29,9 @@ export const site = {
 
   resume: { label: "Résumé ↓", href: "/albin-joby-cv.pdf" },
 
+  /** Nav button. */
+  linkedin: { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/albin-andrews-joby-94a045404/" },
+
   /**
    * The "On the bench" panel — a snapshot of right now.
    * Update these freely; they're meant to look current.
