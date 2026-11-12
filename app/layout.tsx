@@ -21,6 +21,15 @@ const publicSans = Public_Sans({
 
 const title = `${site.name} — Engineering portfolio`;
 
+// Declaring the size lets link-preview crawlers lay the card out
+// without downloading the image first.
+const shareImage = {
+  url: site.shareImage,
+  width: 1200,
+  height: 630,
+  alt: title,
+};
+
 export const metadata: Metadata = {
   // Makes every Open Graph image/URL below absolute, which link previews need.
   metadataBase: new URL(site.url),
@@ -32,13 +41,13 @@ export const metadata: Metadata = {
     title,
     description: site.heroLede,
     url: "/",
-    images: [site.shareImage],
+    images: [shareImage],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description: site.heroLede,
-    images: [site.shareImage],
+    images: [shareImage],
   },
 };
 

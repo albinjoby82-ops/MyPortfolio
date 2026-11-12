@@ -11,7 +11,8 @@ export const site = {
   /** Live origin. Link previews (Open Graph) build absolute URLs from this. */
   url: "https://myportfolio.albinjoby82.workers.dev", // TODO: change once a custom domain is attached
   /** Image shown when the home page (or a project with no cover) is shared. */
-  shareImage: "/projects/galeforce/galeforce-main.jpg",
+  // 1200x630 and under 200 KB: the size LinkedIn and WhatsApp expect.
+  shareImage: "/share-card.jpg",
 
   /** Rotated yellow tag above the hero headline. */
   heroTag: "Stage 2 at UCD · builds things that move",
