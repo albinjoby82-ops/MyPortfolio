@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Panel from "@/components/Panel";
@@ -79,10 +81,17 @@ export async function generateMetadata({
   const title = `${project.title} | ${site.name}`;
   // Link previews need a still image: the cover photo, a video's poster,
   // or the site-wide fallback when the project has neither yet.
-  const image =
+  const still =
     (project.media.type === "video"
       ? project.media.poster
       : project.media.src) ?? site.shareImage;
+  // LinkedIn can't build a preview from a WebP, so a WebP cover is swapped
+  // for the JPG copy saved beside it (cover.webp -> cover.jpg).
+  const jpg = still.replace(/\.webp$/i, ".jpg");
+  const image =
+    jpg !== still && fs.existsSync(path.join(process.cwd(), "public", jpg))
+      ? jpg
+      : still;
 
   return {
     title,

@@ -1,8 +1,6 @@
 import Panel from "@/components/Panel";
 import ProjectList from "@/components/ProjectList";
 import ContactBand from "@/components/ContactBand";
-import HeroFlipbook from "@/components/HeroFlipbook";
-import { flipbook } from "@/content/flipbook";
 import { getProjects } from "@/lib/projects";
 import { site } from "@/content/site";
 
@@ -45,7 +43,6 @@ export default function Home() {
 
         <div>
           <Panel header="On the bench" rows={site.bench} />
-          <HeroFlipbook pages={flipbook} />
         </div>
       </section>
 
